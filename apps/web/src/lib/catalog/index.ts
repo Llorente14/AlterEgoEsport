@@ -7,15 +7,18 @@ import mlbbAchievements from '@data/mlbb_achievement.json';
 import cs2Achievements from '@data/cs2_achievement.json';
 import pubgmAchievements from '@data/pubgm_achievement.json';
 import rawLinks from '@data/links.json';
+import rawPartners from '@data/partners.json';
 import rawProducts from '@data/alterego_produk_aktif_gambar.json';
 import productImages from '../../data/product-images.json';
 import { buildGameAchievements, combineSummaries, latestHighlights, type GameAchievements } from './achievements';
 import { buildLinks, type SiteLinks } from './links';
+import { buildPartners, type Partner } from './partners';
 import { buildProducts, CATEGORY_LABELS, type StoreProduct } from './products';
 import { buildGameRoster, type GameRoster } from './roster';
 
 export type { GameAchievements } from './achievements';
 export type { SiteLinks } from './links';
+export type { Partner } from './partners';
 export type { ProductImage, StoreProduct } from './products';
 export type { GameRoster, RosterDivision, RosterMember } from './roster';
 export { CATEGORY_LABELS } from './products';
@@ -60,6 +63,14 @@ let links: SiteLinks | undefined;
 export function getLinks(): SiteLinks {
   links ??= buildLinks(rawLinks, 'data/links.json');
   return links;
+}
+
+let partners: Partner[] | undefined;
+
+/** Official partners in display order. */
+export function getPartners(): Partner[] {
+  partners ??= buildPartners(rawPartners, 'data/partners.json');
+  return partners;
 }
 
 let products: StoreProduct[] | undefined;

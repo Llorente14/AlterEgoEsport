@@ -1,0 +1,32 @@
+{
+  "partners": [
+    {
+      "name": "Good Day Coffee",
+      "logo": null
+    },
+    {
+      "name": "Interbat",
+      "logo": "interbat.png",
+      "width": 178,
+      "height": 61
+    },
+    {
+      "name": "CBN Fiber",
+      "logo": "cbn-fiber.png",
+      "width": 200,
+      "height": 86
+    },
+    {
+      "name": "myBCA",
+      "logo": null
+    },
+    {
+      "name": "Supreme League",
+      "logo": null
+    },
+    {
+      "name": "Interlac",
+      "logo": null
+    }
+  ]
+}
