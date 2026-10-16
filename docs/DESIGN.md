@@ -149,19 +149,25 @@ Pola gelombang seigaiha (busur konsentris bertumpuk) sebagai SVG.
 ### Hero Headline Block
 Kiri (kolom 1–6): Section Label `ALTER EGO ESPORTS · EST. 2018`, headline Anton display-xl Bone 3 baris (contoh: "WEAR / YOUR / ALTER EGO"), paragraf Chakra Petch 400 18px Silver maks 440px, lalu Primary Button "SHOP ALTER MERCH" dan Ghost Link "Lihat Roster →". Latar: video 30% (lihat Motion → Hero Background Video).
 
-### Logo Slide
-> Revisi 2026-10-17: menggantikan Showreel Frame (video sudah dipakai di hero).
+### Story Scroll
+> Revisi 2026-10-17: menggantikan Logo Slide dan Manifesto Block (sketsa Axel: satu logo, tiga scene).
 
-Section 2, dipin di bawah nav selama 300dvh scroll (bagian dalam `sticky`, `top: 80px`, tinggi `100dvh − 80px`, `overflow: clip`). Logo perisai 2D (WebP 800/1200) di tengah area di bawah nav, tinggi `min(62dvh, 42vw)` di desktop (`min(62dvh, 80vw)` di mobile) sehingga selalu muat di layar desktop ukuran berapa pun.
-- **0–35% scroll:** logo masuk dari luar kanan ke tengah (ease-out), miring 8° → 0°.
-- **35–65%:** diam tegak di tengah.
-- **65–100%:** keluar ke luar kiri (ease-in), miring 0° → −8°. Jarak luar layar = ½ lebar layar + 0,6 × lebar logo + 24px (cukup untuk logo yang miring).
-- **Latar:** "ALTER EGO · ALTER EGO" Anton outline 1px Bone 20%, `min(28vw, 40dvh)`, bergeser ke kiri lebih cepat (parallax).
-- Tanpa JavaScript atau dengan reduced-motion: logo statis di tengah, tanpa pin. Section ini tidak memakai reveal.
-- Tanpa library animasi (sticky CSS + ±40 baris JS).
+Satu section `#story` dengan satu logo perisai yang berpindah antar tiga scene.
 
-### Manifesto Block
-Dua kolom asimetris tanpa kartu: kiri headline Anton display ("BANYAK WAJAH. / SATU NAMA."), kanan paragraf Chakra Petch 400 18px. Disertai satu siluet tiga-topeng outline tipis sebagai ornamen.
+| Scene | Isi | Logo |
+|-------|-----|------|
+| A | Headline Anton "BANYAK / WAJAH / SATU / **NAMA**" (4 baris, "NAMA" Signal Red) di kiri | Kanan (+¼ lebar layar) |
+| B | Dua paragraf manifesto (Chakra Petch 400, Silver) di kanan | Kiri (−¼ lebar layar) |
+| C | Judul "FOUNDER" di atas, 5 Founder Card berundak | Tengah, **di belakang kartu**, 115% dan 45% opacity |
+
+**Desktop ≥ 1024px dengan motion:** section setinggi 450dvh, bagian dalam `sticky` (`top: 80px`, tinggi `100dvh − 80px`). Progres scroll membagi: 0–22% scene A diam · 22–38% logo pindah kanan→kiri (miring maks 8°) dan teks bertukar · 38–58% scene B diam · 58–76% logo pindah ke tengah, teks keluar, judul FOUNDER muncul, kartu naik dari bawah kiri→kanan berurutan · 76–100% scene C, deretan kartu bergeser ke kiri sejauh 4% lebar layar. Logo `min(56dvh, 38vw)`. Semua posisi dihitung dari fungsi murni `storyFrame()` (`src/lib/story-scroll.ts`) dan diverifikasi di 7 ukuran layar (1024×768 sampai 3440×1440).
+
+**Mobile < 1024px:** tanpa pin; tiga blok vertikal biasa. Kartu menjadi **tumpukan yang bisa di-swipe** (drag kiri/kanan memindahkan kartu teratas ke belakang; panah kiri/kanan di keyboard; penghitung "1 / 5"), logo AE besar redup di belakang tumpukan.
+
+**Tanpa JavaScript atau reduced-motion:** tiga blok statis berurutan; kartu berupa daftar vertikal (mobile) atau deretan berundak (desktop). Tanpa library animasi.
+
+### Founder Card
+Kartu 1:1,5 (lebar `min(16vw, 28dvh)`), latar `rgb(13 13 13 / 0.85)` + blur 6px agar logo di belakang tetap samar terlihat, border 1px Hairline, radius 24px. Atas: area foto (placeholder: siluet logo 15% sampai foto tersedia). Bawah: role Mono 12px Signal Red ("FOUNDER ALTER EGO") dan nama Anton 28px UPPERCASE ("DELWYN SUKAMTO"). Tinggi berundak (centre paling rendah): offset 0,1 · 0,35 · 0,55 · 0,25 · −0,1 × lebar kartu. Data dari `data/founders.json` (sementara 5 kartu placeholder).
 
 ### Roster Card
 **Tanpa latar, tanpa border** (aturan Dala). Foto potret rasio 3:4, radius 24px, grayscale 100% → warna penuh saat hover + rim merah tipis (box-shadow inset 0 0 0 1px Signal Red). Di bawah foto: role Mono 12px Signal Red (`EXP LANER · MOBILE LEGENDS`), nickname Anton heading-sm Bone, nama lengkap Chakra Petch 400 16px Ash, ikon bendera kecil.
@@ -251,8 +257,7 @@ Hero memakai video yang sama sebagai latar 30% (revisi 2026-10-17). Jangan self-
 |---|---------|-----|----------|
 | — | Nav | Logo, STORE · ROSTER · NEWS · ACHIEVEMENTS · JOIN, SHOP | Navigation Bar |
 | 1 | Hero | Headline + CTA di atas video latar 30% | Hero Headline Block, Hero Background Video |
-| 2 | Identitas | Logo bergeser kanan → kiri saat scroll | Logo Slide |
-| 3 | Manifesto | Siapa Alter Ego, makna "banyak wajah, satu nama" | Manifesto Block |
+| 2 | Story | Manifesto (3 scene) dan carousel Founder, satu logo yang berpindah | Story Scroll, Founder Card |
 | 4 | Roster | Tab divisi: Mobile Legends · Counter-Strike 2 · PUBG Mobile | Roster Card, tab divisi (Tag/Chip) |
 | 5 | Alter Merch | Lookbook video + 4–8 produk unggulan + "Lihat Semua" | Showreel Frame (lookbook), Product Card, Secondary Button |
 | 6 | Achievements | Angka & pencapaian | Achievement Stat |
@@ -261,7 +266,7 @@ Hero memakai video yang sama sebagai latar 30% (revisi 2026-10-17). Jangan self-
 | 9 | Join | Sosmed Alter Ego Esports & Alter Merch | Join Block |
 | — | Footer | Navigasi, toko per negara, offline store, sosmed | Footer, Seigaiha Texture |
 
-Seigaiha Divider dipakai di antara 3→4, 6→7, dan 8→9.
+Seigaiha Divider dipakai di antara Story dan Roster, 6→7, dan 8→9.
 
 ### Halaman lain
 
