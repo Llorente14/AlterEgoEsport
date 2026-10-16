@@ -51,6 +51,12 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
       </div>
     </div>
 
+    <!--
+      WebGL layer (desktop with motion): the real 3D logo, under the text and cards. The two-sided 2D badge above
+      is its fallback (no WebGL, model fails to load) and is hidden once the 3D logo is on screen.
+    -->
+    <div class="story-canvas" aria-hidden="true" data-story-canvas></div>
+
     <!-- Scene A -->
     <div class="story-layer story-a" data-story-headline>
       <div class="story-text story-a-text flex flex-col">
@@ -169,6 +175,9 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
     padding-top: 16px;
   }
   .story-logo {
+    display: none;
+  }
+  .story-canvas {
     display: none;
   }
   .story-static-logo {
@@ -344,6 +353,17 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
       transform-style: preserve-3d;
       will-change: transform;
     }
+    :global(.js) .story-canvas {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Once the 3D logo is drawing, the 2D badge steps aside (it keeps its box, tests and layout rely on it). */
+    :global(.js) .story[data-logo3d='ready'] .story-logo {
+      visibility: hidden;
+    }
     :global(.js) .story-logo-card {
       position: absolute;
       inset: 0;
@@ -430,9 +450,11 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
 </style>
 
 <script>
-  import { LOGO_LIFT, pinProgress, smoothProgress, storyFrame } from '../lib/story-scroll';
+  import { LOGO_LIFT, pinProgress, smoothProgress, storyFrame, type StoryFrame } from '../lib/story-scroll';
+  import type { Logo3D } from '../lib/logo3d';
 
   const NAV_HEIGHT = 80;
+  const MODEL_URL = '/models/alterego-logo.glb';
   const section = document.querySelector<HTMLElement>('[data-story]');
   const pin = section?.querySelector<HTMLElement>('[data-story-pin]');
   const logo = section?.querySelector<HTMLElement>('[data-story-logo]');
@@ -447,8 +469,44 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
   const pinnedQuery = window.matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
 
   // ── Pinned scroll story (desktop) ──────────────────────────────────────────────────────────
-  if (section && pin && logo && logoCard && headline && description && founder && title && row) {
+  const canvasBox = section?.querySelector<HTMLElement>('[data-story-canvas]');
+
+  if (section && pin && logo && logoCard && canvasBox && headline && description && founder && title && row) {
     let wasPinned = false;
+    let logo3d: Logo3D | null = null;
+    let loading3d = false;
+    let lastFrame: StoryFrame | null = null;
+
+    const hasWebGL = () => {
+      try {
+        const probe = document.createElement('canvas');
+        return Boolean(probe.getContext('webgl2') ?? probe.getContext('webgl'));
+      } catch {
+        return false;
+      }
+    };
+
+    const view = () => ({ vw: pin.clientWidth, logoHeightPx: logo.offsetHeight });
+
+    /** Load the 3D logo (three.js and the model are only fetched here). Any failure leaves the 2D badge. */
+    const load3d = () => {
+      if (logo3d || loading3d || !hasWebGL()) return;
+      loading3d = true;
+      import('../lib/logo3d')
+        .then(({ mountLogo3D }) => mountLogo3D(canvasBox, MODEL_URL))
+        .then((controller) => {
+          loading3d = false;
+          if (!pinnedQuery.matches) return controller.dispose(); // left the desktop layout while loading
+          logo3d = controller;
+          if (lastFrame) controller.setFrame(lastFrame, view());
+          section.dataset.logo3d = 'ready';
+        })
+        .catch((error: unknown) => {
+          loading3d = false;
+          console.warn('[story] 3D tidak dapat dimuat, memakai logo 2D.', error);
+          section.dataset.logo3d = 'fallback';
+        });
+    };
     let target = 0; // where the scroll is
     let current = 0; // where the animation is: it eases toward the scroll so motion stays smooth
     let lastTime = 0;
@@ -460,12 +518,17 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
       delete section.dataset.scene;
       delete section.dataset.progress;
       delete section.dataset.settled;
+      logo3d?.dispose();
+      logo3d = null;
+      delete section.dataset.logo3d;
     };
 
     /** Draw the stage at a progress value. */
     const render = (progress: number) => {
       const vw = document.documentElement.clientWidth;
       const f = storyFrame(progress, cards.length);
+      lastFrame = f;
+      logo3d?.setFrame(f, view());
 
       // The perspective is applied in the logo's own frame, so lifting it does not make it drift sideways.
       const perspective = vw * 1.4;
@@ -510,6 +573,7 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
         return;
       }
       wasPinned = true;
+      load3d();
 
       const rect = section.getBoundingClientRect();
       target = pinProgress(rect.top - NAV_HEIGHT, rect.height, pin.offsetHeight);
