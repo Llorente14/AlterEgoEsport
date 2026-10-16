@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS, sortNews, type NewsCategory } from '../lib/news';
+import NewsCard from './NewsCard.astro';
+import SectionLabel from './SectionLabel.astro';
+
+interface Props {
+  category?: NewsCategory;
+}
+
+const { category } = Astro.props;
+const all = sortNews(await getCollection('news'));
+const articles = category ? all.filter((a) => a.data.category === category) : all;
+const [featured, ...rest] = articles;
+
+const chips = [
+  { href: '/news', label: 'Semua', count: all.length, active: !category },
+  ...NEWS_CATEGORIES.map((c) => ({
+    href: `/news/kategori/${c.toLowerCase()}`,
+    label: NEWS_CATEGORY_LABELS[c],
+    count: all.filter((a) => a.data.category === c).length,
+    active: c === category,
+  })).filter((chip) => chip.count > 0),
+];
+---
+
+<div class="container-page flex flex-col gap-48 pb-96 pt-64">
+  <div class="flex flex-col gap-16">
+    <SectionLabel number="07" label="News" />
+    <h1 class="font-display text-display uppercase leading-display tracking-display">
+      {category ? NEWS_CATEGORY_LABELS[category] : 'Berita'}
+    </h1>
+  </div>
+
+  <nav aria-label="Kategori berita" class="-mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)]">
+    <ul class="flex w-max gap-8">
+      {
+        chips.map((chip) => (
+          <li>
+            <a
+              href={chip.href}
+              aria-current={chip.active ? 'page' : undefined}
+              class="inline-flex min-h-44 items-center gap-8 rounded-pill border border-hairline px-16 font-mono text-[12px] uppercase tracking-label text-silver transition-colors duration-200 hover:text-bone aria-[current=page]:border-signal-red aria-[current=page]:text-bone"
+            >
+              {chip.label}
+              <span class="text-ash">{chip.count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  {
+    featured ? (
+      <>
+        <div class="lg:w-2/3">
+          <NewsCard article={featured} featured headingLevel={2} />
+        </div>
+        {rest.length > 0 && (
+          <ul class="grid gap-x-24 gap-y-48 md:grid-cols-2 lg:grid-cols-3" aria-label="Berita lainnya">
+            {rest.map((article) => (
+              <li>
+                <NewsCard article={article} headingLevel={2} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    ) : (
+      <p class="text-silver">Belum ada berita di kategori ini.</p>
+    )
+  }
+</div>

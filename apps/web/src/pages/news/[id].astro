@@ -1,0 +1,101 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { GAME_LABELS } from '@alterego/shared';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { formatNewsDate, NEWS_CATEGORY_LABELS, relatedNews } from '../../lib/news';
+
+export const getStaticPaths = (async () => {
+  const articles = await getCollection('news');
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}) satisfies GetStaticPaths;
+
+const { article } = Astro.props as { article: CollectionEntry<'news'> };
+const { Content } = await render(article);
+const { title, date, category, game, excerpt, cover, coverAlt } = article.data;
+const related = relatedNews(await getCollection('news'), article);
+---
+
+<BaseLayout title={`${title} — Alter Ego Esports`} description={excerpt}>
+  <article class="container-page flex flex-col gap-48 pb-96 pt-64">
+    <header class="mx-auto flex w-full max-w-[720px] flex-col gap-24">
+      <p class="font-mono text-label uppercase tracking-label text-ash">
+        <a href={`/news/kategori/${category.toLowerCase()}`} class="text-signal-red hover:text-bone">
+          {NEWS_CATEGORY_LABELS[category]}
+        </a>
+        · <time datetime={date.toISOString().slice(0, 10)}>{formatNewsDate(date)}</time>
+        {game && <> · {GAME_LABELS[game]}</>}
+      </p>
+      <h1 class="font-display text-display uppercase leading-display tracking-display">{title}</h1>
+      <p class="text-[20px] text-silver">{excerpt}</p>
+    </header>
+
+    <Image
+      src={cover}
+      alt={coverAlt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 1280px) 1232px, 100vw"
+      loading="eager"
+      class="aspect-video w-full rounded-card object-cover"
+    />
+
+    <div class="article-body mx-auto w-full max-w-[720px]">
+      <Content />
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="container-page flex flex-col gap-32 border-t border-hairline py-96" aria-labelledby="more-news">
+        <h2 id="more-news" class="font-display text-heading uppercase leading-heading">
+          Berita lainnya
+        </h2>
+        <ul class="grid gap-x-24 gap-y-48 md:grid-cols-2 lg:grid-cols-3">
+          {related.map((a) => (
+            <li>
+              <NewsCard article={a} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .article-body {
+    color: var(--color-silver);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+  .article-body :global(p + p),
+  .article-body :global(p + h2),
+  .article-body :global(h2 + p) {
+    margin-top: 24px;
+  }
+  .article-body :global(h2) {
+    margin-top: 48px;
+    font-family: var(--font-display);
+    font-size: 40px;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--color-bone);
+  }
+  .article-body :global(strong) {
+    color: var(--color-bone);
+    font-weight: 600;
+  }
+  .article-body :global(a) {
+    color: var(--color-signal-red);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .article-body :global(blockquote) {
+    margin-top: 24px;
+    border-left: 2px solid var(--color-ego-red);
+    padding-left: 24px;
+    color: var(--color-bone);
+  }
+</style>

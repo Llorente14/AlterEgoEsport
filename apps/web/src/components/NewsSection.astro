@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import { sortNews } from '../lib/news';
+import NewsCard from './NewsCard.astro';
+import SectionLabel from './SectionLabel.astro';
+
+const latest = sortNews(await getCollection('news')).slice(0, 3);
+---
+
+<section id="news" class="container-page flex flex-col gap-48 py-96" aria-labelledby="news-title">
+  <div class="flex flex-wrap items-end justify-between gap-24">
+    <div class="flex flex-col gap-16">
+      <SectionLabel number="07" label="News" />
+      <h2 id="news-title" class="font-display text-display uppercase leading-display tracking-display">
+        Kabar terbaru
+      </h2>
+    </div>
+    <a
+      href="/news"
+      class="group inline-flex min-h-48 items-center gap-8 rounded-control border-[1.5px] border-bone/40 px-24 text-[14px] font-medium uppercase tracking-ui text-bone transition-colors duration-200 hover:border-bone"
+    >
+      Semua berita
+      <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-4">→</span>
+    </a>
+  </div>
+  <ul class="grid gap-x-24 gap-y-48 md:grid-cols-2 lg:grid-cols-3" aria-label="Berita terbaru">
+    {
+      latest.map((article) => (
+        <li>
+          <NewsCard article={article} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

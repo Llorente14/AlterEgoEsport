@@ -1,0 +1,15 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NewsView from '../../../components/NewsView.astro';
+import { NEWS_CATEGORIES, NEWS_CATEGORY_LABELS, type NewsCategory } from '../../../lib/news';
+
+export const getStaticPaths = (() =>
+  NEWS_CATEGORIES.map((category) => ({ params: { category: category.toLowerCase() }, props: { category } }))) satisfies GetStaticPaths;
+
+const { category } = Astro.props as { category: NewsCategory };
+---
+
+<BaseLayout title={`${NEWS_CATEGORY_LABELS[category]} — Berita Alter Ego`}>
+  <NewsView category={category} />
+</BaseLayout>
