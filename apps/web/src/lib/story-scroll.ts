@@ -19,10 +19,15 @@ export const MAX_TILT = 8;
 export const LOGO_SCALE_C = 1.15;
 export const LOGO_OPACITY_C = 0.45;
 /**
- * How far the card row drifts left over scene C, as a fraction of the viewport width.
- * The five cards leave 0.1·vw − 48px free on each side, so 0.04 keeps every card on screen from 1024px up.
+ * Where the card row starts in scene C, as a fraction of the viewport width to the right of its resting place.
+ * It drifts left and ends exactly centred. The five cards leave 0.1·vw − 48px free on each side, so 0.04
+ * keeps every card on screen from 1024px up.
  */
 export const CARDS_DRIFT = 0.04;
+/** How far the logo comes out of the screen at the middle of its flip, as a fraction of the viewport width. */
+export const LOGO_LIFT = 0.32;
+/** Speed of the scroll smoothing (1/s). The logo catches up with the scroll in about 3/rate seconds. */
+export const SMOOTHING_RATE = 9;
 
 const clamp01 = (x: number) => Math.min(Math.max(x, 0), 1);
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
@@ -32,6 +37,15 @@ const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
 const plain = (n: number) => Math.round(n * 1e6) / 1e6 + 0;
 /** Progress of `p` inside [from, to], clamped to 0–1. */
 const within = (p: number, from: number, to: number) => clamp01((p - from) / (to - from));
+
+/**
+ * One step of exponential smoothing toward the scroll position. Frame-rate independent, never overshoots,
+ * and snaps once it is within a hair of the target so the animation can stop.
+ */
+export function smoothProgress(current: number, target: number, dtSeconds: number, rate = SMOOTHING_RATE): number {
+  const next = current + (target - current) * (1 - Math.exp(-rate * Math.max(dtSeconds, 0)));
+  return Math.abs(target - next) < 0.0003 ? target : next;
+}
 
 /** Scroll progress through a pinned section: 0 when its top meets the pin line, 1 when its bottom does. */
 export function pinProgress(sectionTop: number, sectionHeight: number, pinnedHeight: number): number {
@@ -45,7 +59,15 @@ export interface StoryFrame {
   scene: Scene;
   /** Logo centre offset in fractions of the viewport width (+ = right of centre). */
   logoX: number;
+  /** Tilt in degrees while the logo slides from A to B; 0 at rest. */
   logoRotate: number;
+  /**
+   * Turn around the vertical axis in degrees. From B to C the logo spins 0 → 360: at 180 it shows its back,
+   * and it ends facing front again. 0 in A and B, 360 in C.
+   */
+  logoFlip: number;
+  /** 0–1: how far the logo is lifted toward the viewer (peaks at the middle of the flip). */
+  logoLift: number;
   logoScale: number;
   logoOpacity: number;
   /** Text layers: opacity 0–1 and horizontal drift in fractions of the viewport width. */
@@ -54,7 +76,7 @@ export interface StoryFrame {
   founderTitle: { opacity: number };
   /** Per-card rise (0 = below the stage, 1 = in place), staggered left to right. */
   cardRise: number[];
-  /** Horizontal drift of the whole card row, fraction of the viewport width (negative = left). */
+  /** Horizontal offset of the whole card row, fraction of the viewport width; eases to 0 so it ends centred. */
   cardsShift: number;
 }
 
@@ -65,11 +87,12 @@ export function storyFrame(progress: number, cardCount = 5): StoryFrame {
   const abRaw = within(p, SCENES.aEnd, SCENES.abEnd);
   const bcRaw = within(p, SCENES.bEnd, SCENES.bcEnd);
 
-  // Logo: right → left → centre. Tilts while it moves (against the direction of travel), upright at rest.
+  // Logo: right → left → centre. A → B it slides with a tilt; B → C it flips around its vertical axis
+  // (showing its back at the middle) while it comes out of the screen, then settles facing front.
   const logoX = p < SCENES.abEnd ? lerp(LOGO_SIDE, -LOGO_SIDE, ab) : lerp(-LOGO_SIDE, 0, bc);
-  const logoRotate = plain(
-    p < SCENES.abEnd ? -MAX_TILT * Math.sin(Math.PI * abRaw) : MAX_TILT * Math.sin(Math.PI * bcRaw),
-  );
+  const logoRotate = plain(p < SCENES.abEnd ? -MAX_TILT * Math.sin(Math.PI * abRaw) : 0);
+  const logoFlip = plain(360 * bc);
+  const logoLift = plain(Math.sin(Math.PI * bc));
 
   // Texts hand over to each other: the outgoing one fades in the first half of a transition, the next in the second.
   const out = (raw: number) => 1 - ease(within(raw, 0, 0.5));
@@ -90,13 +113,15 @@ export function storyFrame(progress: number, cardCount = 5): StoryFrame {
     scene: p < SCENES.abEnd ? 'A' : p < SCENES.bcEnd ? 'B' : 'C',
     logoX,
     logoRotate,
+    logoFlip,
+    logoLift,
     logoScale: lerp(1, LOGO_SCALE_C, bc),
     logoOpacity: lerp(1, LOGO_OPACITY_C, bc),
     headline: { opacity: headlineOpacity, x: plain(-0.12 * (1 - headlineOpacity)) },
     description: { opacity: descriptionOpacity, x: 0.08 * (1 - descriptionOpacity) },
     founderTitle: { opacity: founderOpacity },
     cardRise,
-    cardsShift: plain(-CARDS_DRIFT * within(p, SCENES.bcEnd, 1)),
+    cardsShift: plain(CARDS_DRIFT * (1 - ease(within(p, SCENES.bcEnd, 1)))),
   };
 }
 
