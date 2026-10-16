@@ -1,0 +1,14 @@
+# Vercel Root Directory: apps/web (CLI upload from this folder)
+# Keep raw sources and local-only folders out of the upload.
+_source/
+data/video/
+data/*.webm
+data/*.mp4
+.cache/
+docs/
+brand/
+node_modules/
+apps/web/dist/
+apps/web/.astro/
+apps/web/test-results/
+apps/web/playwright-report/

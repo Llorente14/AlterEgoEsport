@@ -1,0 +1,21 @@
+# dependencies & build
+node_modules/
+dist/
+.astro/
+.vercel/
+.cache/
+test-results/
+playwright-report/
+
+# raw source files (too large for the repo; only optimized copies are used)
+_source/
+data/video/
+data/*.webm
+data/*.mp4
+
+# environment & OS
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
