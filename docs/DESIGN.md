@@ -119,7 +119,7 @@ Alasan: tombol 8px terasa tegas dan "kompetitif" (gaya Dayos), sedangkan media d
 ## Components
 
 ### Navigation Bar
-Transparan di atas Void, tinggi 80px, sticky dengan latar `rgba(0,0,0,0.8)` + `backdrop-filter: blur(12px)` setelah scroll 80px. Kiri: logo perisai 2D (32px) + wordmark "ALTER EGO" Anton 20px. Tengah: STORE · ROSTER · NEWS · MEDIA · JOIN dalam Chakra Petch 500 14px UPPERCASE 0.04em, Ash (tidak aktif) / Bone (aktif, dengan garis bawah Ego Red 2px). Kanan: ikon keranjang (hanya tampil di mode `native`) + tombol utama **SHOP**. Mobile: logo + tombol hamburger; menu full-screen hitam dengan link Anton 40px bertumpuk.
+Transparan di atas Void, tinggi 80px, sticky dengan latar `rgba(0,0,0,0.8)` + `backdrop-filter: blur(12px)` setelah scroll 80px. Kiri: logo perisai 2D (32px) + wordmark "ALTER EGO" Anton 20px. Tengah: STORE · ROSTER · NEWS · ACHIEVEMENTS · JOIN dalam Chakra Petch 500 14px UPPERCASE 0.04em, Ash (tidak aktif) / Bone (aktif, dengan garis bawah Ego Red 2px). Kanan: ikon keranjang (hanya tampil di mode `native`) + tombol utama **SHOP**. Mobile: logo + tombol hamburger; menu full-screen hitam dengan link Anton 40px bertumpuk.
 
 ### Primary Button
 **Role:** Satu-satunya aksi utama per layar.
@@ -149,8 +149,16 @@ Pola gelombang seigaiha (busur konsentris bertumpuk) sebagai SVG.
 ### Hero Headline Block
 Kiri (kolom 1–6): Section Label `ALTER EGO ESPORTS · EST. 2018`, headline Anton display-xl Bone 3 baris (contoh: "WEAR / YOUR / ALTER EGO"), paragraf Chakra Petch 400 18px Silver maks 440px, lalu Primary Button "SHOP ALTER MERCH" dan Ghost Link "Lihat Roster →". Latar: video 30% (lihat Motion → Hero Background Video).
 
-### Showreel Frame
-Full-bleed, rasio 16:9 (desktop) / 4:5 (mobile), radius 24px dengan margin 24px dari tepi viewport. Overlay gradien hitam 0→60% di bawah dengan Section Label + headline Anton heading. Tombol bulat 64px di tengah: border Bone, ikon speaker — klik menyalakan suara / membuka versi penuh.
+### Logo Slide
+> Revisi 2026-10-17: menggantikan Showreel Frame (video sudah dipakai di hero).
+
+Section 2, dipin di bawah nav selama 300dvh scroll (bagian dalam `sticky`, `top: 80px`, tinggi `100dvh − 80px`, `overflow: clip`). Logo perisai 2D (WebP 800/1200) di tengah area di bawah nav, tinggi `min(62dvh, 42vw)` di desktop (`min(62dvh, 80vw)` di mobile) sehingga selalu muat di layar desktop ukuran berapa pun.
+- **0–35% scroll:** logo masuk dari luar kanan ke tengah (ease-out), miring 8° → 0°.
+- **35–65%:** diam tegak di tengah.
+- **65–100%:** keluar ke luar kiri (ease-in), miring 0° → −8°. Jarak luar layar = ½ lebar layar + 0,6 × lebar logo + 24px (cukup untuk logo yang miring).
+- **Latar:** "ALTER EGO · ALTER EGO" Anton outline 1px Bone 20%, `min(28vw, 40dvh)`, bergeser ke kiri lebih cepat (parallax).
+- Tanpa JavaScript atau dengan reduced-motion: logo statis di tengah, tanpa pin. Section ini tidak memakai reveal.
+- Tanpa library animasi (sticky CSS + ±40 baris JS).
 
 ### Manifesto Block
 Dua kolom asimetris tanpa kartu: kiri headline Anton display ("BANYAK WAJAH. / SATU NAMA."), kanan paragraf Chakra Petch 400 18px. Disertai satu siluet tiga-topeng outline tipis sebagai ornamen.
@@ -210,7 +218,7 @@ Prinsip: **semua bergerak dari kanan ke kiri**, pelan, seperti angin. Easing sta
 - Hero berlatar Void solid, jadi lapisan ambient tidak terlihat di hero.
 
 ### Ambient (di bawah hero)
-- Lapisan `fixed` di belakang konten: 24 segitiga 3–6px + 6 kelopak sakura, **opacity 8%**, mengalir kanan→kiri pelan (30–60 detik per lintasan). Tujuannya agar section tidak hitam polos, bukan untuk menarik perhatian.
+- Lapisan `fixed` di belakang konten: 40 segitiga 5–10px + 10 kelopak sakura, **opacity 35%**, mengalir kanan→kiri pelan (30–60 detik per lintasan). Tujuannya agar section tidak hitam polos, bukan untuk menarik perhatian.
 - Hanya `transform`, tanpa JavaScript.
 
 ### Reduced Motion
@@ -228,7 +236,7 @@ Prinsip: **semua bergerak dari kanan ke kiri**, pelan, seperti angin. Easing sta
 
 | Video | Lokasi | Perilaku | Format |
 |-------|--------|----------|--------|
-| **Showreel esport** | Section 2, tepat setelah hero | Autoplay, muted, loop, `playsinline`; tombol speaker untuk suara; lazy-load saat 200px sebelum masuk viewport; poster frame JPG/WebP | MP4 H.264 ≤ 8 MB (720p, 20–30s) **atau** embed YouTube (lite-youtube) untuk versi penuh |
+| **Showreel esport** | Latar hero (opacity 30%) | Autoplay, muted, loop, `playsinline`; tombol speaker untuk suara; lazy-load saat 200px sebelum masuk viewport; poster frame JPG/WebP | MP4 H.264 ≤ 8 MB (720p, 20–30s) **atau** embed YouTube (lite-youtube) untuk versi penuh |
 | **Lookbook Alter Merch** | Store: di atas grid produk; Landing: di atas grid preview merch | Sama, tanpa tombol suara (video senyap) | MP4 ≤ 5 MB, 10–15s |
 
 Hero memakai video yang sama sebagai latar 30% (revisi 2026-10-17). Jangan self-host file > 10 MB. Di mobile, autoplay tetap jalan (muted) dengan versi 480p.
@@ -241,9 +249,9 @@ Hero memakai video yang sama sebagai latar 30% (revisi 2026-10-17). Jangan self-
 
 | # | Section | Isi | Komponen |
 |---|---------|-----|----------|
-| — | Nav | Logo, STORE · ROSTER · NEWS · MEDIA · JOIN, SHOP | Navigation Bar |
+| — | Nav | Logo, STORE · ROSTER · NEWS · ACHIEVEMENTS · JOIN, SHOP | Navigation Bar |
 | 1 | Hero | Headline + CTA di atas video latar 30% | Hero Headline Block, Hero Background Video |
-| 2 | Showreel | Video highlight esport | Showreel Frame |
+| 2 | Identitas | Logo bergeser kanan → kiri saat scroll | Logo Slide |
 | 3 | Manifesto | Siapa Alter Ego, makna "banyak wajah, satu nama" | Manifesto Block |
 | 4 | Roster | Tab divisi: Mobile Legends · Counter-Strike 2 · PUBG Mobile | Roster Card, tab divisi (Tag/Chip) |
 | 5 | Alter Merch | Lookbook video + 4–8 produk unggulan + "Lihat Semua" | Showreel Frame (lookbook), Product Card, Secondary Button |
