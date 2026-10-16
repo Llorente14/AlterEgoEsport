@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alter Ego - Logo 3D</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #0b0b0d; overflow: hidden; font-family: system-ui, sans-serif; }
+  #stage { position: fixed; inset: 0; }
+  #stage canvas { width: 100%; height: 100%; display: block; }
+  #status {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+    color: #aaa; font-size: 14px; letter-spacing: .04em; pointer-events: none;
+  }
+  #status.error { color: #ff5a4e; }
+  #hint {
+    position: fixed; right: 20px; bottom: 20px; color: #666; font-size: 12px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="status">Memuat model…</div>
+<div id="hint">Drag: putar · Scroll: zoom · Klik kanan: geser</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const MODEL_URL = 'alterego_logo_optimized.glb';
+
+const stage = document.getElementById('stage');
+const status = document.getElementById('status');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+stage.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer)
+  .fromScene(new RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+camera.position.set(0, 0, 6);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.enablePan = true;
+controls.minDistance = 2;
+controls.maxDistance = 12;
+
+const key = new THREE.DirectionalLight(0xffffff, 1.5);
+key.position.set(3, 4, 5);
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xff2020, 2.5);
+rim.position.set(-4, -2, -3);
+scene.add(rim);
+
+const pivot = new THREE.Group();
+scene.add(pivot);
+
+const loader = new GLTFLoader();
+loader.setMeshoptDecoder(MeshoptDecoder);
+loader.load(
+  MODEL_URL,
+  (gltf) => {
+    const logo = gltf.scene;
+    // Pusatkan model di origin supaya rotasi terlihat rapi
+    const box = new THREE.Box3().setFromObject(logo);
+    const center = box.getCenter(new THREE.Vector3());
+    logo.position.sub(center);
+    pivot.add(logo);
+    status.textContent = '';
+  },
+  undefined,
+  (err) => {
+    console.error(err);
+    status.textContent = 'Gagal memuat alterego_logo_optimized.glb. Pastikan file ada di folder yang sama dan halaman dibuka lewat local server.';
+    status.classList.add('error');
+  }
+);
+
+function resize() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.position.z = w < 600 ? 8 : 6;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(stage);
+resize();
+
+// Animasi halus: idle sway + melayang, sambil tetap bisa di-drag
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const t = clock.getElapsedTime();
+  pivot.position.y = Math.sin(t * 1.2) * 0.05;
+  pivot.rotation.y = Math.sin(t * 0.5) * 0.15;
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
