@@ -9,6 +9,9 @@ export default defineConfig({
   reporter: 'list',
   use: {
     baseURL: `http://localhost:${PORT}`,
+    // Headless Chromium renders WebGL in software, so the 3D hero would starve every other test.
+    // Specs opt back into motion with test.use({ reducedMotion: 'no-preference' }).
+    reducedMotion: 'reduce',
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
