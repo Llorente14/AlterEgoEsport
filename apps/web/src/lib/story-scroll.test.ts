@@ -174,3 +174,63 @@ describe('storyFrame: cards', () => {
     expect(storyFrame(1, 1).cardRise).toEqual([1]);
   });
 });
+
+describe('storyFrame: 3D choreography', () => {
+  const facesFront = (n: number) => Math.abs(((n % 360) + 360) % 360) < 1e-6 || Math.abs((((n % 360) + 360) % 360) - 360) < 1e-6;
+
+  it('faces front, flat and still, in every scene at rest', () => {
+    for (const p of [0.05, 0.48, 0.97]) {
+      const { logoPose, logoMotion } = storyFrame(p);
+      expect(facesFront(logoPose.x), `x at ${p}`).toBe(true);
+      expect(facesFront(logoPose.y), `y at ${p}`).toBe(true);
+      expect(logoPose.z).toBe(0);
+      expect(logoMotion).toBe(0);
+    }
+  });
+
+  it('A → B is a turntable: a full spin around the vertical axis, no somersault', () => {
+    let y = 0;
+    for (const p of steps().filter((p) => p <= SCENES.abEnd)) {
+      const { logoPose } = storyFrame(p);
+      expect(logoPose.y).toBeGreaterThanOrEqual(y - 1e-9);
+      expect(Math.abs(logoPose.x)).toBeLessThanOrEqual(12 + 1e-9); // only a pitch
+      y = logoPose.y;
+    }
+    expect(storyFrame(SCENES.abEnd).logoPose.y).toBe(360);
+    expect(storyFrame((SCENES.aEnd + SCENES.abEnd) / 2).logoPose.y).toBeCloseTo(180, 3);
+  });
+
+  it('B → C is a somersault: a full vertical flip, back showing in the middle, with a sway and a roll', () => {
+    const mid = (SCENES.bEnd + SCENES.bcEnd) / 2;
+    expect(storyFrame(mid).logoPose.x).toBeCloseTo(180, 3);
+
+    let x = 0;
+    for (const p of steps().filter((p) => p >= SCENES.bEnd && p <= SCENES.bcEnd)) {
+      const { logoPose } = storyFrame(p);
+      expect(logoPose.x).toBeGreaterThanOrEqual(x - 1e-9);
+      expect(Math.abs(logoPose.y - 360)).toBeLessThanOrEqual(25 + 1e-9);
+      expect(Math.abs(logoPose.z)).toBeLessThanOrEqual(12 + 1e-9);
+      x = logoPose.x;
+    }
+    expect(storyFrame(SCENES.bcEnd).logoPose.x).toBe(360);
+  });
+
+  it('the two moves use different axes, so no move repeats the other', () => {
+    const turn = storyFrame((SCENES.aEnd + SCENES.abEnd) / 2).logoPose;
+    const somersault = storyFrame((SCENES.bEnd + SCENES.bcEnd) / 2).logoPose;
+    expect(Math.abs(turn.y - 180)).toBeLessThan(1);
+    expect(Math.abs(somersault.x - 180)).toBeLessThan(1);
+    expect(Math.abs(turn.x)).toBeLessThanOrEqual(12);
+    expect(Math.abs(somersault.y - 360)).toBeLessThanOrEqual(25);
+  });
+
+  it('logoMotion peaks mid-move and is 0 at rest, so cursor-follow fades while flipping', () => {
+    expect(storyFrame((SCENES.aEnd + SCENES.abEnd) / 2).logoMotion).toBeCloseTo(1, 3);
+    expect(storyFrame((SCENES.bEnd + SCENES.bcEnd) / 2).logoMotion).toBeCloseTo(1, 3);
+    for (const p of steps()) {
+      const m = storyFrame(p).logoMotion;
+      expect(m).toBeGreaterThanOrEqual(0);
+      expect(m).toBeLessThanOrEqual(1);
+    }
+  });
+});

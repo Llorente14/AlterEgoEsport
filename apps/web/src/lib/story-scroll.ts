@@ -68,6 +68,15 @@ export interface StoryFrame {
   logoFlip: number;
   /** 0–1: how far the logo is lifted toward the viewer (peaks at the middle of the flip). */
   logoLift: number;
+  /**
+   * Full 3D pose for the WebGL logo, in degrees (apply as Euler order YXZ). Each move has its own flip:
+   *  A → B  turntable: a full spin around the vertical axis (y 0 → 360) with a pitch and the slide's tilt
+   *  B → C  somersault: a full vertical flip (x 0 → 360, back visible at 180) with a sway and a roll
+   * At rest the logo faces front: x and y are multiples of 360 and z is 0.
+   */
+  logoPose: { x: number; y: number; z: number };
+  /** 0 at rest, up to 1 in the middle of a move; the cursor-follow fades out while the logo is flipping. */
+  logoMotion: number;
   logoScale: number;
   logoOpacity: number;
   /** Text layers: opacity 0–1 and horizontal drift in fractions of the viewport width. */
@@ -94,6 +103,15 @@ export function storyFrame(progress: number, cardCount = 5): StoryFrame {
   const logoFlip = plain(360 * bc);
   const logoLift = plain(Math.sin(Math.PI * bc));
 
+  // 3D choreography: two different flips, one per move.
+  const turntable = p < SCENES.abEnd; // A → B (and at rest in A)
+  const logoPose = {
+    x: plain(turntable ? 12 * Math.sin(Math.PI * abRaw) : 360 * bc),
+    y: plain(turntable ? 360 * ab : 360 + 25 * Math.sin(2 * Math.PI * bcRaw)),
+    z: plain(turntable ? -MAX_TILT * Math.sin(Math.PI * abRaw) : -12 * Math.sin(Math.PI * bc)),
+  };
+  const logoMotion = plain(Math.sin(Math.PI * (turntable ? abRaw : bcRaw)));
+
   // Texts hand over to each other: the outgoing one fades in the first half of a transition, the next in the second.
   const out = (raw: number) => 1 - ease(within(raw, 0, 0.5));
   const into = (raw: number) => ease(within(raw, 0.5, 1));
@@ -115,6 +133,8 @@ export function storyFrame(progress: number, cardCount = 5): StoryFrame {
     logoRotate,
     logoFlip,
     logoLift,
+    logoPose,
+    logoMotion,
     logoScale: lerp(1, LOGO_SCALE_C, bc),
     logoOpacity: lerp(1, LOGO_OPACITY_C, bc),
     headline: { opacity: headlineOpacity, x: plain(-0.12 * (1 - headlineOpacity)) },
