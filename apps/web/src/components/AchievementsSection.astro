@@ -1,0 +1,83 @@
+---
+import { GAME_LABELS } from '@alterego/shared';
+import { getAchievements } from '../lib/catalog';
+import { formatMonthYear, formatUSDCompact } from '../lib/format';
+import SectionLabel from './SectionLabel.astro';
+
+const { games, total, highlights } = getAchievements();
+
+const stats = [
+  { value: String(total.titles), label: 'Gelar juara' },
+  { value: String(total.runnerUps), label: 'Runner-up' },
+  { value: String(total.internationalAppearances), label: 'Panggung dunia' },
+  { value: formatUSDCompact(total.totalPrizeUSD), label: 'Total hadiah' },
+];
+---
+
+<section id="achievements" class="container-page flex flex-col gap-64 py-96" aria-labelledby="achievements-title">
+  <div class="flex flex-col gap-16">
+    <SectionLabel number="06" label="Achievements" />
+    <h2 id="achievements-title" class="font-display text-display uppercase leading-display tracking-display">
+      Rekam jejak
+    </h2>
+  </div>
+
+  <dl class="grid grid-cols-2 border-y border-hairline lg:grid-cols-4">
+    {
+      stats.map((stat, i) => (
+        <div
+          class:list={[
+            'flex flex-col-reverse gap-8 py-32 lg:px-32',
+            i % 2 === 1 && 'border-l border-hairline pl-24',
+            i >= 2 && 'border-t border-hairline lg:border-t-0',
+            i === 2 && 'lg:border-l lg:pl-32',
+            i === 0 && 'lg:pl-0',
+          ]}
+        >
+          <dt class="font-mono text-label uppercase tracking-label text-ash">{stat.label}</dt>
+          <dd class="font-display text-display leading-display">{stat.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+
+  <ul class="flex flex-wrap gap-x-32 gap-y-8 font-mono text-label uppercase tracking-label text-ash" aria-label="Ringkasan per game">
+    {
+      games.map((g) => (
+        <li>
+          <span class="text-bone">{g.label}</span> · {g.summary.titles} gelar · {g.summary.runnerUps} runner-up ·{' '}
+          {formatUSDCompact(g.summary.totalPrizeUSD)}
+        </li>
+      ))
+    }
+  </ul>
+
+  <ol class="flex flex-col" aria-label="Pencapaian terbaru">
+    {
+      highlights.map((a) => {
+        const date = formatMonthYear(a.endDate ?? a.startDate);
+        const champion = a.placement === '1';
+        return (
+          <li class="grid grid-cols-[1fr_auto] items-center gap-x-24 gap-y-8 border-b border-hairline py-24 md:grid-cols-[160px_1fr_auto]">
+            <p class="col-span-2 font-mono text-label uppercase tracking-label text-ash md:col-span-1">
+              {date ?? '—'} · <span class="text-signal-red">{GAME_LABELS[a.game]}</span>
+            </p>
+            <div class="flex flex-col gap-4">
+              <h3 class="font-display text-[28px] uppercase leading-heading">{a.tournament}</h3>
+              <p class="text-[14px] text-ash">
+                {a.division}
+                {a.prize && <> · {formatUSDCompact(a.prize.amount)}</>}
+              </p>
+            </div>
+            <p class="flex flex-col items-end gap-4 text-right">
+              <span class:list={['font-display text-heading leading-heading', champion && 'text-signal-red']}>
+                {a.placement.includes('-') ? a.placement : `#${a.placement}`}
+              </span>
+              <span class="font-mono text-label uppercase tracking-label text-ash">{a.placementLabel}</span>
+            </p>
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>

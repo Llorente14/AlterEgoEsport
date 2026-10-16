@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('kerangka landing', () => {
-  test('section tampil berurutan: hero, showreel, manifesto, roster', async ({ page }) => {
+  test('section tampil berurutan sesuai sitemap', async ({ page }) => {
     await page.goto('/');
     const ids = await page.locator('main > section').evaluateAll((els) => els.map((el) => el.id));
-    expect(ids).toEqual(['hero', 'showreel', 'manifesto', 'roster']);
+    expect(ids).toEqual(['hero', 'showreel', 'manifesto', 'roster', 'achievements']);
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Alter');
   });
 
