@@ -1,0 +1,160 @@
+{
+  "game": "cs2",
+  "updatedAt": "2026-10-16",
+  "players": [
+    {
+      "id": "bntet",
+      "nickname": "BNTET",
+      "fullName": "Hansel Ferdinand",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2025-07-31",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 1,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    },
+    {
+      "id": "pokemon",
+      "nickname": "POKEMON",
+      "fullName": "Saad Ahmed",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2026-08-28",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 2,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    },
+    {
+      "id": "laxiee",
+      "nickname": "LAXIEE",
+      "fullName": "Maks Andryei",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2026-08-28",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 3,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    },
+    {
+      "id": "adex",
+      "nickname": "ADEX",
+      "fullName": "Adelin Nica",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2026-08-28",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 4,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    },
+    {
+      "id": "shadiy",
+      "nickname": "SHADIY",
+      "fullName": "Martins Gütmanis",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2026-08-28",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 5,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    },
+    {
+      "id": "bali",
+      "nickname": "BALI",
+      "fullName": "Andrew Joseph",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "staff",
+      "role": "Coach",
+      "status": "active",
+      "joinDate": "2025-07-31",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 6,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    },
+    {
+      "id": "whyphy",
+      "nickname": "WHYPHY",
+      "fullName": "Avian Luthfi",
+      "nationality": null,
+      "game": "cs2",
+      "division": "Alter Ego",
+      "type": "staff",
+      "role": "Manager",
+      "status": "active",
+      "joinDate": "2021-05",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/counterstrike/Alter_Ego",
+      "photo": null,
+      "displayOrder": 7,
+      "gameSpecific": {
+        "isIGL": null
+      },
+      "sources": [
+        "https://liquipedia.net/counterstrike/Alter_Ego"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "game": "pubgm",
+  "updatedAt": "2026-10-16",
+  "players": [
+    {
+      "id": "badru",
+      "nickname": "BADRU",
+      "fullName": "Badru Fikri Imanudin",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2023-02-03",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 1,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "rosemary",
+      "nickname": "ROSEMARY",
+      "fullName": "Juventino Ryan Jeremy Rolos",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2023-02-03",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 2,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "krypton",
+      "nickname": "KRYPTON",
+      "fullName": "Zhafir Krypton Eria",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2025-05-14",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 3,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "snape",
+      "nickname": "SNAPE",
+      "fullName": "Muh Fathyn Zilhaq Syah S",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2025-08-30",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 4,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "jimmyop",
+      "nickname": "JIMMYOP",
+      "fullName": "Muhd Hazim Irfan Kamarudin",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2026-02-11",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 5,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "zuxxy",
+      "nickname": "ZUXXY",
+      "fullName": "Made Bagas Pramudita",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "player",
+      "role": null,
+      "status": "active",
+      "joinDate": "2026-02-12",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 6,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "aces",
+      "nickname": "ACES",
+      "fullName": "Muhammad Haris",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "staff",
+      "role": "Manager",
+      "status": "active",
+      "joinDate": "2023-02-03",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 7,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "hzlnuts",
+      "nickname": "HZLNUTS",
+      "fullName": "Noval Adrian Putra",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "staff",
+      "role": "Head Coach",
+      "status": "active",
+      "joinDate": "2025-09-03",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 8,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    },
+    {
+      "id": "rapshody",
+      "nickname": "RAPSHODY",
+      "fullName": "Muhammad Rifky",
+      "nationality": null,
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "type": "staff",
+      "role": "Coach",
+      "status": "active",
+      "joinDate": "2026-07-10",
+      "previousTeams": [],
+      "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+      "photo": null,
+      "displayOrder": 9,
+      "gameSpecific": {
+        "isIGL": false
+      },
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
+    }
+  ]
+}
