@@ -69,10 +69,10 @@ describe('buildGameRoster', () => {
   it('fails with the file and entry when data is malformed', () => {
     expect(() =>
       buildGameRoster(file([member({}), member({ nickname: undefined })]), 'data/pubgm.json'),
-    ).toThrowError(CatalogDataError);
+    ).toThrow(CatalogDataError);
     expect(() =>
       buildGameRoster(file([member({}), member({ nickname: undefined })]), 'data/pubgm.json'),
-    ).toThrowError(/data\/pubgm\.json → players\[1\]\.nickname/);
+    ).toThrow(/data\/pubgm\.json → players\[1\]\.nickname/);
   });
 });
 

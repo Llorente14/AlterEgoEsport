@@ -69,7 +69,7 @@ describe('buildGameAchievements', () => {
   it('fails with the file and entry when data is malformed', () => {
     expect(() =>
       buildGameAchievements(file([entry({ placement: '' })]), 'data/pubgm_achievement.json'),
-    ).toThrowError(/data\/pubgm_achievement\.json → achievements\[0\]\.placement/);
+    ).toThrow(/data\/pubgm_achievement\.json → achievements\[0\]\.placement/);
   });
 });
 
