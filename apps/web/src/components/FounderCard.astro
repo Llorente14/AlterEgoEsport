@@ -1,0 +1,54 @@
+---
+import type { Founder } from '../lib/catalog';
+
+interface Props {
+  founder: Founder;
+  /** 1-based position, used for the stagger offset and the accessible label. */
+  position: number;
+  total: number;
+}
+
+const { founder, position, total } = Astro.props;
+---
+
+<li
+  class="founder-card"
+  style={`--k:${position}`}
+  data-founder-card
+  aria-label={`${founder.name}, ${founder.role} (${position} dari ${total})`}
+>
+  <div class="founder-photo">
+    {
+      founder.photo ? (
+        <img src={founder.photo} alt={`Foto ${founder.name}`} loading="lazy" class="size-full object-cover" />
+      ) : (
+        <img src="/logo/alterego-logo-256.webp" alt="" width="256" height="251" class="w-1/2 opacity-15 grayscale" />
+      )
+    }
+  </div>
+  <div class="flex flex-col gap-4 p-16">
+    <p class="font-mono text-label uppercase tracking-label text-signal-red">{founder.role}</p>
+    <p class="font-display text-[28px] uppercase leading-heading">{founder.name}</p>
+  </div>
+</li>
+
+<style>
+  .founder-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-card);
+    /* Semi-opaque so the logo behind the cards still shows through. */
+    background: rgb(13 13 13 / 0.85);
+    backdrop-filter: blur(6px);
+    user-select: none;
+  }
+  .founder-photo {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-ink-raised);
+  }
+</style>

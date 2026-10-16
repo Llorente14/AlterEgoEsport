@@ -1,0 +1,530 @@
+---
+import { getFounders } from '../lib/catalog';
+import FounderCard from './FounderCard.astro';
+import SectionLabel from './SectionLabel.astro';
+
+const founders = getFounders();
+const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.webp 1200w';
+---
+
+<!--
+  Story: one stage, three scenes, one logo that travels between them (src/lib/story-scroll.ts).
+    A  headline left, logo right   B  logo left, manifesto right   C  FOUNDER cards, logo behind them
+  Desktop with motion: pinned under the nav and driven by scroll. Otherwise (mobile, reduced motion,
+  no JavaScript) the three scenes are plain blocks one after another; on mobile the cards are a swipeable stack.
+-->
+<section id="story" class="story relative" aria-labelledby="story-title" data-story data-no-reveal>
+  <div class="story-pin relative" data-story-pin>
+    <!-- The single logo of the pinned desktop version. Hidden in the plain layout, where each block has its own. -->
+    <img
+      src="/logo/alterego-logo-800.webp"
+      srcset={logoSrcset}
+      sizes="38vw"
+      width="1200"
+      height="1179"
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+      class="story-logo"
+      data-story-logo
+    />
+
+    <!-- Scene A -->
+    <div class="story-layer story-a" data-story-headline>
+      <div class="story-text">
+        <SectionLabel number="02" label="Manifesto" />
+        <h2 id="story-title" class="font-display text-display uppercase leading-display tracking-display">
+          Banyak<br />Wajah<br />Satu<br /><span class="text-signal-red">Nama</span>
+        </h2>
+      </div>
+      <img
+        src="/logo/alterego-logo-800.webp"
+        srcset={logoSrcset}
+        sizes="(min-width: 1024px) 38vw, 70vw"
+        width="1200"
+        height="1179"
+        alt="Logo Alter Ego"
+        loading="eager"
+        decoding="async"
+        class="story-static-logo"
+      />
+    </div>
+
+    <!-- Scene B -->
+    <div class="story-layer story-b" data-story-description>
+      <img
+        src="/logo/alterego-logo-800.webp"
+        srcset={logoSrcset}
+        sizes="38vw"
+        width="1200"
+        height="1179"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        class="story-static-logo story-b-logo"
+      />
+      <div class="story-text flex flex-col gap-24 text-silver">
+        <p>
+          Setiap pemain punya sisi lain: yang muncul saat lampu panggung menyala dan tekanan memuncak. Alter Ego lahir
+          dari sisi itu.
+        </p>
+        <p>
+          Sejak 2018 kami bertanding di Mobile Legends, Counter-Strike 2, dan PUBG Mobile, dengan satu tujuan: membawa
+          nama Indonesia ke panggung dunia. Tiga topeng, satu identitas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scene C -->
+    <div class="story-layer story-c" data-story-founder>
+      <img
+        src="/logo/alterego-logo-800.webp"
+        srcset={logoSrcset}
+        sizes="60vw"
+        width="1200"
+        height="1179"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        class="story-static-logo story-c-logo"
+      />
+      <div class="story-founder-title">
+        <SectionLabel number="03" label="Founder" />
+        <h2 class="font-display text-heading uppercase leading-heading tracking-display">Founder</h2>
+      </div>
+
+      <div class="founder-viewport" data-founder-viewport>
+        <ul class="founder-cards" aria-label="Founder Alter Ego" data-founder-cards tabindex="-1">
+          {founders.map((founder, i) => <FounderCard founder={founder} position={i + 1} total={founders.length} />)}
+        </ul>
+        <div class="founder-controls" data-founder-controls hidden>
+          <p class="font-mono text-label uppercase tracking-label text-ash" aria-live="polite" data-founder-count>
+            1 / {founders.length}
+          </p>
+          <button type="button" class="sr-only" data-founder-next>Kartu berikutnya</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Plain layout: three blocks one after another ─────────────────────────────────────────── */
+  .story-layer {
+    position: relative;
+    padding: 64px var(--gutter);
+  }
+  .story-text {
+    max-width: 560px;
+  }
+  .story-logo {
+    display: none;
+  }
+  .story-static-logo {
+    display: block;
+    height: min(56dvh, 70vw);
+    width: auto;
+    margin: 32px auto 0;
+  }
+  .story-b-logo {
+    display: none; /* mobile: no logo in the manifesto block */
+  }
+  .story-founder-title {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 20;
+    margin-bottom: 32px;
+  }
+  .story-c-logo {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    z-index: 0;
+    /* Wider than the card stack (78vw) so the shield shows around its edges. */
+    height: min(115vw, 70dvh);
+    margin: 0;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+  }
+
+  /* Cards: a plain list without JavaScript. */
+  .founder-viewport {
+    position: relative;
+    z-index: 10;
+  }
+  .founder-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .founder-cards :global(.founder-card) {
+    min-height: 240px;
+  }
+
+  /* Mobile with JavaScript: a swipeable stack, the logo faint behind it. */
+  @media (max-width: 1023px) {
+    :global(.js) .founder-cards {
+      position: relative;
+      display: block;
+      width: min(78vw, 320px);
+      aspect-ratio: 3 / 4;
+      margin: 0 auto;
+      touch-action: pan-y;
+      outline-offset: 8px;
+    }
+    :global(.js) .founder-cards :global(.founder-card) {
+      position: absolute;
+      inset: 0;
+      min-height: 0;
+      z-index: calc(10 - var(--pos, 0));
+      transform: translate(var(--dx, 0px), calc(var(--pos, 0) * 14px)) rotate(var(--rot, 0deg))
+        scale(calc(1 - var(--pos, 0) * 0.05));
+      opacity: calc(1 - max(var(--pos, 0) - 2, 0));
+      transition:
+        transform 300ms var(--ease-out),
+        opacity 300ms var(--ease-out);
+      cursor: grab;
+    }
+    :global(.js) .founder-cards :global(.founder-card.is-dragging) {
+      transition: none;
+      cursor: grabbing;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :global(.js) .founder-cards :global(.founder-card) {
+        transition: none;
+      }
+    }
+    .founder-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+    }
+  }
+
+  /* ── Desktop: staggered cards, headline and logo side by side ────────────────────────────── */
+  @media (min-width: 1024px) {
+    .story-layer {
+      padding: 96px max(var(--gutter), 8vw);
+    }
+    .story-a,
+    .story-b {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+      min-height: 100dvh;
+    }
+    .story-static-logo {
+      height: min(56dvh, 38vw);
+      margin: 0 auto;
+    }
+    .story-b-logo {
+      display: block;
+    }
+    .story-c-logo {
+      height: min(62dvh, 46vw);
+    }
+    .story-founder-title {
+      align-items: center;
+      text-align: center;
+    }
+    .founder-cards {
+      --cw: min(16vw, 28dvh);
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      padding-bottom: calc(var(--cw) * 0.7);
+    }
+    .founder-cards :global(.founder-card) {
+      width: var(--cw);
+      height: calc(var(--cw) * 1.5);
+      min-height: 0;
+      /* Staggered heights from the sketch: the centre card sits lowest. */
+      --off: calc(var(--cw) * var(--stagger, 0));
+      transform: translateY(var(--off));
+    }
+    .founder-cards :global(.founder-card:nth-child(1)) {
+      --stagger: 0.1;
+    }
+    .founder-cards :global(.founder-card:nth-child(2)) {
+      --stagger: 0.35;
+    }
+    .founder-cards :global(.founder-card:nth-child(3)) {
+      --stagger: 0.55;
+    }
+    .founder-cards :global(.founder-card:nth-child(4)) {
+      --stagger: 0.25;
+    }
+    .founder-cards :global(.founder-card:nth-child(5)) {
+      --stagger: -0.1;
+    }
+  }
+
+  /* ── Pinned: desktop with JavaScript and motion allowed ──────────────────────────────────── */
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    :global(.js) .story {
+      height: 450dvh;
+    }
+    :global(.js) .story-pin {
+      position: sticky;
+      top: 80px;
+      height: calc(100dvh - 80px);
+      overflow: clip;
+    }
+    :global(.js) .story-static-logo {
+      display: none;
+    }
+    :global(.js) .story-logo {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 0;
+      height: min(56dvh, 38vw);
+      width: auto;
+      transform: translate(-50%, -50%) translateX(25vw);
+      will-change: transform, opacity;
+    }
+    :global(.js) .story-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      padding: 0 max(var(--gutter), 8vw);
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      will-change: transform, opacity;
+    }
+    :global(.js) .story-a .story-text {
+      width: 42vw;
+    }
+    :global(.js) .story-b {
+      justify-content: flex-end;
+      opacity: 0;
+    }
+    :global(.js) .story-b .story-text {
+      width: min(34vw, 460px);
+    }
+    :global(.js) .story-c {
+      display: block;
+      padding: 0;
+      opacity: 1;
+      pointer-events: none;
+    }
+    :global(.js) .story-founder-title {
+      position: absolute;
+      top: 6%;
+      left: 0;
+      right: 0;
+      margin: 0;
+      opacity: 0;
+    }
+    :global(.js) .founder-viewport {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    :global(.js) .founder-cards {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 28%;
+      padding-bottom: 0;
+      will-change: transform;
+    }
+    :global(.js) .founder-cards :global(.founder-card) {
+      --rise: 0;
+      /* Each card rises from below the stage to its staggered height. */
+      transform: translateY(calc(var(--off) + (1 - var(--rise)) * 100dvh));
+      opacity: var(--rise);
+      pointer-events: auto; /* so the cards are hit-testable; the layers around them stay click-through */
+      will-change: transform, opacity;
+    }
+  }
+</style>
+
+<script>
+  import { pinProgress, storyFrame } from '../lib/story-scroll';
+
+  const NAV_HEIGHT = 80;
+  const section = document.querySelector<HTMLElement>('[data-story]');
+  const pin = section?.querySelector<HTMLElement>('[data-story-pin]');
+  const logo = section?.querySelector<HTMLElement>('[data-story-logo]');
+  const headline = section?.querySelector<HTMLElement>('[data-story-headline]');
+  const description = section?.querySelector<HTMLElement>('[data-story-description]');
+  const founder = section?.querySelector<HTMLElement>('[data-story-founder]');
+  const title = founder?.querySelector<HTMLElement>('.story-founder-title');
+  const row = founder?.querySelector<HTMLElement>('[data-founder-cards]');
+  const cards = [...(row?.querySelectorAll<HTMLElement>('[data-founder-card]') ?? [])];
+
+  const pinnedQuery = window.matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
+
+  // ── Pinned scroll story (desktop) ──────────────────────────────────────────────────────────
+  if (section && pin && logo && headline && description && founder && title && row) {
+    let queued = false;
+    let wasPinned = false;
+
+    const layers = [headline, description, title];
+    const clear = () => {
+      for (const el of [logo, headline, description, title, row, founder, ...cards]) el.removeAttribute('style');
+      delete section.dataset.scene;
+      delete section.dataset.progress;
+    };
+
+    const update = () => {
+      queued = false;
+      const pinned = pinnedQuery.matches;
+      if (!pinned) {
+        if (wasPinned) clear();
+        wasPinned = false;
+        return;
+      }
+      wasPinned = true;
+
+      const vw = document.documentElement.clientWidth;
+      const rect = section.getBoundingClientRect();
+      const progress = pinProgress(rect.top - NAV_HEIGHT, rect.height, pin.offsetHeight);
+      const f = storyFrame(progress, cards.length);
+
+      logo.style.transform = `translate(-50%, -50%) translateX(${(f.logoX * vw).toFixed(1)}px) rotate(${f.logoRotate.toFixed(2)}deg) scale(${f.logoScale.toFixed(3)})`;
+      logo.style.opacity = f.logoOpacity.toFixed(3);
+
+      headline.style.opacity = f.headline.opacity.toFixed(3);
+      headline.style.transform = `translateX(${(f.headline.x * vw).toFixed(1)}px)`;
+      description.style.opacity = f.description.opacity.toFixed(3);
+      description.style.transform = `translateX(${(f.description.x * vw).toFixed(1)}px)`;
+      title.style.opacity = f.founderTitle.opacity.toFixed(3);
+      row.style.transform = `translateX(${(f.cardsShift * vw).toFixed(1)}px)`;
+      cards.forEach((card, i) => card.style.setProperty('--rise', f.cardRise[i]!.toFixed(3)));
+
+      for (const layer of layers) layer.style.pointerEvents = Number(layer.style.opacity) < 0.05 ? 'none' : '';
+      section.dataset.scene = f.scene;
+      section.dataset.progress = progress.toFixed(3);
+    };
+
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    pinnedQuery.addEventListener('change', queue);
+    update();
+  }
+
+  // ── Swipeable card stack (mobile and tablet) ───────────────────────────────────────────────
+  const stackQuery = window.matchMedia('(max-width: 1023px)');
+  const viewport = section?.querySelector<HTMLElement>('[data-founder-viewport]');
+  const controls = viewport?.querySelector<HTMLElement>('[data-founder-controls]');
+  const counter = viewport?.querySelector<HTMLElement>('[data-founder-count]');
+  const nextButton = viewport?.querySelector<HTMLButtonElement>('[data-founder-next]');
+
+  if (row && viewport && controls && counter && nextButton && cards.length > 1) {
+    let order = [...cards]; // order[0] is the card on top
+    const SWIPE_DISTANCE = 80;
+    const SWIPE_VELOCITY = 0.5; // px per ms
+
+    const layout = () => {
+      order.forEach((card, i) => {
+        card.style.setProperty('--pos', String(i));
+        card.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+      });
+      counter.textContent = `${cards.indexOf(order[0]!) + 1} / ${cards.length}`;
+    };
+
+    /** Move the top card to the back (dir -1) or bring the last card forward (dir +1). */
+    const advance = (dir: 1 | -1) => {
+      if (dir === 1) order = [...order.slice(1), order[0]!];
+      else order = [order[order.length - 1]!, ...order.slice(0, -1)];
+      layout();
+    };
+
+    const setActive = (active: boolean) => {
+      controls.hidden = !active;
+      row.tabIndex = active ? 0 : -1;
+      if (active) {
+        layout();
+      } else {
+        order = [...cards];
+        for (const card of cards) {
+          card.style.removeProperty('--pos');
+          card.style.removeProperty('--dx');
+          card.style.removeProperty('--rot');
+          card.removeAttribute('aria-hidden');
+        }
+      }
+    };
+
+    // Dragging the top card.
+    let drag: { card: HTMLElement; startX: number; lastX: number; lastT: number; velocity: number } | null = null;
+
+    row.addEventListener('pointerdown', (event) => {
+      if (!stackQuery.matches || order[0] === undefined) return;
+      const card = order[0];
+      if (!card.contains(event.target as Node)) return;
+      drag = { card, startX: event.clientX, lastX: event.clientX, lastT: event.timeStamp, velocity: 0 };
+      card.classList.add('is-dragging');
+      row.setPointerCapture(event.pointerId);
+    });
+
+    row.addEventListener('pointermove', (event) => {
+      if (!drag) return;
+      const dx = event.clientX - drag.startX;
+      const dt = Math.max(event.timeStamp - drag.lastT, 1);
+      drag.velocity = (event.clientX - drag.lastX) / dt;
+      drag.lastX = event.clientX;
+      drag.lastT = event.timeStamp;
+      drag.card.style.setProperty('--dx', `${dx}px`);
+      drag.card.style.setProperty('--rot', `${(dx / 20).toFixed(2)}deg`);
+    });
+
+    const endDrag = (event: PointerEvent) => {
+      if (!drag) return;
+      const { card, startX, velocity } = drag;
+      drag = null;
+      card.classList.remove('is-dragging');
+      const dx = event.clientX - startX;
+      if (Math.abs(dx) > SWIPE_DISTANCE || Math.abs(velocity) > SWIPE_VELOCITY) {
+        // Fling the card off screen, then send it to the back of the stack.
+        const direction = Math.sign(dx || velocity);
+        card.style.setProperty('--dx', `${direction * window.innerWidth}px`);
+        card.style.setProperty('--rot', `${direction * 18}deg`);
+        window.setTimeout(() => {
+          card.classList.add('is-dragging'); // no transition while it jumps to the back
+          card.style.removeProperty('--dx');
+          card.style.removeProperty('--rot');
+          advance(1);
+          requestAnimationFrame(() => card.classList.remove('is-dragging'));
+        }, 220);
+      } else {
+        card.style.removeProperty('--dx');
+        card.style.removeProperty('--rot');
+      }
+    };
+    row.addEventListener('pointerup', endDrag);
+    row.addEventListener('pointercancel', endDrag);
+
+    row.addEventListener('keydown', (event) => {
+      if (!stackQuery.matches) return;
+      if (event.key === 'ArrowRight') advance(1);
+      else if (event.key === 'ArrowLeft') advance(-1);
+      else return;
+      event.preventDefault();
+    });
+    nextButton.addEventListener('click', () => advance(1));
+
+    setActive(stackQuery.matches);
+    stackQuery.addEventListener('change', () => setActive(stackQuery.matches));
+  }
+</script>
