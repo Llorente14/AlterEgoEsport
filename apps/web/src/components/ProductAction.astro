@@ -1,0 +1,45 @@
+---
+import { STORE_MODE } from '../config/store';
+import type { StoreProduct } from '../lib/catalog';
+import { productActions } from '../lib/store-actions';
+
+interface Props {
+  product: StoreProduct;
+  /** Card: compact buttons. Detail: full-width buttons. */
+  size?: 'card' | 'detail';
+}
+
+const { product, size = 'card' } = Astro.props;
+const actions = productActions(product, STORE_MODE);
+const external = (isExternal: boolean) => (isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+const height = size === 'card' ? 'min-h-44 text-[13px]' : 'min-h-48 text-[14px]';
+---
+
+<div class:list={['flex gap-8', size === 'detail' ? 'flex-col sm:flex-row' : 'flex-col']} data-product-action>
+  <a
+    href={actions.primary.href}
+    {...external(actions.primary.external)}
+    class:list={[
+      'inline-flex flex-1 items-center justify-center rounded-control bg-ego-red px-16 font-semibold uppercase tracking-ui text-bone transition-colors duration-200 hover:bg-ego-red-hover',
+      height,
+    ]}
+    aria-label={`${actions.primary.label}: ${product.name}`}
+  >
+    {actions.primary.label}
+  </a>
+  {
+    actions.secondary.map((link) => (
+      <a
+        href={link.href}
+        {...external(link.external)}
+        class:list={[
+          'inline-flex items-center justify-center rounded-control border-[1.5px] border-bone/40 px-16 font-medium uppercase tracking-ui text-bone transition-colors duration-200 hover:border-bone',
+          height,
+        ]}
+        aria-label={`Beli di ${link.label}: ${product.name}`}
+      >
+        {link.label}
+      </a>
+    ))
+  }
+</div>

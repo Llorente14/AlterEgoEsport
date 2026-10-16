@@ -1,0 +1,57 @@
+---
+import type { StoreProduct } from '../lib/catalog';
+import { CATEGORY_LABELS } from '../lib/catalog';
+import { formatPriceRange } from '../lib/format';
+import ProductAction from './ProductAction.astro';
+import ProductImage from './ProductImage.astro';
+
+interface Props {
+  product: StoreProduct;
+  loading?: 'lazy' | 'eager';
+}
+
+const { product, loading = 'lazy' } = Astro.props;
+const [first, second] = product.images;
+const sizes = '(min-width: 1024px) 300px, 50vw';
+---
+
+<article class="group relative flex flex-col gap-16 rounded-card bg-ink p-16" data-product-card>
+  <div class="relative aspect-square overflow-hidden rounded-[16px] bg-ink-raised">
+    {
+      first && (
+        <ProductImage
+          image={first}
+          alt={product.name}
+          sizes={sizes}
+          loading={loading}
+          class="absolute inset-0 size-full object-cover"
+        />
+      )
+    }
+    {
+      second && (
+        <ProductImage
+          image={second}
+          alt=""
+          sizes={sizes}
+          class="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        />
+      )
+    }
+  </div>
+  <div class="flex flex-1 flex-col gap-4">
+    <p class="font-mono text-label uppercase tracking-label text-ash">{CATEGORY_LABELS[product.category]}</p>
+    <h3 class="line-clamp-2 text-[16px] font-medium leading-[1.3] text-bone">
+      <a href={`/store/${product.slug}`} class="after:absolute after:inset-0 after:rounded-card" data-product-link>
+        {product.name}
+      </a>
+    </h3>
+    <p class="mt-auto pt-8 text-[18px] font-medium text-bone">
+      {formatPriceRange(product.priceMin, product.priceMax)}
+    </p>
+  </div>
+  <!-- Buttons sit above the stretched card link so both stay clickable. -->
+  <div class="relative z-10">
+    <ProductAction product={product} />
+  </div>
+</article>

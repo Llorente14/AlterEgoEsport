@@ -1,0 +1,28 @@
+---
+import type { ProductImage } from '../lib/catalog';
+
+interface Props {
+  image: ProductImage;
+  alt: string;
+  sizes: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { image, alt, sizes, class: className, loading = 'lazy' } = Astro.props;
+const srcset = Object.entries(image.srcset)
+  .map(([width, src]) => `${src} ${Math.min(Number(width), image.width)}w`)
+  .join(', ');
+---
+
+<img
+  src={image.srcset['800']}
+  srcset={srcset}
+  sizes={sizes}
+  alt={alt}
+  width={image.width}
+  height={image.height}
+  loading={loading}
+  decoding="async"
+  class={className}
+/>

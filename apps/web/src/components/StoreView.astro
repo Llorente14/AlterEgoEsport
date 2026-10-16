@@ -1,0 +1,79 @@
+---
+import type { ProductCategory } from '@alterego/shared';
+import { getCategories, getProducts } from '../lib/catalog';
+import MarketplaceLinks from './MarketplaceLinks.astro';
+import ProductCard from './ProductCard.astro';
+import SectionLabel from './SectionLabel.astro';
+import SeigaihaDivider from './SeigaihaDivider.astro';
+
+interface Props {
+  /** Show only this category; all products when omitted. */
+  category?: ProductCategory;
+}
+
+const { category } = Astro.props;
+const all = getProducts();
+const products = category ? all.filter((p) => p.category === category) : all;
+const categories = getCategories();
+
+const chips = [
+  { href: '/store', label: 'Semua', count: all.length, active: !category },
+  ...categories.map((c) => ({
+    href: `/store/kategori/${c.category}`,
+    label: c.label,
+    count: c.count,
+    active: c.category === category,
+  })),
+];
+const activeLabel = categories.find((c) => c.category === category)?.label;
+---
+
+<section class="container-page flex flex-col gap-32 pt-64" aria-labelledby="store-title">
+  <SectionLabel number="05" label="Alter Merch" />
+  <div class="flex flex-wrap items-end justify-between gap-24">
+    <h1 id="store-title" class="font-display text-display uppercase leading-display tracking-display">
+      {activeLabel ?? 'Store'}
+    </h1>
+    <p class="font-mono text-label uppercase tracking-label text-ash" data-product-count>{products.length} produk</p>
+  </div>
+  <p class="max-w-[560px] text-silver">
+    Jersey resmi, apparel ALT390, dan aksesori Alter Ego. Pembelian diproses lewat toko resmi kami di Shopee dan
+    Tokopedia.
+  </p>
+  <div class="max-w-[560px]">
+    <MarketplaceLinks />
+  </div>
+</section>
+
+<SeigaihaDivider />
+
+<div class="container-page flex flex-col gap-32 pb-96">
+  <nav aria-label="Kategori produk" class="-mx-[var(--gutter)] overflow-x-auto px-[var(--gutter)]">
+    <ul class="flex w-max gap-8">
+      {
+        chips.map((chip) => (
+          <li>
+            <a
+              href={chip.href}
+              aria-current={chip.active ? 'page' : undefined}
+              class="inline-flex min-h-44 items-center gap-8 rounded-pill border border-hairline px-16 font-mono text-[12px] uppercase tracking-label text-silver transition-colors duration-200 hover:text-bone aria-[current=page]:border-signal-red aria-[current=page]:text-bone"
+            >
+              {chip.label}
+              <span class="text-ash">{chip.count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <ul class="grid grid-cols-2 gap-16 md:grid-cols-3 lg:grid-cols-4 lg:gap-24" aria-label="Daftar produk">
+    {
+      products.map((product, i) => (
+        <li class="flex">
+          <ProductCard product={product} loading={i < 4 ? 'eager' : 'lazy'} />
+        </li>
+      ))
+    }
+  </ul>
+</div>

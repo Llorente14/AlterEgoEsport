@@ -1,0 +1,36 @@
+---
+import { getLinks } from '../lib/catalog';
+
+const links = getLinks();
+const regionNames = new Intl.DisplayNames(['id'], { type: 'region' });
+const external = { target: '_blank', rel: 'noopener noreferrer' };
+---
+
+<details class="group/marketplace" data-marketplace-links>
+  <summary
+    class="inline-flex min-h-44 cursor-pointer list-none items-center gap-8 text-[14px] text-ash transition-colors hover:text-bone [&::-webkit-details-marker]:hidden"
+  >
+    Belanja dari luar Indonesia?
+    <span aria-hidden="true" class="transition-transform duration-200 group-open/marketplace:rotate-90">→</span>
+  </summary>
+  <ul class="mt-8 flex flex-col border-t border-hairline">
+    {
+      links.shopee
+        .filter((s) => s.country !== 'ID')
+        .map((s) => (
+          <li class="border-b border-hairline">
+            <a href={s.url} {...external} class="flex min-h-44 items-center justify-between gap-16 text-[14px] text-silver hover:text-bone">
+              <span>{s.label}</span>
+              <span class="font-mono text-label uppercase tracking-label text-ash">{regionNames.of(s.country)}</span>
+            </a>
+          </li>
+        ))
+    }
+    <li class="border-b border-hairline">
+      <a href={links.whatsapp.url} {...external} class="flex min-h-44 items-center justify-between gap-16 text-[14px] text-silver hover:text-bone">
+        <span>{links.whatsapp.label}</span>
+        <span class="font-mono text-label uppercase tracking-label text-ash">Worldwide</span>
+      </a>
+    </li>
+  </ul>
+</details>

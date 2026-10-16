@@ -1,0 +1,17 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { ProductCategory } from '@alterego/shared';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StoreView from '../../../components/StoreView.astro';
+import { getCategories } from '../../../lib/catalog';
+
+export const getStaticPaths = (() =>
+  getCategories().map((c) => ({ params: { category: c.category }, props: { label: c.label } }))) satisfies GetStaticPaths;
+
+const category = Astro.params.category as ProductCategory;
+const { label } = Astro.props;
+---
+
+<BaseLayout title={`${label} — Alter Merch`} description={`${label} resmi Alter Ego Esports di Alter Merch.`}>
+  <StoreView category={category} />
+</BaseLayout>
