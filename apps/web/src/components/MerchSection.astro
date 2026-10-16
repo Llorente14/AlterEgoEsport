@@ -1,0 +1,38 @@
+---
+import { getProducts } from '../lib/catalog';
+import ProductCard from './ProductCard.astro';
+import SectionLabel from './SectionLabel.astro';
+
+/** Products appear in the order of the data file, newest releases first. */
+const FEATURED_COUNT = 8;
+const all = getProducts();
+const featured = all.slice(0, FEATURED_COUNT);
+---
+
+<section id="store" class="container-page flex flex-col gap-48 py-96" aria-labelledby="merch-title">
+  <div class="flex flex-wrap items-end justify-between gap-24">
+    <div class="flex flex-col gap-16">
+      <SectionLabel number="05" label="Alter Merch" />
+      <h2 id="merch-title" class="font-display text-display uppercase leading-display tracking-display">
+        Pakai seragam<br />yang sama
+      </h2>
+    </div>
+    <a
+      href="/store"
+      class="group inline-flex min-h-48 items-center gap-8 rounded-control border-[1.5px] border-bone/40 px-24 text-[14px] font-medium uppercase tracking-ui text-bone transition-colors duration-200 hover:border-bone"
+    >
+      Lihat semua {all.length} produk
+      <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-4">→</span>
+    </a>
+  </div>
+
+  <ul class="grid grid-cols-2 gap-16 lg:grid-cols-4 lg:gap-24" aria-label="Produk unggulan">
+    {
+      featured.map((product) => (
+        <li class="flex">
+          <ProductCard product={product} />
+        </li>
+      ))
+    }
+  </ul>
+</section>

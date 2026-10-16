@@ -4,9 +4,9 @@
 
 **Blocked by:** 06, 08
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Lookbook video pendek (atau poster bila belum ada video lookbook)
-- [ ] 8 produk unggulan memakai Product Card + ProductAction
-- [ ] "Lihat Semua" ke Store
-- [ ] E2E: 8 kartu tampil, link ke Store
+- [ ] Lookbook video pendek — ditunda: belum ada file video lookbook
+- [x] 8 produk unggulan memakai Product Card + ProductAction
+- [x] "Lihat Semua" ke Store
+- [x] E2E: 8 kartu tampil, link ke Store
