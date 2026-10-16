@@ -16,8 +16,8 @@ test.describe('gerak dengan motion aktif', () => {
     await page.goto('/store');
     const ambient = page.locator('[data-ambient]');
     await expect(ambient).toBeAttached();
-    expect(await ambient.locator('.ambient-tri').count()).toBe(24);
-    expect(await ambient.evaluate((el) => getComputedStyle(el).opacity)).toBe('0.08');
+    expect(await ambient.locator('.ambient-tri').count()).toBe(40);
+    expect(await ambient.evaluate((el) => getComputedStyle(el).opacity)).toBe('0.35');
 
     await page.goto('/');
     expect(await page.locator('#hero').evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(0, 0, 0)');

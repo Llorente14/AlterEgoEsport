@@ -3,9 +3,9 @@
 // The hero has a solid background, so the layer only shows below it.
 import SakuraPetals from './SakuraPetals.astro';
 
-const triangles = Array.from({ length: 24 }, (_, i) => ({
+const triangles = Array.from({ length: 40 }, (_, i) => ({
   top: `${(i * 61) % 100}%`,
-  size: 3 + ((i * 3) % 4), // 3–6px
+  size: 5 + ((i * 3) % 6), // 5–10px
   duration: 30 + ((i * 11) % 31), // 30–60s: slower than the hero wind
   delay: -((i * 13) % 60),
   rotate: (i * 47) % 360,
@@ -22,12 +22,12 @@ const triangles = Array.from({ length: 24 }, (_, i) => ({
       />
     ))
   }
-  <SakuraPetals count={6} />
+  <SakuraPetals count={10} />
 </div>
 
 <style>
   .ambient {
-    opacity: 0.08;
+    opacity: 0.35;
   }
   .ambient-tri {
     width: 0;
