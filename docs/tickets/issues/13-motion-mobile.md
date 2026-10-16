@@ -4,10 +4,10 @@
 
 **Blocked by:** 08
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Kelopak CSS (maks 12) mengalir kanan→kiri di hero mobile
-- [ ] Ambient particle ringan di bawah hero
-- [ ] Reveal section sekali saat masuk viewport
-- [ ] Reduced-motion: tanpa kelopak, ambient, marquee, reveal
-- [ ] E2E dengan emulasi reduced-motion
+- [x] Kelopak CSS (maks 12) mengalir kanan→kiri di hero mobile
+- [x] Ambient particle ringan di bawah hero
+- [x] Reveal section sekali saat masuk viewport
+- [x] Reduced-motion: tanpa kelopak, ambient, marquee, reveal
+- [x] E2E dengan emulasi reduced-motion

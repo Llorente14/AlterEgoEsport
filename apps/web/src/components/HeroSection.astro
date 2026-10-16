@@ -1,4 +1,5 @@
 ---
+import SakuraPetals from './SakuraPetals.astro';
 import SectionLabel from './SectionLabel.astro';
 ---
 
@@ -10,6 +11,8 @@ import SectionLabel from './SectionLabel.astro';
 >
   <!-- WebGL layer (desktop only), faded on the left so the headline stays readable. -->
   <div class="hero-canvas pointer-events-none absolute inset-0" data-hero-canvas aria-hidden="true"></div>
+  <!-- Mobile and tablet: light CSS petals instead of WebGL. -->
+  <SakuraPetals class="lg:hidden" />
 
   <div class="container-page relative grid min-h-[calc(100dvh-80px)] items-center gap-48 py-64 lg:grid-cols-12">
     <div class="flex flex-col gap-24 lg:col-span-7">

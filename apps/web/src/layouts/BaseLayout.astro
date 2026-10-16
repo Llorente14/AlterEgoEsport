@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import AmbientField from '../components/AmbientField.astro';
 
 interface Props {
   title?: string;
@@ -23,13 +24,31 @@ const {
     <meta name="theme-color" content="#000000" />
     <link rel="icon" type="image/png" href="/logo/alterego-logo-64.png" />
     <title>{title}</title>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
     <slot name="head" />
   </head>
   <body class="flex min-h-dvh flex-col">
+    <AmbientField />
     <Nav />
     <main id="main" class="flex-1">
       <slot />
     </main>
     <Footer />
+    <script>
+      const sections = document.querySelectorAll<HTMLElement>('main > section:not(:first-child)');
+      const reveal = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('is-revealed');
+            reveal.unobserve(entry.target);
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px' },
+      );
+      sections.forEach((section) => reveal.observe(section));
+    </script>
   </body>
 </html>

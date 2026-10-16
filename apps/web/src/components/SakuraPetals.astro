@@ -1,0 +1,65 @@
+---
+// Lightweight CSS sakura petals drifting right to left (no JavaScript, transform/opacity only).
+interface Props {
+  count?: number;
+  class?: string;
+}
+
+const { count = 12, class: className } = Astro.props;
+
+// Deterministic spread so the build output is stable.
+const petals = Array.from({ length: count }, (_, i) => {
+  const seed = (i * 37) % 100;
+  return {
+    top: `${(i * 83) % 100}%`,
+    size: 8 + ((i * 5) % 9), // 8–16px
+    duration: 12 + ((i * 7) % 9), // 12–20s
+    delay: -((seed / 100) * 20).toFixed(1),
+    red: i % 3 !== 0,
+  };
+});
+---
+
+<div class:list={['sakura pointer-events-none absolute inset-0 overflow-hidden', className]} aria-hidden="true" data-sakura>
+  {
+    petals.map((p) => (
+      <svg
+        class="sakura-petal absolute"
+        style={`top:${p.top};width:${p.size}px;height:${p.size}px;animation-duration:${p.duration}s;animation-delay:${p.delay}s`}
+        viewBox="-0.6 -0.6 1.2 1.2"
+      >
+        <path
+          d="M0 -0.5 Q0.55 -0.1 0.12 0.5 L0 0.4 L-0.12 0.5 Q-0.55 -0.1 0 -0.5Z"
+          fill={p.red ? 'var(--color-signal-red)' : 'var(--color-bone)'}
+        />
+      </svg>
+    ))
+  }
+</div>
+
+<style>
+  .sakura-petal {
+    left: 0;
+    opacity: 0.7;
+    will-change: transform;
+    animation-name: sakura-drift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes sakura-drift {
+    from {
+      transform: translate3d(calc(100vw + 40px), 0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate3d(50vw, 6vh, 0) rotate(200deg);
+    }
+    to {
+      transform: translate3d(-40px, 2vh, 0) rotate(400deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sakura {
+      display: none;
+    }
+  }
+</style>

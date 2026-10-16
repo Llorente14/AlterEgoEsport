@@ -7,8 +7,8 @@ test('beranda tampil dengan identitas brand', async ({ page }) => {
   await expect(page.getByRole('navigation', { name: 'Navigasi utama' })).toBeVisible();
   await expect(page.getByRole('contentinfo')).toBeVisible();
 
-  const bodyBg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(bodyBg).toBe('rgb(0, 0, 0)');
+  const pageBg = await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor);
+  expect(pageBg).toBe('rgb(0, 0, 0)');
 
   const headingFont = await page
     .getByRole('heading', { level: 1 })

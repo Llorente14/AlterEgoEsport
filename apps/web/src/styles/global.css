@@ -87,8 +87,8 @@
     background: var(--color-void);
   }
 
+  /* The page background lives on <html> so the fixed ambient layer (z-index -10) shows above it. */
   body {
-    background: var(--color-void);
     color: var(--color-bone);
     font-family: var(--font-body);
     font-weight: 400;
@@ -100,6 +100,21 @@
   :focus-visible {
     outline: 2px solid var(--color-bone);
     outline-offset: 2px;
+  }
+}
+
+/* Sections fade up once as they enter the viewport (JavaScript only; never with reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  .js main > section:not(:first-child) {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 600ms var(--ease-out),
+      transform 600ms var(--ease-out);
+  }
+  .js main > section.is-revealed {
+    opacity: 1;
+    transform: none;
   }
 }
 
