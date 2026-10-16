@@ -67,11 +67,9 @@ test.describe('story (desktop, pinned)', () => {
       expect(Math.abs(centerX(bLogo) - width * 0.25)).toBeLessThanOrEqual(2);
       expect(overlaps(bText, bLogo)).toBe(false);
       expect(bText.x).toBeGreaterThan(width / 2);
-      // Sub-title on top, description below it, fun fact last, all inside the stage.
-      const subtitle = await box(page, '[data-story-description] .story-subtitle');
+      // Description first, fun fact last, all inside the stage.
       const firstParagraph = await box(page, '[data-story-description] .story-text > p');
       const funFact = await box(page, '[data-story-description] .fun-fact');
-      expect(subtitle.y + subtitle.height).toBeLessThanOrEqual(firstParagraph.y + 1);
       expect(firstParagraph.y + firstParagraph.height).toBeLessThanOrEqual(funFact.y + 1);
       expect(bText.y).toBeGreaterThanOrEqual(NAV);
       expect(bText.y + bText.height).toBeLessThanOrEqual(height);
@@ -288,8 +286,8 @@ test.describe('story (tanpa pin)', () => {
     const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
     await page.goto('/');
-    await expect(page.getByRole('heading', { name: /Banyak\s*Wajah\s*Satu\s*Nama/ })).toBeVisible();
-    await expect(page.getByText('Tiga topeng, satu identitas.')).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Banyak Wajah\s*Satu Nama/ })).toBeVisible();
+    await expect(page.getByText('Setiap pemain punya sisi lain', { exact: false })).toBeVisible();
     const ys = await page
       .locator('[data-founder-card]')
       .evaluateAll((els) => els.map((el) => el.getBoundingClientRect().top));

@@ -156,8 +156,8 @@ Satu section `#story` dengan satu logo perisai yang berpindah antar tiga scene.
 
 | Scene | Isi | Logo |
 |-------|-----|------|
-| A | Headline Anton "BANYAK / WAJAH / SATU / **NAMA**" (4 baris, "NAMA" Signal Red) di kiri | Kanan (+¼ lebar layar) |
-| B | Kolom kanan, dari atas: Section Label "02 / MANIFESTO" + **sub-title** Anton "Tiga topeng, satu identitas." → **deskripsi** (2 paragraf) → **Fun fact** (garis Hairline di atasnya, label Mono "FUN FACT" Signal Red) | Kiri (−¼ lebar layar) |
+| A | Headline Anton "BANYAK WAJAH / **SATU NAMA**" (2 baris, baris kedua Signal Red) di kiri, dengan satu baris deskripsi singkat di bawahnya (teks bebas) | Kanan (+¼ lebar layar) |
+| B | Kolom kanan: **deskripsi** (teks bebas, 2 paragraf) → **Fun fact** (garis Hairline di atasnya, label Mono "FUN FACT" Signal Red) | Kiri (−¼ lebar layar) |
 | C | Judul "FOUNDER" di atas, 5 Founder Card berundak | Tengah, **di belakang kartu**, 115% dan 45% opacity |
 
 Fun fact dihitung dari data achievement (jumlah gelar juara dan total hadiah semua game), jadi selalu mengikuti data: "Dari tiga game, Alter Ego sudah membawa pulang {gelar} gelar juara dan sekitar {hadiah} hadiah turnamen."

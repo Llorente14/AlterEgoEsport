@@ -53,10 +53,12 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
 
     <!-- Scene A -->
     <div class="story-layer story-a" data-story-headline>
-      <div class="story-text">
-        <h2 id="story-title" class="font-display text-display uppercase leading-display tracking-display">
-          Banyak<br />Wajah<br />Satu<br /><span class="text-signal-red">Nama</span>
+      <div class="story-text story-a-text flex flex-col">
+        <h2 id="story-title" class="font-display uppercase leading-display tracking-display">
+          Banyak Wajah<br /><span class="text-signal-red">Satu Nama</span>
         </h2>
+        <!-- Free text: a short line under the headline. Replace with the real intro later. -->
+        <p class="story-a-desc text-silver">Deskripsi singkat tentang Alter Ego. Isi bebas, bisa diganti nanti.</p>
       </div>
       <img
         src="/logo/alterego-logo-800.webp"
@@ -86,11 +88,7 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
         class="story-static-logo story-b-logo"
       />
       <div class="story-text story-b-text flex flex-col text-silver">
-        <!-- Sub-title on top, description below it, then the fun fact. -->
-        <div class="flex flex-col gap-16">
-          <SectionLabel number="02" label="Manifesto" />
-          <h3 class="story-subtitle font-display uppercase leading-heading text-bone">Tiga topeng, satu identitas.</h3>
-        </div>
+        <!-- Description, then the fun fact. Free text. -->
         <p>
           Setiap pemain punya sisi lain: yang muncul saat lampu panggung menyala dan tekanan memuncak. Alter Ego lahir
           dari sisi itu.
@@ -152,8 +150,16 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
   .story-b-text {
     gap: 24px;
   }
-  .story-subtitle {
-    font-size: clamp(28px, 6vw, 40px);
+  .story-a-text {
+    gap: 24px;
+  }
+  .story-a-text h2 {
+    font-size: clamp(40px, 6vw, 72px);
+  }
+  .story-a-desc {
+    max-width: 440px;
+    font-size: 18px;
+    line-height: 1.6;
   }
   .fun-fact {
     display: flex;
@@ -382,8 +388,8 @@ const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} 
       font-size: clamp(14px, 2.2dvh, 18px);
       gap: clamp(12px, 2.4dvh, 24px);
     }
-    :global(.js) .story-subtitle {
-      font-size: clamp(24px, 4.6dvh, 40px);
+    :global(.js) .story-a-text h2 {
+      font-size: clamp(40px, 7vh, 80px);
     }
     :global(.js) .story-c {
       display: block;
