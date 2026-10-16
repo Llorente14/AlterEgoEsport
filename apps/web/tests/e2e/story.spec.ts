@@ -24,6 +24,8 @@ async function scrollTo(page: Page, progress: number) {
   await expect
     .poll(async () => Number(await page.locator('[data-story]').getAttribute('data-progress')))
     .toBeCloseTo(progress, 2);
+  // The stage eases toward the scroll position; measure only once it has caught up.
+  await expect(page.locator('[data-story]')).toHaveAttribute('data-settled', 'true');
 }
 
 async function box(page: Page, selector: string) {
@@ -65,6 +67,14 @@ test.describe('story (desktop, pinned)', () => {
       expect(Math.abs(centerX(bLogo) - width * 0.25)).toBeLessThanOrEqual(2);
       expect(overlaps(bText, bLogo)).toBe(false);
       expect(bText.x).toBeGreaterThan(width / 2);
+      // Sub-title on top, description below it, fun fact last, all inside the stage.
+      const subtitle = await box(page, '[data-story-description] .story-subtitle');
+      const firstParagraph = await box(page, '[data-story-description] .story-text > p');
+      const funFact = await box(page, '[data-story-description] .fun-fact');
+      expect(subtitle.y + subtitle.height).toBeLessThanOrEqual(firstParagraph.y + 1);
+      expect(firstParagraph.y + firstParagraph.height).toBeLessThanOrEqual(funFact.y + 1);
+      expect(bText.y).toBeGreaterThanOrEqual(NAV);
+      expect(bText.y + bText.height).toBeLessThanOrEqual(height);
       expect(bLogo.y).toBeGreaterThanOrEqual(NAV);
       expect(bLogo.y + bLogo.height).toBeLessThanOrEqual(height);
       await expect(page.locator('[data-story-description]')).toHaveCSS('opacity', '1');
@@ -87,6 +97,9 @@ test.describe('story (desktop, pinned)', () => {
         expect(b.y).toBeGreaterThanOrEqual(NAV);
         expect(b.y + b.height).toBeLessThanOrEqual(height + 1);
       }
+      // The card row is centred on the screen once the scroll reaches its end.
+      const rowCentre = (Math.min(...boxes.map((b) => b.x)) + Math.max(...boxes.map((b) => b.x + b.width))) / 2;
+      expect(Math.abs(rowCentre - width / 2)).toBeLessThanOrEqual(2);
       const ys = boxes.map((b) => b.y);
       expect(ys[2]).toBe(Math.max(...ys)); // centre card sits lowest
       expect(ys[4]).toBe(Math.min(...ys)); // last card sits highest
@@ -98,7 +111,7 @@ test.describe('story (desktop, pinned)', () => {
           const el = document.elementFromPoint(x!, y!);
           return {
             insideCard: Boolean(el?.closest('[data-founder-card]')),
-            isLogo: el?.hasAttribute('data-story-logo') ?? false,
+            isLogo: Boolean(el?.closest('[data-story-logo]')),
           };
         },
         [centerX(cLogo), centerY(cLogo)],
@@ -109,6 +122,83 @@ test.describe('story (desktop, pinned)', () => {
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
     });
   }
+
+  test('kartu tepat di tengah di akhir scroll (scroll penuh)', async ({ page }) => {
+    for (const size of [DESKTOP_SIZES[0]!, DESKTOP_SIZES[4]!, DESKTOP_SIZES[6]!]) {
+      await page.setViewportSize(size);
+      await page.goto('/');
+      await scrollTo(page, 1);
+      const xs = await page
+        .locator('[data-founder-card]')
+        .evaluateAll((els) => els.map((el) => el.getBoundingClientRect()).map((r) => [r.left, r.right] as const));
+      const centre = (Math.min(...xs.map((x) => x[0])) + Math.max(...xs.map((x) => x[1]))) / 2;
+      expect(Math.abs(centre - size.width / 2), `${size.width}px`).toBeLessThanOrEqual(2);
+    }
+  });
+
+  test('logo berputar horizontal dari kiri ke tengah: sisi belakang terlihat lalu kembali ke depan', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    const flipX = () =>
+      page.locator('[data-story-logo-card]').evaluate((el) => {
+        const m = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+        return m.m11; // cos of the turn: 1 = front, -1 = back
+      });
+    const width = async () => (await box(page, '[data-story-logo]')).width;
+
+    await scrollTo(page, 0.48);
+    expect(await flipX()).toBeCloseTo(1, 2);
+    const restWidth = await width();
+
+    await scrollTo(page, (0.58 + 0.76) / 2);
+    expect(await flipX()).toBeLessThan(-0.95); // showing its back
+    expect(await width()).toBeGreaterThan(restWidth * 1.1); // lifted out of the screen toward the viewer
+
+    await scrollTo(page, 0.97);
+    expect(await flipX()).toBeCloseTo(1, 2); // facing front again
+  });
+
+  test('gerak logo halus: setelah lompatan scroll bergerak bertahap tanpa teleport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await scrollTo(page, 0.1);
+
+    const jump = await page.evaluate(() => {
+      const section = document.querySelector<HTMLElement>('[data-story]')!;
+      const pin = section.querySelector<HTMLElement>('[data-story-pin]')!;
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      return top - 80 + 0.34 * (section.offsetHeight - pin.offsetHeight);
+    });
+    const xs = await page.evaluate(
+      (y) =>
+        new Promise<number[]>((resolve) => {
+          const logo = document.querySelector('[data-story-logo]')!;
+          const samples: number[] = [];
+          const centre = () => {
+            const r = logo.getBoundingClientRect();
+            return r.left + r.width / 2;
+          };
+          window.scrollTo({ top: y, behavior: 'instant' });
+          const loop = () => {
+            samples.push(centre());
+            if (samples.length < 90) requestAnimationFrame(loop);
+            else resolve(samples);
+          };
+          requestAnimationFrame(loop);
+        }),
+      jump,
+    );
+
+    const travelled = xs[0]! - xs[xs.length - 1]!;
+    expect(travelled).toBeGreaterThan(300);
+    let biggestStep = 0;
+    for (let i = 1; i < xs.length; i++) {
+      expect(xs[i]!).toBeLessThanOrEqual(xs[i - 1]! + 0.5); // never moves backwards
+      biggestStep = Math.max(biggestStep, xs[i - 1]! - xs[i]!);
+    }
+    expect(biggestStep).toBeLessThan(travelled * 0.35); // no single frame covers a third of the trip
+    expect(xs.filter((x, i) => i > 0 && x < xs[i - 1]! - 0.5).length).toBeGreaterThan(6); // spread over many frames
+  });
 
   test('teks hanya satu scene pada satu waktu', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });

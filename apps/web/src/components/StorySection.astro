@@ -1,10 +1,15 @@
 ---
-import { getFounders } from '../lib/catalog';
+import { getAchievements, getFounders } from '../lib/catalog';
+import { formatUSDCompact } from '../lib/format';
 import FounderCard from './FounderCard.astro';
 import SectionLabel from './SectionLabel.astro';
 
 const founders = getFounders();
 const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.webp 1200w';
+
+// The fun fact is computed from the achievement data, so it never goes stale.
+const { total } = getAchievements();
+const funFact = `Dari tiga game, Alter Ego sudah membawa pulang ${total.titles} gelar juara dan sekitar ${formatUSDCompact(total.totalPrizeUSD)} hadiah turnamen.`;
 ---
 
 <!--
@@ -15,25 +20,40 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
 -->
 <section id="story" class="story relative" aria-labelledby="story-title" data-story data-no-reveal>
   <div class="story-pin relative" data-story-pin>
-    <!-- The single logo of the pinned desktop version. Hidden in the plain layout, where each block has its own. -->
-    <img
-      src="/logo/alterego-logo-800.webp"
-      srcset={logoSrcset}
-      sizes="38vw"
-      width="1200"
-      height="1179"
-      alt=""
-      aria-hidden="true"
-      loading="lazy"
-      decoding="async"
-      class="story-logo"
-      data-story-logo
-    />
+    <!--
+      The single logo of the pinned desktop version (hidden in the plain layout, where each block has its own).
+      A two-sided badge: from scene B to C it flips around its vertical axis and shows its back.
+    -->
+    <div class="story-logo" aria-hidden="true" data-story-logo>
+      <div class="story-logo-card" data-story-logo-card>
+        <img
+          src="/logo/alterego-logo-800.webp"
+          srcset={logoSrcset}
+          sizes="38vw"
+          width="1200"
+          height="1179"
+          alt=""
+          loading="eager"
+          decoding="async"
+          class="story-logo-face story-logo-front"
+        />
+        <img
+          src="/logo/alterego-logo-800.webp"
+          srcset={logoSrcset}
+          sizes="38vw"
+          width="1200"
+          height="1179"
+          alt=""
+          loading="eager"
+          decoding="async"
+          class="story-logo-face story-logo-back"
+        />
+      </div>
+    </div>
 
     <!-- Scene A -->
     <div class="story-layer story-a" data-story-headline>
       <div class="story-text">
-        <SectionLabel number="02" label="Manifesto" />
         <h2 id="story-title" class="font-display text-display uppercase leading-display tracking-display">
           Banyak<br />Wajah<br />Satu<br /><span class="text-signal-red">Nama</span>
         </h2>
@@ -65,15 +85,24 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
         decoding="async"
         class="story-static-logo story-b-logo"
       />
-      <div class="story-text flex flex-col gap-24 text-silver">
+      <div class="story-text story-b-text flex flex-col text-silver">
+        <!-- Sub-title on top, description below it, then the fun fact. -->
+        <div class="flex flex-col gap-16">
+          <SectionLabel number="02" label="Manifesto" />
+          <h3 class="story-subtitle font-display uppercase leading-heading text-bone">Tiga topeng, satu identitas.</h3>
+        </div>
         <p>
           Setiap pemain punya sisi lain: yang muncul saat lampu panggung menyala dan tekanan memuncak. Alter Ego lahir
           dari sisi itu.
         </p>
         <p>
           Sejak 2018 kami bertanding di Mobile Legends, Counter-Strike 2, dan PUBG Mobile, dengan satu tujuan: membawa
-          nama Indonesia ke panggung dunia. Tiga topeng, satu identitas.
+          nama Indonesia ke panggung dunia.
         </p>
+        <aside class="fun-fact" aria-label="Fun fact">
+          <p class="font-mono text-label uppercase tracking-label text-signal-red">Fun fact</p>
+          <p class="text-bone">{funFact}</p>
+        </aside>
       </div>
     </div>
 
@@ -119,6 +148,19 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
   }
   .story-text {
     max-width: 560px;
+  }
+  .story-b-text {
+    gap: 24px;
+  }
+  .story-subtitle {
+    font-size: clamp(28px, 6vw, 40px);
+  }
+  .fun-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid var(--color-hairline);
+    padding-top: 16px;
   }
   .story-logo {
     display: none;
@@ -290,9 +332,32 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
       top: 50%;
       z-index: 0;
       height: min(56dvh, 38vw);
-      width: auto;
+      aspect-ratio: 1200 / 1179;
+      /* Parked off screen right until the first scroll update; the script drives the rest. */
       transform: translate(-50%, -50%) translateX(25vw);
-      will-change: transform, opacity;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    :global(.js) .story-logo-card {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    /* Two faces: opacity sits on the faces, because opacity on a 3D parent would flatten the flip. */
+    :global(.js) .story-logo-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: var(--logo-opacity, 1);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    /* The back of the badge: the shield seen from behind, mirrored and darker. */
+    :global(.js) .story-logo-back {
+      transform: rotateY(180deg) scaleX(-1);
+      filter: brightness(0.45) saturate(0.6);
     }
     :global(.js) .story-layer {
       position: absolute;
@@ -313,6 +378,12 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
     }
     :global(.js) .story-b .story-text {
       width: min(34vw, 460px);
+      /* Text scales with the stage height so sub-title, description and fun fact fit on short screens. */
+      font-size: clamp(14px, 2.2dvh, 18px);
+      gap: clamp(12px, 2.4dvh, 24px);
+    }
+    :global(.js) .story-subtitle {
+      font-size: clamp(24px, 4.6dvh, 40px);
     }
     :global(.js) .story-c {
       display: block;
@@ -353,12 +424,13 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
 </style>
 
 <script>
-  import { pinProgress, storyFrame } from '../lib/story-scroll';
+  import { LOGO_LIFT, pinProgress, smoothProgress, storyFrame } from '../lib/story-scroll';
 
   const NAV_HEIGHT = 80;
   const section = document.querySelector<HTMLElement>('[data-story]');
   const pin = section?.querySelector<HTMLElement>('[data-story-pin]');
   const logo = section?.querySelector<HTMLElement>('[data-story-logo]');
+  const logoCard = section?.querySelector<HTMLElement>('[data-story-logo-card]');
   const headline = section?.querySelector<HTMLElement>('[data-story-headline]');
   const description = section?.querySelector<HTMLElement>('[data-story-description]');
   const founder = section?.querySelector<HTMLElement>('[data-story-founder]');
@@ -369,34 +441,34 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
   const pinnedQuery = window.matchMedia('(min-width: 1024px) and (prefers-reduced-motion: no-preference)');
 
   // ── Pinned scroll story (desktop) ──────────────────────────────────────────────────────────
-  if (section && pin && logo && headline && description && founder && title && row) {
-    let queued = false;
+  if (section && pin && logo && logoCard && headline && description && founder && title && row) {
     let wasPinned = false;
+    let target = 0; // where the scroll is
+    let current = 0; // where the animation is: it eases toward the scroll so motion stays smooth
+    let lastTime = 0;
+    let frameId = 0;
 
     const layers = [headline, description, title];
     const clear = () => {
-      for (const el of [logo, headline, description, title, row, founder, ...cards]) el.removeAttribute('style');
+      for (const el of [logo, logoCard, headline, description, title, row, founder, ...cards]) el.removeAttribute('style');
       delete section.dataset.scene;
       delete section.dataset.progress;
+      delete section.dataset.settled;
     };
 
-    const update = () => {
-      queued = false;
-      const pinned = pinnedQuery.matches;
-      if (!pinned) {
-        if (wasPinned) clear();
-        wasPinned = false;
-        return;
-      }
-      wasPinned = true;
-
+    /** Draw the stage at a progress value. */
+    const render = (progress: number) => {
       const vw = document.documentElement.clientWidth;
-      const rect = section.getBoundingClientRect();
-      const progress = pinProgress(rect.top - NAV_HEIGHT, rect.height, pin.offsetHeight);
       const f = storyFrame(progress, cards.length);
 
-      logo.style.transform = `translate(-50%, -50%) translateX(${(f.logoX * vw).toFixed(1)}px) rotate(${f.logoRotate.toFixed(2)}deg) scale(${f.logoScale.toFixed(3)})`;
-      logo.style.opacity = f.logoOpacity.toFixed(3);
+      // The perspective is applied in the logo's own frame, so lifting it does not make it drift sideways.
+      const perspective = vw * 1.4;
+      const lift = f.logoLift * LOGO_LIFT * vw;
+      logo.style.transform =
+        `translate(-50%, -50%) translateX(${(f.logoX * vw).toFixed(1)}px) perspective(${perspective.toFixed(0)}px) ` +
+        `translateZ(${lift.toFixed(1)}px) rotate(${f.logoRotate.toFixed(2)}deg) scale(${f.logoScale.toFixed(3)})`;
+      logoCard.style.transform = `rotateY(${f.logoFlip.toFixed(2)}deg)`;
+      logo.style.setProperty('--logo-opacity', f.logoOpacity.toFixed(3));
 
       headline.style.opacity = f.headline.opacity.toFixed(3);
       headline.style.transform = `translateX(${(f.headline.x * vw).toFixed(1)}px)`;
@@ -408,19 +480,53 @@ const logoSrcset = '/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.
 
       for (const layer of layers) layer.style.pointerEvents = Number(layer.style.opacity) < 0.05 ? 'none' : '';
       section.dataset.scene = f.scene;
-      section.dataset.progress = progress.toFixed(3);
     };
 
-    const queue = () => {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(update);
+    /** Animation loop: runs only while the displayed progress is still catching up with the scroll. */
+    const tick = (now: number) => {
+      frameId = 0;
+      current = smoothProgress(current, target, (now - lastTime) / 1000);
+      lastTime = now;
+      render(current);
+      if (current !== target) frameId = requestAnimationFrame(tick);
+      else section.dataset.settled = 'true';
     };
 
-    window.addEventListener('scroll', queue, { passive: true });
-    window.addEventListener('resize', queue);
-    pinnedQuery.addEventListener('change', queue);
-    update();
+    /** Read the scroll position. `jump` skips the easing (first paint, resize). */
+    const readScroll = (jump = false) => {
+      if (!pinnedQuery.matches) {
+        if (wasPinned) {
+          cancelAnimationFrame(frameId);
+          frameId = 0;
+          clear();
+        }
+        wasPinned = false;
+        return;
+      }
+      wasPinned = true;
+
+      const rect = section.getBoundingClientRect();
+      target = pinProgress(rect.top - NAV_HEIGHT, rect.height, pin.offsetHeight);
+      section.dataset.progress = target.toFixed(3);
+
+      if (jump) {
+        current = target;
+        render(current);
+        section.dataset.settled = 'true';
+        return;
+      }
+      if (current === target) return;
+      delete section.dataset.settled;
+      if (!frameId) {
+        lastTime = performance.now();
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    window.addEventListener('scroll', () => readScroll(), { passive: true });
+    window.addEventListener('resize', () => readScroll(true));
+    pinnedQuery.addEventListener('change', () => readScroll(true));
+    readScroll(true);
   }
 
   // ── Swipeable card stack (mobile and tablet) ───────────────────────────────────────────────
