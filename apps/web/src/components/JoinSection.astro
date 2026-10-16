@@ -1,0 +1,49 @@
+---
+import { getLinks } from '../lib/catalog';
+import SectionLabel from './SectionLabel.astro';
+
+const { social } = getLinks();
+const groups = [
+  { title: 'Alter Ego Esports', links: social['alterego-esports'] },
+  { title: 'Alter Merch', links: social['alter-merch'] },
+];
+---
+
+<section id="join" class="container-page flex flex-col gap-64 py-96" aria-labelledby="join-title">
+  <div class="flex flex-col gap-16">
+    <SectionLabel number="09" label="Join" />
+    <h2 id="join-title" class="font-display text-display uppercase leading-display tracking-display">
+      Join the<br /><span class="text-signal-red">Alter</span> Ego
+    </h2>
+  </div>
+
+  <div class="grid gap-48 lg:grid-cols-2">
+    {
+      groups.map((group) => (
+        <div class="flex flex-col gap-16">
+          <h3 class="font-mono text-label uppercase tracking-label text-ash">{group.title}</h3>
+          <ul class="flex flex-col">
+            {group.links.map((link) => (
+              <li>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex min-h-64 items-center justify-between gap-16 border-b border-hairline py-16 transition-colors duration-200 hover:border-ego-red"
+                >
+                  <span class="flex flex-wrap items-baseline gap-x-16 gap-y-4">
+                    <span class="text-[24px] font-medium text-bone">{link.platform}</span>
+                    <span class="font-mono text-label uppercase tracking-label text-ash">{link.handle}</span>
+                  </span>
+                  <span aria-hidden="true" class="text-[20px] text-ash transition-transform duration-200 group-hover:translate-x-4 group-hover:text-bone">
+                    →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>

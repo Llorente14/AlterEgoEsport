@@ -1,0 +1,89 @@
+---
+import { getPartners, type Partner } from '../lib/catalog';
+import SectionLabel from './SectionLabel.astro';
+
+const partners = getPartners();
+---
+
+<!-- Each partner is a monochrome logo, or its name as a wordmark until a logo file is added. -->
+<section id="partners" class="flex flex-col gap-48 py-96" aria-labelledby="partners-title">
+  <div class="container-page flex flex-col gap-16">
+    <SectionLabel number="08" label="Partners" />
+    <h2 id="partners-title" class="font-display text-heading uppercase leading-heading">Didukung oleh</h2>
+  </div>
+
+  <!-- Desktop: slow right-to-left marquee (list duplicated for a seamless loop). -->
+  <div class="partner-marquee hidden overflow-hidden lg:block" data-partner-marquee>
+    <div class="partner-track flex w-max">
+      {
+        [0, 1].map((copy) => (
+          <ul class="flex shrink-0 items-center gap-64 pr-64" aria-hidden={copy === 1 ? 'true' : undefined}>
+            {partners.map((p: Partner) => (
+              <li class="flex h-48 items-center">
+                {p.logoSrc ? (
+                  <img src={p.logoSrc} alt={copy === 0 ? p.name : ''} width={p.width} height={p.height} class="partner-logo h-40 w-auto" loading="lazy" />
+                ) : (
+                  <span class="partner-wordmark font-display text-[28px] leading-none">{p.name}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Mobile and tablet: static grid. -->
+  <ul class="container-page grid grid-cols-2 gap-x-24 gap-y-32 sm:grid-cols-3 lg:hidden" aria-label="Partner">
+    {
+      partners.map((p) => (
+        <li class="flex h-48 items-center justify-center">
+          {p.logoSrc ? (
+            <img src={p.logoSrc} alt={p.name} width={p.width} height={p.height} class="partner-logo h-32 w-auto max-w-full" loading="lazy" />
+          ) : (
+            <span class="partner-wordmark text-center font-display text-[22px] leading-none">{p.name}</span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  /* Partners appear in one tone: logos are flattened to white, wordmarks match them. */
+  .partner-logo {
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+  .partner-wordmark {
+    color: color-mix(in srgb, var(--color-bone) 70%, transparent);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+  li:hover > .partner-logo {
+    opacity: 1;
+  }
+  li:hover > .partner-wordmark {
+    color: var(--color-bone);
+  }
+
+  .partner-track {
+    animation: partner-scroll 40s linear infinite;
+  }
+  .partner-marquee:hover .partner-track {
+    animation-play-state: paused;
+  }
+  @keyframes partner-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .partner-track {
+      animation: none;
+    }
+  }
+</style>
