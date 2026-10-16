@@ -1,0 +1,41 @@
+---
+import type { RosterMember } from '../lib/catalog';
+
+interface Props {
+  member: RosterMember;
+}
+
+const { member } = Astro.props;
+
+const regionNames = new Intl.DisplayNames(['id'], { type: 'region' });
+const country = member.nationality ? regionNames.of(member.nationality) : null;
+---
+
+<article class="group flex flex-col gap-16">
+  <div
+    class="relative aspect-[3/4] overflow-hidden rounded-card transition-shadow duration-300 group-hover:shadow-[inset_0_0_0_1px_var(--color-signal-red)]"
+  >
+    {
+      member.photo ? (
+        <img
+          src={member.photo}
+          alt={`Foto ${member.nickname}`}
+          loading="lazy"
+          class="size-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+        />
+      ) : (
+        <div class="flex size-full items-center justify-center rounded-card border border-dashed border-hairline" data-placeholder>
+          <img src="/logo/alterego-logo-256.webp" alt="" width="128" height="124" class="w-1/2 opacity-10 grayscale" />
+        </div>
+      )
+    }
+  </div>
+  <div class="flex flex-col gap-4">
+    <p class="font-mono text-label uppercase tracking-label text-signal-red">
+      {member.roleLabel}
+    </p>
+    <h4 class="font-display text-heading-sm uppercase leading-heading tracking-display">{member.nickname}</h4>
+    {member.fullName && <p class="text-[16px] text-ash">{member.fullName}</p>}
+    {country && <p class="font-mono text-label uppercase tracking-label text-ash">{country}</p>}
+  </div>
+</article>

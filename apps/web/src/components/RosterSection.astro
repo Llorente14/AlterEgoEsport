@@ -1,0 +1,119 @@
+---
+import { getRoster } from '../lib/catalog';
+import RosterCard from './RosterCard.astro';
+import SectionLabel from './SectionLabel.astro';
+
+const rosters = getRoster();
+---
+
+<section id="roster" class="container-page flex flex-col gap-48 py-96" aria-labelledby="roster-title">
+  <div class="flex flex-col gap-16">
+    <SectionLabel number="04" label="Roster" />
+    <h2 id="roster-title" class="font-display text-display uppercase leading-display tracking-display">
+      Wajah di balik<br />Alter Ego
+    </h2>
+  </div>
+
+  <!-- Tabs are revealed by the script; without JavaScript every game panel stays visible. -->
+  <div role="tablist" aria-label="Pilih game" class="flex flex-wrap gap-8" data-roster-tabs hidden>
+    {
+      rosters.map((r, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`roster-tab-${r.game}`}
+          aria-controls={`roster-${r.game}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+          data-game={r.game}
+          class="min-h-11 rounded-pill border border-hairline px-16 font-mono text-[12px] uppercase tracking-label text-silver transition-colors duration-200 hover:text-bone aria-selected:border-signal-red aria-selected:text-bone"
+        >
+          {r.label}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    rosters.map((r) => (
+      <div
+        id={`roster-${r.game}`}
+        role="tabpanel"
+        aria-labelledby={`roster-tab-${r.game}`}
+        class="flex flex-col gap-64"
+        data-roster-panel
+      >
+        <h3 class="font-display text-heading uppercase leading-heading" data-panel-heading>
+          {r.label}
+        </h3>
+        {r.divisions.map((division) => (
+          <div class="flex flex-col gap-32">
+            <p class="font-mono text-label uppercase tracking-label text-ash">{division.name}</p>
+            <div class="grid grid-cols-2 gap-x-24 gap-y-48 md:grid-cols-3 lg:grid-cols-5">
+              {division.players.map((member) => (
+                <RosterCard member={member} />
+              ))}
+            </div>
+            {division.staff.length > 0 && (
+              <ul class="flex flex-wrap gap-x-32 gap-y-8 border-t border-hairline pt-16" aria-label={`Staff ${division.name}`}>
+                {division.staff.map((s) => (
+                  <li class="flex items-baseline gap-8">
+                    <span class="font-mono text-label uppercase tracking-label text-ash">{s.roleLabel}</span>
+                    <span class="font-display text-[20px] uppercase">{s.nickname}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  const tablist = document.querySelector<HTMLElement>('[data-roster-tabs]');
+  if (tablist) {
+    const tabs = [...tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const panels = [...document.querySelectorAll<HTMLElement>('[data-roster-panel]')];
+
+    const select = (game: string, focus = false) => {
+      for (const tab of tabs) {
+        const active = tab.dataset.game === game;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        if (active && focus) tab.focus();
+      }
+      for (const panel of panels) panel.hidden = panel.id !== `roster-${game}`;
+    };
+
+    // Enhance: show tabs, hide repeated headings, show one panel at a time.
+    tablist.hidden = false;
+    document.querySelectorAll<HTMLElement>('[data-panel-heading]').forEach((h) => h.classList.add('sr-only'));
+
+    const fromHash = location.hash.replace('#roster-', '');
+    select(tabs.some((t) => t.dataset.game === fromHash) ? fromHash : tabs[0]!.dataset.game!);
+
+    tablist.addEventListener('click', (event) => {
+      const tab = (event.target as HTMLElement).closest<HTMLButtonElement>('[role="tab"]');
+      if (!tab) return;
+      select(tab.dataset.game!);
+      history.replaceState(null, '', `#roster-${tab.dataset.game}`);
+    });
+
+    tablist.addEventListener('keydown', (event) => {
+      const index = tabs.findIndex((t) => t === document.activeElement);
+      if (index < 0) return;
+      const next =
+        event.key === 'ArrowRight' ? (index + 1) % tabs.length
+        : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length
+        : event.key === 'Home' ? 0
+        : event.key === 'End' ? tabs.length - 1
+        : -1;
+      if (next < 0) return;
+      event.preventDefault();
+      select(tabs[next]!.dataset.game!, true);
+      history.replaceState(null, '', `#roster-${tabs[next]!.dataset.game}`);
+    });
+  }
+</script>

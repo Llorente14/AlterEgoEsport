@@ -4,10 +4,10 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Modul katalog membaca roster 3 game dari folder data, memvalidasi skema; data rusak menggagalkan build dengan pesan file + entri
-- [ ] Roster terurut game → divisi (Alter Ego dulu, lalu alfabet) → displayOrder; pemain dan staff terpisah
-- [ ] Section Roster: tab ARIA (panah kiri/kanan), game aktif di hash URL, berfungsi tanpa JavaScript (semua panel tampil)
-- [ ] Roster Card sesuai DESIGN.md; foto kosong → siluet topeng + label nama
-- [ ] Tes katalog (fixture: urutan, staff terpisah, data rusak) dan E2E (pindah tab dengan keyboard)
+- [x] Modul katalog membaca roster 3 game dari folder data, memvalidasi skema; data rusak menggagalkan build dengan pesan file + entri
+- [x] Roster terurut game → divisi (Alter Ego dulu, lalu alfabet) → displayOrder; pemain dan staff terpisah
+- [x] Section Roster: tab ARIA (panah kiri/kanan), game aktif di hash URL, berfungsi tanpa JavaScript (semua panel tampil)
+- [x] Roster Card sesuai DESIGN.md; foto kosong → siluet topeng + label nama
+- [x] Tes katalog (fixture: urutan, staff terpisah, data rusak) dan E2E (pindah tab dengan keyboard)
