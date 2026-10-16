@@ -1,0 +1,119 @@
+/* Design tokens: mirror of DESIGN.md → Quick Start. DESIGN.md is the source of truth. */
+@import '@fontsource/anton/400.css';
+@import '@fontsource/chakra-petch/400.css';
+@import '@fontsource/chakra-petch/500.css';
+@import '@fontsource/chakra-petch/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import 'tailwindcss';
+
+@theme {
+  /* Reset Tailwind's default palette: only brand colors exist */
+  --color-*: initial;
+
+  /* Colors */
+  --color-void: #000000;
+  --color-ink: #0d0d0d;
+  --color-ink-raised: #161616;
+  --color-hairline: #262626;
+  --color-bone: #ffffff;
+  --color-ash: #9a9a9a;
+  --color-silver: #bdbdbd;
+  --color-ego-red: #cc1510;
+  --color-ego-red-hover: #e01a12;
+  --color-signal-red: #ee2b20;
+  --color-blood: #7a0a0e;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Fonts */
+  --font-display: 'Anton', 'Barlow Condensed', 'Bebas Neue', Impact, sans-serif;
+  --font-body: 'Chakra Petch', 'Barlow', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Type scale (fluid) */
+  --text-label: clamp(11px, 0.8vw, 12px);
+  --text-caption: clamp(13px, 1vw, 14px);
+  --text-ui: clamp(15px, 1.1vw, 16px);
+  --text-body: clamp(16px, 1.3vw, 18px);
+  --text-subheading: clamp(20px, 1.8vw, 24px);
+  --text-heading-sm: clamp(28px, 3vw, 40px);
+  --text-heading: clamp(40px, 4.4vw, 56px);
+  --text-display: clamp(56px, 6.9vw, 88px);
+  --text-display-xl: clamp(72px, 10vw, 128px);
+
+  --leading-display: 0.9;
+  --leading-heading: 0.95;
+  --leading-body: 1.6;
+  --tracking-display: -0.01em;
+  --tracking-label: 0.06em;
+  --tracking-ui: 0.04em;
+
+  /* Spacing */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-96: 96px;
+  --spacing-128: 128px;
+
+  /* Radius */
+  --radius-control: 8px;
+  --radius-card: 24px;
+  --radius-panel: 32px;
+  --radius-pill: 9999px;
+
+  /* Breakpoints */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --page-max-width: 1280px;
+  --gutter: 24px;
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 400ms;
+  color-scheme: dark;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-void);
+  }
+
+  body {
+    background: var(--color-void);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-bone);
+    outline-offset: 2px;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}

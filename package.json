@@ -1,0 +1,16 @@
+{
+  "name": "alterego",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @alterego/web",
+    "build": "npm run build -w @alterego/web",
+    "preview": "npm run preview -w @alterego/web",
+    "test": "npm run test -w @alterego/web",
+    "test:e2e": "npm run test:e2e -w @alterego/web",
+    "check": "npm run check -w @alterego/web"
+  }
+}

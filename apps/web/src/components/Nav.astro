@@ -1,0 +1,40 @@
+---
+const links = [
+  { label: 'Store', href: '/#store' },
+  { label: 'Roster', href: '/#roster' },
+  { label: 'News', href: '/#news' },
+  { label: 'Media', href: '/#showreel' },
+  { label: 'Join', href: '/#join' },
+];
+---
+
+<header class="sticky top-0 z-50 h-20 bg-void/80 backdrop-blur-md">
+  <nav class="container-page flex h-full items-center justify-between gap-24" aria-label="Navigasi utama">
+    <a href="/" class="flex items-center gap-8" aria-label="Alter Ego — beranda">
+      <img src="/logo/alterego-logo-64.png" alt="" width="32" height="32" class="size-8" />
+      <span class="font-display text-[20px] uppercase leading-none">Alter Ego</span>
+    </a>
+
+    <ul class="hidden items-center gap-32 lg:flex">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="font-body text-[14px] font-medium uppercase tracking-ui text-ash transition-colors duration-200 hover:text-bone"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href="/#store"
+      class="inline-flex min-h-12 items-center rounded-control bg-ego-red px-24 font-body text-[14px] font-semibold uppercase tracking-ui text-bone transition-colors duration-200 hover:bg-ego-red-hover"
+    >
+      Shop
+    </a>
+  </nav>
+</header>
