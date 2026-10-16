@@ -49,16 +49,8 @@
   --tracking-label: 0.06em;
   --tracking-ui: 0.04em;
 
-  /* Spacing */
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-16: 16px;
-  --spacing-24: 24px;
-  --spacing-32: 32px;
-  --spacing-48: 48px;
-  --spacing-64: 64px;
-  --spacing-96: 96px;
-  --spacing-128: 128px;
+  /* Spacing: 1 unit = 1px, so `gap-24` is 24px (DESIGN.md --space-24) */
+  --spacing: 1px;
 
   /* Radius */
   --radius-control: 8px;
