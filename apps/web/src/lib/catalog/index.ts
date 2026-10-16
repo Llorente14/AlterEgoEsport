@@ -7,10 +7,12 @@ import mlbbAchievements from '@data/mlbb_achievement.json';
 import cs2Achievements from '@data/cs2_achievement.json';
 import pubgmAchievements from '@data/pubgm_achievement.json';
 import rawLinks from '@data/links.json';
+import rawFounders from '@data/founders.json';
 import rawPartners from '@data/partners.json';
 import rawProducts from '@data/alterego_produk_aktif_gambar.json';
 import productImages from '../../data/product-images.json';
 import { buildGameAchievements, combineSummaries, latestHighlights, type GameAchievements } from './achievements';
+import { buildFounders, type Founder } from './founders';
 import { buildLinks, type SiteLinks } from './links';
 import { buildPartners, type Partner } from './partners';
 import { buildProducts, CATEGORY_LABELS, type StoreProduct } from './products';
@@ -18,6 +20,7 @@ import { buildGameRoster, type GameRoster } from './roster';
 
 export type { GameAchievements } from './achievements';
 export type { SiteLinks } from './links';
+export type { Founder } from './founders';
 export type { Partner } from './partners';
 export type { ProductImage, StoreProduct } from './products';
 export type { GameRoster, RosterDivision, RosterMember } from './roster';
@@ -63,6 +66,14 @@ let links: SiteLinks | undefined;
 export function getLinks(): SiteLinks {
   links ??= buildLinks(rawLinks, 'data/links.json');
   return links;
+}
+
+let founders: Founder[] | undefined;
+
+/** People shown in the Founder carousel, in display order. */
+export function getFounders(): Founder[] {
+  founders ??= buildFounders(rawFounders, 'data/founders.json');
+  return founders;
 }
 
 let partners: Partner[] | undefined;
