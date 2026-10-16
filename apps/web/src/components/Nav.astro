@@ -1,17 +1,26 @@
 ---
 const links = [
-  { label: 'Store', href: '/#store' },
+  { label: 'Store', href: '/store' },
   { label: 'Roster', href: '/#roster' },
-  { label: 'News', href: '/#news' },
+  { label: 'News', href: '/news' },
   { label: 'Media', href: '/#showreel' },
   { label: 'Join', href: '/#join' },
 ];
 ---
 
-<header class="sticky top-0 z-50 h-20 bg-void/80 backdrop-blur-md">
+<header
+  class="sticky top-0 z-50 h-80 transition-[background-color,backdrop-filter] duration-300 data-scrolled:bg-void/80 data-scrolled:backdrop-blur-md"
+  data-site-header
+>
+  <a
+    href="#main"
+    class="sr-only rounded-control bg-bone px-16 py-8 text-void focus:not-sr-only focus:absolute focus:top-16 focus:left-16"
+  >
+    Lewati ke konten
+  </a>
   <nav class="container-page flex h-full items-center justify-between gap-24" aria-label="Navigasi utama">
-    <a href="/" class="flex items-center gap-8" aria-label="Alter Ego — beranda">
-      <img src="/logo/alterego-logo-64.png" alt="" width="32" height="32" class="size-8" />
+    <a href="/" class="flex min-h-44 items-center gap-8" aria-label="Alter Ego — beranda">
+      <img src="/logo/alterego-logo-64.png" alt="" width="32" height="32" class="size-32" />
       <span class="font-display text-[20px] uppercase leading-none">Alter Ego</span>
     </a>
 
@@ -21,7 +30,7 @@ const links = [
           <li>
             <a
               href={link.href}
-              class="font-body text-[14px] font-medium uppercase tracking-ui text-ash transition-colors duration-200 hover:text-bone"
+              class="text-[14px] font-medium uppercase tracking-ui text-ash transition-colors duration-200 hover:text-bone"
             >
               {link.label}
             </a>
@@ -30,11 +39,101 @@ const links = [
       }
     </ul>
 
-    <a
-      href="/#store"
-      class="inline-flex min-h-12 items-center rounded-control bg-ego-red px-24 font-body text-[14px] font-semibold uppercase tracking-ui text-bone transition-colors duration-200 hover:bg-ego-red-hover"
-    >
-      Shop
-    </a>
+    <div class="flex items-center gap-8">
+      <a
+        href="/store"
+        class="inline-flex min-h-48 items-center rounded-control bg-ego-red px-24 text-[14px] font-semibold uppercase tracking-ui text-bone transition-colors duration-200 hover:bg-ego-red-hover"
+      >
+        Shop
+      </a>
+      <button
+        type="button"
+        class="inline-flex size-48 items-center justify-center rounded-control text-bone lg:hidden"
+        aria-label="Buka menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-open
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
   </nav>
 </header>
+
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+  class="fixed inset-0 z-50 flex flex-col bg-void px-[var(--gutter)] lg:hidden"
+  hidden
+  data-menu
+>
+  <div class="flex h-80 items-center justify-between">
+    <span class="font-display text-[20px] uppercase leading-none">Alter Ego</span>
+    <button
+      type="button"
+      class="inline-flex size-48 items-center justify-center rounded-control text-bone"
+      aria-label="Tutup menu"
+      data-menu-close
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </button>
+  </div>
+  <ul class="flex flex-1 flex-col justify-center gap-16">
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href} class="font-display text-[40px] uppercase leading-heading" data-menu-link>
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]')!;
+  const onScroll = () => header.toggleAttribute('data-scrolled', window.scrollY > 80);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const menu = document.querySelector<HTMLElement>('[data-menu]')!;
+  const openButton = document.querySelector<HTMLButtonElement>('[data-menu-open]')!;
+  const closeButton = document.querySelector<HTMLButtonElement>('[data-menu-close]')!;
+
+  const setOpen = (open: boolean) => {
+    menu.hidden = !open;
+    openButton.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    (open ? closeButton : openButton).focus();
+  };
+
+  openButton.addEventListener('click', () => setOpen(true));
+  closeButton.addEventListener('click', () => setOpen(false));
+  menu.querySelectorAll('[data-menu-link]').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+
+  menu.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setOpen(false);
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    // Keep focus inside the open menu.
+    const focusable = [...menu.querySelectorAll<HTMLElement>('a, button')];
+    const first = focusable[0]!;
+    const last = focusable[focusable.length - 1]!;
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+</script>
