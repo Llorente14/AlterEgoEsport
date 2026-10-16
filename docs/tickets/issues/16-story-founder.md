@@ -12,4 +12,6 @@
 - [x] Mobile: tumpukan kartu dengan swipe dan panah keyboard, logo di belakang tumpukan
 - [x] Reduced-motion dan tanpa JavaScript: blok statis, konten tetap terbaca
 - [x] Data kartu dari `data/founders.json` (placeholder 5× Delwyn Sukamto)
+- [x] Revisi: gerak logo diperhalus (peredaman scroll), logo flip horizontal dari kiri ke tengah menunjukkan sisi belakang, kartu berakhir tepat di tengah
+- [x] Revisi: scene B = sub-title, deskripsi, lalu fun fact (dihitung dari data achievement)
 - [ ] Verifikasi peran "Founder Alter Ego" untuk Delwyn Sukamto sebelum rilis (hasil pencarian menyebutnya CEO Interbat) dan ganti kartu dengan data/foto asli

@@ -157,10 +157,18 @@ Satu section `#story` dengan satu logo perisai yang berpindah antar tiga scene.
 | Scene | Isi | Logo |
 |-------|-----|------|
 | A | Headline Anton "BANYAK / WAJAH / SATU / **NAMA**" (4 baris, "NAMA" Signal Red) di kiri | Kanan (+¼ lebar layar) |
-| B | Dua paragraf manifesto (Chakra Petch 400, Silver) di kanan | Kiri (−¼ lebar layar) |
+| B | Kolom kanan, dari atas: Section Label "02 / MANIFESTO" + **sub-title** Anton "Tiga topeng, satu identitas." → **deskripsi** (2 paragraf) → **Fun fact** (garis Hairline di atasnya, label Mono "FUN FACT" Signal Red) | Kiri (−¼ lebar layar) |
 | C | Judul "FOUNDER" di atas, 5 Founder Card berundak | Tengah, **di belakang kartu**, 115% dan 45% opacity |
 
-**Desktop ≥ 1024px dengan motion:** section setinggi 450dvh, bagian dalam `sticky` (`top: 80px`, tinggi `100dvh − 80px`). Progres scroll membagi: 0–22% scene A diam · 22–38% logo pindah kanan→kiri (miring maks 8°) dan teks bertukar · 38–58% scene B diam · 58–76% logo pindah ke tengah, teks keluar, judul FOUNDER muncul, kartu naik dari bawah kiri→kanan berurutan · 76–100% scene C, deretan kartu bergeser ke kiri sejauh 4% lebar layar. Logo `min(56dvh, 38vw)`. Semua posisi dihitung dari fungsi murni `storyFrame()` (`src/lib/story-scroll.ts`) dan diverifikasi di 7 ukuran layar (1024×768 sampai 3440×1440).
+Fun fact dihitung dari data achievement (jumlah gelar juara dan total hadiah semua game), jadi selalu mengikuti data: "Dari tiga game, Alter Ego sudah membawa pulang {gelar} gelar juara dan sekitar {hadiah} hadiah turnamen."
+
+**Desktop ≥ 1024px dengan motion:** section setinggi 450dvh, bagian dalam `sticky` (`top: 80px`, tinggi `100dvh − 80px`). Progres scroll membagi: 0–22% scene A diam · 22–38% logo pindah kanan→kiri (miring maks 8°) dan teks bertukar · 38–58% scene B diam · 58–76% **logo flip ke tengah**, teks keluar, judul FOUNDER muncul, kartu naik dari bawah kiri→kanan berurutan · 76–100% scene C, deretan kartu mulai 4% lebar layar di kanan, bergeser ke kiri, dan **berakhir tepat di tengah layar**. Logo `min(56dvh, 38vw)`.
+
+**Flip logo (kiri → tengah):** logo adalah lencana dua sisi. Selama transisi B→C ia berputar 360° di sumbu vertikal (rotateY): pada 180° terlihat **sisi belakang** (perisai tercermin, 45% lebih gelap), lalu kembali menghadap depan. Di tengah putaran logo terangkat ke arah penonton (`translateZ` hingga 0,32 × lebar layar, perspektif 1,4 × lebar layar) sehingga terlihat "keluar layar", lalu mendarat di belakang kartu. Opacity dipasang pada tiap sisi, bukan pada induk 3D (opacity pada induk 3D meratakan putaran).
+
+**Smoothing:** posisi logo, teks, dan kartu tidak dipetakan langsung ke posisi scroll. Progres yang ditampilkan mengejar progres scroll dengan peredaman eksponensial (`smoothProgress`, laju 9/detik, tidak bergantung frame rate, tidak overshoot), loop `requestAnimationFrame` hanya berjalan selama masih mengejar. Atribut `data-settled` menandai animasi sudah berhenti.
+
+Semua posisi dihitung dari fungsi murni `storyFrame()` (`src/lib/story-scroll.ts`) dan diverifikasi di 7 ukuran layar (1024×768 sampai 3440×1440).
 
 **Mobile < 1024px:** tanpa pin; tiga blok vertikal biasa. Kartu menjadi **tumpukan yang bisa di-swipe** (drag kiri/kanan memindahkan kartu teratas ke belakang; panah kiri/kanan di keyboard; penghitung "1 / 5"), logo AE besar redup di belakang tumpukan.
 
