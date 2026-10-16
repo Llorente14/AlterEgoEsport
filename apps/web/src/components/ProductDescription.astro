@@ -1,0 +1,48 @@
+---
+import { groupDescription } from '../lib/product-description';
+
+interface Props {
+  blocks: string[];
+}
+
+const sections = groupDescription(Astro.props.blocks);
+const isBullet = (line: string) => line.startsWith('- ');
+---
+
+<div class="flex flex-col border-t border-hairline">
+  {
+    sections.map((section, i) => {
+      const bullets = section.lines.every(isBullet);
+      const isTable = section.title === 'Size Chart';
+      return (
+        <details class="group/acc border-b border-hairline" open={i === 0}>
+          <summary class="flex min-h-56 cursor-pointer list-none items-center justify-between gap-16 py-16 [&::-webkit-details-marker]:hidden">
+            <span class="font-display text-[24px] uppercase leading-heading">{section.title}</span>
+            <span aria-hidden="true" class="text-[20px] text-ash transition-transform duration-200 group-open/acc:rotate-45">
+              +
+            </span>
+          </summary>
+          <div class="pb-24 text-[16px] text-silver">
+            {isTable ? (
+              <ul class="flex flex-col font-mono text-[13px]">
+                {section.lines.map((line, j) => (
+                  <li class:list={['border-b border-hairline py-8', j === 0 && 'text-ash uppercase']}>{line}</li>
+                ))}
+              </ul>
+            ) : bullets ? (
+              <ul class="flex list-disc flex-col gap-4 pl-24 marker:text-signal-red">
+                {section.lines.map((line) => (
+                  <li>{line.slice(2)}</li>
+                ))}
+              </ul>
+            ) : (
+              <div class="flex flex-col gap-8">
+                {section.lines.map((line) => (isBullet(line) ? <p>• {line.slice(2)}</p> : <p>{line}</p>))}
+              </div>
+            )}
+          </div>
+        </details>
+      );
+    })
+  }
+</div>

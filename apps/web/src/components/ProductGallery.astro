@@ -1,0 +1,80 @@
+---
+import type { StoreProduct } from '../lib/catalog';
+import ProductImage from './ProductImage.astro';
+
+interface Props {
+  product: StoreProduct;
+}
+
+const { product } = Astro.props;
+const { images, name } = product;
+---
+
+<div class="flex flex-col gap-16" data-gallery>
+  <!-- Scroll-snap strip: swipeable on touch and usable without JavaScript. -->
+  <div
+    class="flex snap-x snap-mandatory overflow-x-auto rounded-card bg-ink-raised [scrollbar-width:none]"
+    aria-label={`Foto ${name}`}
+    role="region"
+    tabindex="0"
+    data-gallery-track
+  >
+    {
+      images.map((image, i) => (
+        <div class="aspect-square w-full shrink-0 snap-center" id={`foto-${i + 1}`} data-gallery-slide>
+          <ProductImage
+            image={image}
+            alt={i === 0 ? name : `${name}, foto ${i + 1}`}
+            sizes="(min-width: 1024px) 640px, 100vw"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            class="size-full object-cover"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    images.length > 1 && (
+      <ul class="flex gap-8 overflow-x-auto pb-4" aria-label="Pilih foto">
+        {images.map((image, i) => (
+          <li class="shrink-0">
+            <button
+              type="button"
+              class="block size-64 overflow-hidden rounded-[12px] border border-hairline opacity-60 transition-opacity hover:opacity-100 aria-[current=true]:border-signal-red aria-[current=true]:opacity-100"
+              aria-label={`Lihat foto ${i + 1}`}
+              aria-current={i === 0 ? 'true' : 'false'}
+              data-gallery-thumb={i}
+            >
+              <img src={image.srcset['400']} alt="" width="64" height="64" loading="lazy" class="size-full object-cover" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>
+
+<script>
+  for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) {
+    const track = gallery.querySelector<HTMLElement>('[data-gallery-track]')!;
+    const slides = [...gallery.querySelectorAll<HTMLElement>('[data-gallery-slide]')];
+    const thumbs = [...gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-thumb]')];
+
+    const mark = (index: number) =>
+      thumbs.forEach((t, i) => t.setAttribute('aria-current', String(i === index)));
+
+    thumbs.forEach((thumb, i) =>
+      thumb.addEventListener('click', () => {
+        track.scrollTo({ left: slides[i]!.offsetLeft, behavior: 'smooth' });
+        mark(i);
+      }),
+    );
+
+    track.addEventListener(
+      'scroll',
+      () => mark(Math.round(track.scrollLeft / Math.max(track.clientWidth, 1))),
+      { passive: true },
+    );
+  }
+</script>

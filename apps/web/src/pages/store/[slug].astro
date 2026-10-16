@@ -1,0 +1,101 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketplaceLinks from '../../components/MarketplaceLinks.astro';
+import ProductAction from '../../components/ProductAction.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import ProductDescription from '../../components/ProductDescription.astro';
+import ProductGallery from '../../components/ProductGallery.astro';
+import { CATEGORY_LABELS, getProducts, type StoreProduct } from '../../lib/catalog';
+import { formatPriceRange } from '../../lib/format';
+import { STORE_MODE } from '../../config/store';
+import { productActions } from '../../lib/store-actions';
+
+export const getStaticPaths = (() =>
+  getProducts().map((product) => ({ params: { slug: product.slug }, props: { product } }))) satisfies GetStaticPaths;
+
+const { product } = Astro.props as { product: StoreProduct };
+const price = formatPriceRange(product.priceMin, product.priceMax);
+const related = getProducts()
+  .filter((p) => p.category === product.category && p.slug !== product.slug)
+  .slice(0, 4);
+const summary = product.descriptionBlocks[1] ?? product.descriptionBlocks[0] ?? '';
+const { primary } = productActions(product, STORE_MODE);
+---
+
+<BaseLayout title={`${product.name} — Alter Merch`} description={summary.slice(0, 155)}>
+  <div class="container-page pb-128 pt-32 lg:pb-96">
+    <nav aria-label="Breadcrumb" class="mb-32">
+      <ol class="flex flex-wrap items-center gap-8 font-mono text-label uppercase tracking-label text-ash">
+        <li><a href="/store" class="hover:text-bone">Store</a></li>
+        <li aria-hidden="true">/</li>
+        <li>
+          <a href={`/store/kategori/${product.category}`} class="hover:text-bone">{CATEGORY_LABELS[product.category]}</a>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="grid gap-48 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <ProductGallery product={product} />
+      </div>
+
+      <div class="flex flex-col gap-32 lg:sticky lg:top-96 lg:col-span-5 lg:self-start">
+        <div class="flex flex-col gap-16">
+          <p class="font-mono text-label uppercase tracking-label text-signal-red">{CATEGORY_LABELS[product.category]}</p>
+          <h1 class="font-display text-heading uppercase leading-heading tracking-display">{product.name}</h1>
+          <p class="text-[24px] font-medium text-bone" data-product-price>{price}</p>
+        </div>
+
+        <div id="beli" class="flex flex-col gap-16">
+          <ProductAction product={product} size="detail" />
+          <MarketplaceLinks />
+        </div>
+
+        <ProductDescription blocks={product.descriptionBlocks} />
+      </div>
+    </div>
+
+    {
+      related.length > 0 && (
+        <section class="mt-128 flex flex-col gap-32" aria-labelledby="related-title">
+          <h2 id="related-title" class="font-display text-heading uppercase leading-heading">
+            {CATEGORY_LABELS[product.category]} lainnya
+          </h2>
+          <ul class="grid grid-cols-2 gap-16 lg:grid-cols-4 lg:gap-24">
+            {related.map((p) => (
+              <li class="flex">
+                <ProductCard product={p} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+
+  <!-- Mobile buy bar: keeps price and the buy button in reach while scrolling. -->
+  <div
+    class="fixed inset-x-0 bottom-0 z-40 flex items-center gap-16 border-t border-hairline bg-void/95 px-[var(--gutter)] py-12 backdrop-blur-md lg:hidden"
+    data-buy-bar
+  >
+    <p class="min-w-0 flex-1 truncate text-[16px] font-medium">{price}</p>
+    <a
+      href={primary.href}
+      {...(primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      class="inline-flex min-h-48 items-center rounded-control bg-ego-red px-24 text-[14px] font-semibold uppercase tracking-ui text-bone"
+      aria-label={`${primary.label}: ${product.name}`}
+    >
+      {primary.label}
+    </a>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* Room for the fixed mobile buy bar below the footer. */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: 72px;
+    }
+  }
+</style>

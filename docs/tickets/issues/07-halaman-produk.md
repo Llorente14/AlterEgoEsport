@@ -4,9 +4,9 @@
 
 **Blocked by:** 06
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Halaman per slug untuk 85 produk
-- [ ] Galeri (gambar utama + thumbnail), harga/rentang, deskripsi terformat, accordion
-- [ ] Area aksi ProductAction; menempel di bawah layar pada mobile
-- [ ] E2E: buka produk dari Store, galeri berpindah, Beli Sekarang benar
+- [x] Halaman per slug untuk 85 produk
+- [x] Galeri (gambar utama + thumbnail), harga/rentang, deskripsi terformat, accordion
+- [x] Area aksi ProductAction; menempel di bawah layar pada mobile
+- [x] E2E: buka produk dari Store, galeri berpindah, Beli Sekarang benar
