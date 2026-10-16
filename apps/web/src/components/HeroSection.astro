@@ -1,0 +1,52 @@
+---
+import SectionLabel from './SectionLabel.astro';
+---
+
+<section
+  id="hero"
+  class="container-page grid min-h-[calc(100dvh-80px)] items-center gap-48 py-64 lg:grid-cols-12"
+  aria-labelledby="hero-title"
+>
+  <div class="flex flex-col gap-24 lg:col-span-7">
+    <img
+      src="/logo/alterego-logo-256.webp"
+      alt=""
+      width="96"
+      height="93"
+      class="w-96 lg:hidden"
+      fetchpriority="high"
+    />
+    <SectionLabel number="01" label="Alter Ego Esports · Est. 2018" />
+    <h1 id="hero-title" class="font-display text-display-xl uppercase leading-display tracking-display">
+      Wear<br />Your<br /><span class="text-signal-red">Alter</span> Ego
+    </h1>
+    <p class="max-w-[440px] text-silver">
+      Tim esports Indonesia di Mobile Legends, Counter-Strike 2, dan PUBG Mobile. Pakai jersey yang sama dengan
+      mereka di Alter Merch.
+    </p>
+    <div class="flex flex-wrap items-center gap-24">
+      <a
+        href="/store"
+        class="group inline-flex min-h-48 items-center gap-8 rounded-control bg-ego-red px-24 text-[14px] font-semibold uppercase tracking-ui text-bone transition-colors duration-200 hover:bg-ego-red-hover"
+      >
+        Shop Alter Merch
+        <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-4">→</span>
+      </a>
+      <a href="#roster" class="text-[16px] text-ash underline-offset-4 transition-colors hover:text-bone hover:underline">
+        Lihat Roster →
+      </a>
+    </div>
+  </div>
+
+  <!-- Desktop visual slot: the 3D particle hero (ticket 12) mounts here; the logo is its fallback. -->
+  <div class="relative hidden aspect-square items-center justify-center lg:col-span-5 lg:flex" data-hero-visual>
+    <img
+      src="/logo/alterego-logo-512.webp"
+      alt="Logo Alter Ego"
+      width="512"
+      height="496"
+      class="w-4/5"
+      fetchpriority="high"
+    />
+  </div>
+</section>

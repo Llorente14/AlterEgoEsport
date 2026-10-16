@@ -1,0 +1,19 @@
+---
+// Seigaiha (overlapping wave arcs) strip used between major sections.
+const id = `seigaiha-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<svg class="block h-24 w-full text-bone opacity-[0.08]" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id={id} width="24" height="12" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="12" cy="12" r="11" />
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="0" cy="6" r="11" />
+        <circle cx="24" cy="6" r="11" />
+      </g>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill={`url(#${id})`} />
+</svg>

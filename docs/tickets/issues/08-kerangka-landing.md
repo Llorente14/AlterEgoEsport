@@ -4,10 +4,10 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Hero versi tipografi (dipakai di semua ukuran sampai tiket 12)
-- [ ] Showreel Frame: autoplay muted loop playsinline, lazy-load, poster, 480p di mobile (tanpa tombol suara: video tanpa audio)
-- [ ] Manifesto Block, Section Label bernomor, seigaiha divider
-- [ ] Nav sticky dengan blur setelah scroll; menu mobile full-screen dapat dibuka/ditutup keyboard (Esc)
-- [ ] E2E: menu mobile buka/tutup, showreel memuat sumber
+- [x] Hero versi tipografi (dipakai di semua ukuran sampai tiket 12)
+- [x] Showreel Frame: autoplay muted loop playsinline, lazy-load, poster, 480p di mobile (tanpa tombol suara: video tanpa audio)
+- [x] Manifesto Block, Section Label bernomor, seigaiha divider
+- [x] Nav sticky dengan blur setelah scroll; menu mobile full-screen dapat dibuka/ditutup keyboard (Esc)
+- [x] E2E: menu mobile buka/tutup, showreel memuat sumber
