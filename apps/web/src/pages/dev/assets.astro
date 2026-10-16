@@ -1,0 +1,29 @@
+---
+// Internal page to verify web assets load. Not linked anywhere and excluded from the sitemap.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Uji aset — Alter Ego">
+  <meta slot="head" name="robots" content="noindex" />
+  <section class="container-page flex flex-col gap-48 py-64">
+    <h1 class="font-display text-heading uppercase leading-heading">Uji aset</h1>
+
+    <video
+      class="aspect-video w-full rounded-card bg-ink object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/video/showreel-poster.webp"
+      data-testid="showreel"
+    >
+      <source src="/video/showreel-480.mp4" type="video/mp4" media="(max-width: 767px)" />
+      <source src="/video/showreel-720.webm" type="video/webm" />
+      <source src="/video/showreel-720.mp4" type="video/mp4" />
+    </video>
+
+    <img src="/logo/alterego-logo-512.webp" alt="Logo Alter Ego" width="256" height="248" class="w-64" />
+    <p class="font-mono text-label uppercase tracking-label text-ash">Model 3D: /models/alterego-logo.glb</p>
+  </section>
+</BaseLayout>

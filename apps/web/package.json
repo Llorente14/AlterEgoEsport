@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "check:assets": "node scripts/check-assets.mjs",
+    "build": "npm run check:assets && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
