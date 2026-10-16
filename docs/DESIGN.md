@@ -147,7 +147,7 @@ Pola gelombang seigaiha (busur konsentris bertumpuk) sebagai SVG.
 - **Texture:** pola diulang di latar Footer dan header Store dengan opacity 4%. Jangan dipakai di belakang teks body.
 
 ### Hero Headline Block
-Kiri (kolom 1–6): Section Label `ALTER EGO ESPORTS · EST. 2018`, headline Anton display-xl Bone 3 baris (contoh: "WEAR / YOUR / ALTER EGO"), paragraf Chakra Petch 400 18px Silver maks 440px, lalu Primary Button "SHOP ALTER MERCH" dan Ghost Link "Lihat Roster →". Kanan (kolom 7–12): kanvas partikel + logo 3D (lihat Motion).
+Kiri (kolom 1–6): Section Label `ALTER EGO ESPORTS · EST. 2018`, headline Anton display-xl Bone 3 baris (contoh: "WEAR / YOUR / ALTER EGO"), paragraf Chakra Petch 400 18px Silver maks 440px, lalu Primary Button "SHOP ALTER MERCH" dan Ghost Link "Lihat Roster →". Latar: video 30% (lihat Motion → Hero Background Video).
 
 ### Showreel Frame
 Full-bleed, rasio 16:9 (desktop) / 4:5 (mobile), radius 24px dengan margin 24px dari tepi viewport. Overlay gradien hitam 0→60% di bawah dengan Section Label + headline Anton heading. Tombol bulat 64px di tengah: border Bone, ikon speaker — klik menyalakan suara / membuka versi penuh.
@@ -201,31 +201,20 @@ Latar Void + tekstur seigaiha 4%. Empat kolom: (1) logo + tagline + alamat offli
 
 Prinsip: **semua bergerak dari kanan ke kiri**, pelan, seperti angin. Easing standar `cubic-bezier(0.22, 1, 0.36, 1)`; durasi UI 200–400ms.
 
-### Hero Particle Flow (desktop ≥ 1024px saja)
-- **Medium:** WebGL (Three.js) satu `InstancedMesh`, di kanvas kolom kanan yang meluber ke seluruh hero dengan opacity lebih rendah di sisi kiri.
-- **Partikel:** ±5.000 segitiga outline 1–2px. Komposisi warna: 55% Bone, 30% Signal Red, 15% Ash. Ukuran 2–6px.
-- **Kelopak sakura:** ±80 kelopak (sprite 5-kelopak / satu kelopak), warna Signal Red dan Bone, ukuran 8–16px, berputar pelan di sumbu sendiri sambil ikut aliran.
-- **Aliran:** kecepatan dasar 0.4–1.2 unit/detik ke arah **kiri**, sedikit turun (sudut ±8°), dengan noise (curl noise) supaya bergelombang. Partikel yang keluar tepi kiri lahir lagi di tepi kanan.
-- **Morph ke logo:** saat halaman siap (logo terunduh), ±60% partikel ditarik ke titik-titik sampel permukaan logo selama 1.6s, membentuk siluet perisai; logo solid fade-in 0→1 di 0.8s terakhir. Siklus: tahan 6s → 30% partikel di tepi kanan logo "terlepas" dan terbawa angin ke kiri → ditarik kembali. Logo tidak pernah hilang seluruhnya.
-- **Kursor:** radius tolak 120px; partikel di dalamnya didorong menjauh lalu kembali ke aliran (spring).
-- **Scroll:** sepanjang tinggi hero, kecepatan aliran turun hingga 30%, logo berputar Y 0→25° dan bergeser naik 10%. Setelah hero lewat, render loop di-pause (`IntersectionObserver`).
-- **Ambient:** di bawah hero, lapisan CSS/canvas 2D ringan berisi ±40 segitiga + 10 kelopak di opacity 15% terus mengalir kanan→kiri di latar halaman.
+### Hero Background Video
+> Revisi 2026-10-17: partikel WebGL dan logo 3D di hero dihapus setelah review (terlalu ramai, penempatan buruk). Hero memakai video.
 
-### Logo 3D
-- **Sumber:** `alterego_logo.glb` (dibangun dari `layers/` lewat `build_logo.py`: 7 layer — red_outer, black, gray_dark, gray_mid, gray_light, white, red_detail — diekstrusi bertingkat).
-- **Ukuran wajib:** kompres ke **≤ 3 MB** (Draco atau Meshopt + simplifikasi geometri; file sekarang 127 MB tidak boleh dipakai di produksi).
-- **Lighting:** environment `RoomEnvironment` intensitas rendah, key light putih dari kanan-atas, **rim light merah** dari kiri-belakang (sama dengan `index.html`). Tone mapping ACES Filmic.
-- **Idle:** melayang naik-turun 0.05 unit (periode ~5s) dan berayun Y ±0.15 rad. Tidak ada OrbitControls / drag / zoom di situs produksi.
-- **Loading:** sebelum `.glb` siap, tampilkan PNG logo 2D di posisi yang sama dengan opacity 0.3; partikel tetap mengalir.
+- **Medium:** video highlight (`showreel-720.webm`/`.mp4`, `showreel-480.mp4` di < 768px) sebagai latar penuh hero, `object-cover`, **opacity 30%**, autoplay, muted, loop, `playsinline`, poster WebP.
+- **Keterbacaan:** gradien Void 80% → transparan dari kiri ke kanan, dan gradien Void dari bawah (160px) agar menyatu dengan section berikutnya.
+- **Konten:** kolom tunggal kiri (label, headline, paragraf, CTA). Tidak ada logo di kanan; logo 2D 96px hanya di mobile.
+- Hero berlatar Void solid, jadi lapisan ambient tidak terlihat di hero.
 
-### Mobile & Tablet (< 1024px) — TANPA 3D
-- Tidak memuat Three.js maupun `.glb` sama sekali.
-- Hero menjadi **komposisi tipografi**: headline Anton display-xl memenuhi lebar, logo PNG 2D kecil (96px) di atas Section Label, garis seigaiha di bawah headline.
-- Animasi kelopak CSS ringan: maks 12 kelopak SVG, `transform` + `opacity` saja, mengalir kanan→kiri, durasi 12–20s per kelopak.
-- Headline masuk dengan reveal per baris (translateY 40px → 0, stagger 80ms).
+### Ambient (di bawah hero)
+- Lapisan `fixed` di belakang konten: 24 segitiga 3–6px + 6 kelopak sakura, **opacity 8%**, mengalir kanan→kiri pelan (30–60 detik per lintasan). Tujuannya agar section tidak hitam polos, bukan untuk menarik perhatian.
+- Hanya `transform`, tanpa JavaScript.
 
 ### Reduced Motion
-`prefers-reduced-motion: reduce` → di semua perangkat: tanpa partikel, tanpa kelopak, tanpa marquee, tanpa reveal. Desktop menampilkan render statis logo 3D (gambar WebP hasil render) di kolom kanan.
+`prefers-reduced-motion: reduce` → video hero berhenti di poster, tanpa ambient, tanpa marquee partner, tanpa reveal section.
 
 ### UI Motion
 - Hover tombol: warna 200ms, panah geser 4px.
@@ -242,7 +231,7 @@ Prinsip: **semua bergerak dari kanan ke kiri**, pelan, seperti angin. Easing sta
 | **Showreel esport** | Section 2, tepat setelah hero | Autoplay, muted, loop, `playsinline`; tombol speaker untuk suara; lazy-load saat 200px sebelum masuk viewport; poster frame JPG/WebP | MP4 H.264 ≤ 8 MB (720p, 20–30s) **atau** embed YouTube (lite-youtube) untuk versi penuh |
 | **Lookbook Alter Merch** | Store: di atas grid produk; Landing: di atas grid preview merch | Sama, tanpa tombol suara (video senyap) | MP4 ≤ 5 MB, 10–15s |
 
-Video tidak pernah ditaruh di hero dan tidak pernah self-host file > 10 MB. Di mobile, autoplay tetap jalan (muted) dengan versi 480p.
+Hero memakai video yang sama sebagai latar 30% (revisi 2026-10-17). Jangan self-host file > 10 MB. Di mobile, autoplay tetap jalan (muted) dengan versi 480p.
 
 ---
 
@@ -253,7 +242,7 @@ Video tidak pernah ditaruh di hero dan tidak pernah self-host file > 10 MB. Di m
 | # | Section | Isi | Komponen |
 |---|---------|-----|----------|
 | — | Nav | Logo, STORE · ROSTER · NEWS · MEDIA · JOIN, SHOP | Navigation Bar |
-| 1 | Hero | Headline + CTA kiri, partikel + logo 3D kanan (desktop) / tipografi (mobile) | Hero Headline Block, Hero Particle Flow |
+| 1 | Hero | Headline + CTA di atas video latar 30% | Hero Headline Block, Hero Background Video |
 | 2 | Showreel | Video highlight esport | Showreel Frame |
 | 3 | Manifesto | Siapa Alter Ego, makna "banyak wajah, satu nama" | Manifesto Block |
 | 4 | Roster | Tab divisi: Mobile Legends · Counter-Strike 2 · PUBG Mobile | Roster Card, tab divisi (Tag/Chip) |
@@ -381,7 +370,7 @@ Placeholder sampai data diverifikasi dari sumber resmi.
 - Jangan pakai kartu berlatar di landing (Roster, News, Manifesto tetap melayang di atas void). Kartu hanya Product Card.
 - Jangan pakai huruf kana atau kanji; unsur Jepang cukup sakura, seigaiha, dan bentuk hanko.
 - Jangan pakai ornamen Jepang lain (torii, kipas, gunung Fuji, ombak besar ala Hokusai) — terasa seperti kostum.
-- Jangan taruh foto atau video di hero.
+- Jangan taruh video hero di atas 30% opacity atau tanpa gradien; judul harus selalu terbaca.
 - Jangan muat `.glb` > 3 MB, dan jangan memuat Three.js di mobile.
 - Jangan pakai warna di luar palet, termasuk hijau untuk "sukses".
 - Jangan set Anton di bawah 28px atau dalam huruf kecil.
@@ -401,7 +390,7 @@ Placeholder sampai data diverifikasi dari sumber resmi.
 Flat. Tidak ada `box-shadow` untuk kedalaman. Pemisahan dicapai lewat lompatan permukaan (Void → Ink → Ink Raised), garis Hairline 1px, dan skala tipografi. Satu-satunya "cahaya" adalah rim-light merah pada logo 3D.
 
 ## Imagery
-- **Logo 3D** adalah satu-satunya objek 3D di situs.
+- Tidak ada objek 3D di situs (revisi 2026-10-17). Model logo 3D tetap tersedia di `brand/` untuk keperluan lain.
 - **Foto pemain:** potret latar gelap/hitam, pencahayaan dramatis dari samping, ditampilkan grayscale dan berwarna saat hover.
 - **Foto produk:** latar `#161616` polos atau flat-lay di atas hitam, pencahayaan rata; foto kedua = model memakai produk.
 - **Foto berita:** foto pertandingan/event, crop 16:9.

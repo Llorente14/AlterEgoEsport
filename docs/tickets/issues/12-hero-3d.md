@@ -13,3 +13,5 @@
 - [x] E2E: mobile tidak meminta glb; desktop memasang kanvas
 
 Catatan: diukur 113 fps di Chrome dengan Intel Iris Xe (1440×900). Chunk scene ±670 KB (belum gzip), hanya diunduh di desktop.
+
+> Revisi 2026-10-17: hero 3D dan partikel dihapus setelah review user; diganti video latar 30% (lihat DESIGN.md → Hero Background Video).
