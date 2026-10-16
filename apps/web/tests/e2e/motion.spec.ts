@@ -3,16 +3,8 @@ import { expect, test } from '@playwright/test';
 test.describe('gerak dengan motion aktif', () => {
   test.use({ reducedMotion: 'no-preference' });
 
-  test('mobile: kelopak CSS di hero (maks 12) dan section muncul saat di-scroll', async ({ page, isMobile }) => {
-    test.skip(!isMobile, 'hanya mobile');
+  test('section muncul saat di-scroll', async ({ page }) => {
     await page.goto('/');
-
-    const heroPetals = page.locator('#hero [data-sakura] svg');
-    expect(await heroPetals.count()).toBeLessThanOrEqual(12);
-    await expect(heroPetals.first()).toBeVisible();
-    const animation = await heroPetals.first().evaluate((el) => getComputedStyle(el).animationName);
-    expect(animation).toBe('sakura-drift');
-
     const roster = page.locator('#roster');
     await expect(roster).not.toHaveClass(/is-revealed/);
     await roster.scrollIntoViewIfNeeded();
@@ -20,19 +12,23 @@ test.describe('gerak dengan motion aktif', () => {
     await expect.poll(() => roster.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
   });
 
-  test('lapisan ambient ada di semua halaman', async ({ page }) => {
+  test('lapisan ambient tipis ada di semua halaman, tertutup di hero', async ({ page }) => {
     await page.goto('/store');
-    await expect(page.locator('[data-ambient]')).toBeAttached();
-    expect(await page.locator('[data-ambient] .ambient-tri').count()).toBe(40);
+    const ambient = page.locator('[data-ambient]');
+    await expect(ambient).toBeAttached();
+    expect(await ambient.locator('.ambient-tri').count()).toBe(24);
+    expect(await ambient.evaluate((el) => getComputedStyle(el).opacity)).toBe('0.08');
+
+    await page.goto('/');
+    expect(await page.locator('#hero').evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(0, 0, 0)');
   });
 });
 
 test.describe('reduced motion', () => {
   test.use({ reducedMotion: 'reduce' });
 
-  test('tanpa kelopak, ambient, marquee, dan reveal', async ({ page }) => {
+  test('tanpa ambient, marquee, dan reveal', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('#hero [data-sakura]')).toBeHidden();
     await expect(page.locator('[data-ambient]')).toBeHidden();
 
     const roster = page.locator('#roster');

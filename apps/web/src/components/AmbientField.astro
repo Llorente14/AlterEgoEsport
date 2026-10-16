@@ -1,8 +1,9 @@
 ---
-// Page-wide ambient layer: faint triangles and petals drifting right to left behind all content.
+// Page-wide ambient layer: faint triangles and petals drifting right to left behind the sections.
+// The hero has a solid background, so the layer only shows below it.
 import SakuraPetals from './SakuraPetals.astro';
 
-const triangles = Array.from({ length: 40 }, (_, i) => ({
+const triangles = Array.from({ length: 24 }, (_, i) => ({
   top: `${(i * 61) % 100}%`,
   size: 3 + ((i * 3) % 4), // 3–6px
   duration: 30 + ((i * 11) % 31), // 30–60s: slower than the hero wind
@@ -21,12 +22,12 @@ const triangles = Array.from({ length: 40 }, (_, i) => ({
       />
     ))
   }
-  <SakuraPetals count={10} />
+  <SakuraPetals count={6} />
 </div>
 
 <style>
   .ambient {
-    opacity: 0.15;
+    opacity: 0.08;
   }
   .ambient-tri {
     width: 0;
