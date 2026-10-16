@@ -1,0 +1,113 @@
+---
+import SectionLabel from './SectionLabel.astro';
+---
+
+<!--
+  Logo Slide: while this section is pinned under the nav, the logo enters from the right,
+  rests in the centre and leaves to the left (src/lib/logo-slide.ts). Without JavaScript or
+  with reduced motion it is a static, centred logo.
+-->
+<section id="identity" class="logo-slide relative" aria-labelledby="identity-title" data-logo-slide data-no-reveal>
+  <div class="logo-slide-pin relative overflow-clip" data-logo-slide-pin>
+    <div class="container-page relative z-10 pt-32">
+      <SectionLabel number="02" label="Identitas" />
+      <h2 id="identity-title" class="sr-only">Alter Ego — banyak wajah, satu nama</h2>
+    </div>
+
+    <p
+      class="logo-slide-track pointer-events-none absolute left-0 top-1/2 font-display uppercase leading-none whitespace-nowrap select-none"
+      aria-hidden="true"
+      data-logo-slide-track
+    >
+      Alter Ego · Alter Ego · Alter Ego
+    </p>
+
+    <img
+      src="/logo/alterego-logo-800.webp"
+      srcset="/logo/alterego-logo-800.webp 800w, /logo/alterego-logo-1200.webp 1200w"
+      sizes="(min-width: 1024px) 42vw, 80vw"
+      width="1200"
+      height="1179"
+      alt="Logo Alter Ego"
+      loading="eager"
+      decoding="async"
+      class="logo-slide-logo absolute left-1/2 top-1/2 w-auto"
+      data-logo-slide-logo
+    />
+  </div>
+</section>
+
+<style>
+  .logo-slide-pin {
+    height: min(80dvh, 720px);
+  }
+  .logo-slide-logo {
+    /* Always fits: never taller than 62% of the screen or wider than 42% of it (80% on mobile). */
+    height: min(62dvh, 80vw);
+    transform: translate(-50%, -50%);
+    will-change: transform;
+  }
+  .logo-slide-track {
+    font-size: min(28vw, 40dvh);
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(255 255 255 / 0.2);
+    transform: translate(10%, -50%);
+    will-change: transform;
+  }
+  @media (min-width: 1024px) {
+    .logo-slide-logo {
+      height: min(62dvh, 42vw);
+    }
+  }
+
+  /* Pinned mode: JavaScript running and motion allowed. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .logo-slide {
+      height: 300dvh;
+    }
+    :global(.js) .logo-slide-pin {
+      position: sticky;
+      top: 80px;
+      height: calc(100dvh - 80px);
+    }
+    :global(.js) .logo-slide-logo {
+      /* Parked off screen to the right until the first scroll update. */
+      transform: translate(-50%, -50%) translateX(100vw);
+    }
+  }
+</style>
+
+<script>
+  import { logoSlide, pinProgress } from '../lib/logo-slide';
+
+  const NAV_HEIGHT = 80;
+  const section = document.querySelector<HTMLElement>('[data-logo-slide]');
+  const pin = section?.querySelector<HTMLElement>('[data-logo-slide-pin]');
+  const logo = section?.querySelector<HTMLElement>('[data-logo-slide-logo]');
+  const track = section?.querySelector<HTMLElement>('[data-logo-slide-track]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (section && pin && logo && track && !reducedMotion) {
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const rect = section.getBoundingClientRect();
+      const progress = pinProgress(rect.top - NAV_HEIGHT, rect.height, pin.offsetHeight);
+      const { x, rotate, trackShift } = logoSlide(progress, document.documentElement.clientWidth, logo.offsetWidth);
+      logo.style.transform = `translate(-50%, -50%) translateX(${x.toFixed(1)}px) rotate(${rotate.toFixed(2)}deg)`;
+      track.style.transform = `translate(${(trackShift * 100).toFixed(2)}%, -50%)`;
+      section.dataset.progress = progress.toFixed(3);
+    };
+
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    update();
+  }
+</script>

@@ -105,7 +105,7 @@
 
 /* Sections fade up once as they enter the viewport (JavaScript only; never with reduced motion). */
 @media (prefers-reduced-motion: no-preference) {
-  .js main > section:not(:first-child) {
+  .js main > section:not(:first-child, [data-no-reveal]) {
     opacity: 0;
     transform: translateY(24px);
     transition:

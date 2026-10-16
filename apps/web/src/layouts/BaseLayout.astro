@@ -37,7 +37,7 @@ const {
     </main>
     <Footer />
     <script>
-      const sections = document.querySelectorAll<HTMLElement>('main > section:not(:first-child)');
+      const sections = document.querySelectorAll<HTMLElement>('main > section:not(:first-child, [data-no-reveal])');
       const reveal = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) {
