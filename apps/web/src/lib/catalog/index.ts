@@ -1,16 +1,24 @@
 // Catalog: the single entry point for site content. Pages and components never read raw data files.
-import type { Achievement, AchievementSummary } from '@alterego/shared';
+import type { Achievement, AchievementSummary, ProductCategory } from '@alterego/shared';
 import mlbbRoster from '@data/mlbb.json';
 import cs2Roster from '@data/cs2.json';
 import pubgmRoster from '@data/pubgm.json';
 import mlbbAchievements from '@data/mlbb_achievement.json';
 import cs2Achievements from '@data/cs2_achievement.json';
 import pubgmAchievements from '@data/pubgm_achievement.json';
+import rawLinks from '@data/links.json';
+import rawProducts from '@data/alterego_produk_aktif_gambar.json';
+import productImages from '../../data/product-images.json';
 import { buildGameAchievements, combineSummaries, latestHighlights, type GameAchievements } from './achievements';
+import { buildLinks, type SiteLinks } from './links';
+import { buildProducts, CATEGORY_LABELS, type StoreProduct } from './products';
 import { buildGameRoster, type GameRoster } from './roster';
 
 export type { GameAchievements } from './achievements';
+export type { SiteLinks } from './links';
+export type { ProductImage, StoreProduct } from './products';
 export type { GameRoster, RosterDivision, RosterMember } from './roster';
+export { CATEGORY_LABELS } from './products';
 export { CatalogDataError } from './validate';
 
 let roster: GameRoster[] | undefined;
@@ -44,4 +52,46 @@ export function getAchievements(): AchievementsOverview {
     achievements = { games, total: combineSummaries(games), highlights: latestHighlights(games) };
   }
   return achievements;
+}
+
+let links: SiteLinks | undefined;
+
+/** Marketplaces, social accounts and the offline store. */
+export function getLinks(): SiteLinks {
+  links ??= buildLinks(rawLinks, 'data/links.json');
+  return links;
+}
+
+let products: StoreProduct[] | undefined;
+
+/** All active Alter Merch products, in the order of the data file. */
+export function getProducts(): StoreProduct[] {
+  products ??= buildProducts(rawProducts, 'data/alterego_produk_aktif_gambar.json', {
+    images: productImages,
+    shopeeFallback: getLinks().shopeeHome,
+    tokopediaFallback: getLinks().tokopedia.url,
+  });
+  return products;
+}
+
+export function getProduct(slug: string): StoreProduct | undefined {
+  return getProducts().find((p) => p.slug === slug);
+}
+
+export interface CategoryCount {
+  category: ProductCategory;
+  label: string;
+  count: number;
+}
+
+/** Categories that have at least one product, in menu order. */
+export function getCategories(): CategoryCount[] {
+  const all = getProducts();
+  return (Object.keys(CATEGORY_LABELS) as ProductCategory[])
+    .map((category) => ({
+      category,
+      label: CATEGORY_LABELS[category],
+      count: all.filter((p) => p.category === category).length,
+    }))
+    .filter((c) => c.count > 0);
 }

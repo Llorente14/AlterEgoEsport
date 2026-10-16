@@ -68,7 +68,7 @@ export interface AchievementSummary {
   totalPrizeUSD: number;
 }
 
-export type ProductCategory = 'jersey' | 'hoodie' | 'jacket' | 'tshirt' | 'accessory' | 'other';
+export type ProductCategory = 'jersey' | 'jacket' | 'hoodie' | 'tshirt' | 'bottoms' | 'accessory' | 'other';
 
 export type ProductBadge = 'NEW' | 'LIMITED' | 'SOLD OUT' | 'PRE-ORDER';
 

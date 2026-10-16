@@ -1,0 +1,29 @@
+{
+  "shopee": [
+    { "country": "ID", "label": "Shopee Indonesia", "url": "https://shopee.co.id/alterego_merch" },
+    { "country": "PH", "label": "Shopee Philippines", "url": "https://shopee.ph/alteregomerchtc.ph" },
+    { "country": "MY", "label": "Shopee Malaysia", "url": "https://shopee.com.my/alteregomerch7q.my" },
+    { "country": "SG", "label": "Shopee Singapore", "url": "https://shopee.sg/alteregomerchuq.sg" },
+    { "country": "VN", "label": "Shopee Vietnam", "url": "https://shopee.vn/alteregomerchcn.vn" },
+    { "country": "TH", "label": "Shopee Thailand", "url": "https://shopee.co.th/alteregomerchfy.th" }
+  ],
+  "tokopedia": { "label": "Tokopedia", "url": "https://www.tokopedia.com/alteregomerch" },
+  "whatsapp": { "label": "WhatsApp (Worldwide Shipping)", "url": "https://wa.me/6289652442519" },
+  "offlineStore": {
+    "name": "Milestones Coffee",
+    "area": "Jakarta Barat",
+    "mapsUrl": "https://www.google.com/maps/place/Milestones+Coffee+-+Jakarta+Barat/@-6.1973533,106.7648184,17z"
+  },
+  "social": {
+    "alterego-esports": [
+      { "platform": "Instagram", "handle": "@alteregoesports", "url": "https://www.instagram.com/alteregoesports/" },
+      { "platform": "TikTok", "handle": "@alterego.esports", "url": "https://www.tiktok.com/@alterego.esports" },
+      { "platform": "YouTube", "handle": "@AlterEgoEsports", "url": "https://www.youtube.com/@AlterEgoEsports" },
+      { "platform": "X", "handle": "@AlterEgo_IDN", "url": "https://x.com/AlterEgo_IDN" }
+    ],
+    "alter-merch": [
+      { "platform": "Instagram", "handle": "@altermerch.id", "url": "https://www.instagram.com/altermerch.id/" }
+    ]
+  },
+  "linktree": "https://linktr.ee/AlterEgoesports"
+}
