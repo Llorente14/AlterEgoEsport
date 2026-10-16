@@ -3,6 +3,14 @@
 
 export type Game = 'mlbb' | 'cs2' | 'pubgm';
 
+export const GAMES: readonly Game[] = ['mlbb', 'cs2', 'pubgm'];
+
+export const GAME_LABELS: Record<Game, string> = {
+  mlbb: 'Mobile Legends',
+  cs2: 'Counter-Strike 2',
+  pubgm: 'PUBG Mobile',
+};
+
 export type StoreMode = 'marketplace' | 'native';
 
 export type PlayerStatus = 'active' | 'substitute' | 'inactive' | 'loan';
@@ -11,11 +19,11 @@ export interface Player {
   id: string;
   nickname: string;
   fullName: string | null;
-  nationality: string;
+  nationality: string | null;
   game: Game;
   division: string;
   type: 'player' | 'staff';
-  role: string;
+  role: string | null;
   status: PlayerStatus;
   joinDate: string | null;
   previousTeams: string[];
