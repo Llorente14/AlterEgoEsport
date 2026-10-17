@@ -20,7 +20,7 @@ test.describe('Berita', () => {
     await page.goto('/news');
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Berita');
-    await expect(page.locator('[data-news-card]')).toHaveCount(6);
+    await expect(page.locator('[data-news-card]')).toHaveCount(7);
 
     // Only one category has articles, so the filter shows just "Semua".
     const chips = page.getByRole('navigation', { name: 'Kategori berita' }).getByRole('link');
