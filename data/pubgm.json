@@ -6,7 +6,7 @@
       "id": "badru",
       "nickname": "BADRU",
       "fullName": "Badru Fikri Imanudin",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "player",
@@ -22,13 +22,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/4/4c/Alter_Ego_Ares_Badru.png"
     },
     {
       "id": "rosemary",
       "nickname": "ROSEMARY",
       "fullName": "Juventino Ryan Jeremy Rolos",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "player",
@@ -43,14 +44,16 @@
         "isIGL": false
       },
       "sources": [
-        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
+        "https://liquipedia.net/pubgmobile/Rosemary"
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/thumb/f/f2/AE_Rosemary_PMGC_2025.png/600px-AE_Rosemary_PMGC_2025.png"
     },
     {
       "id": "krypton",
       "nickname": "KRYPTON",
       "fullName": "Zhafir Krypton Eria",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "player",
@@ -66,13 +69,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/thumb/c/c9/AE_Krypton_at_the_2025_PMWC.jpg/900px-AE_Krypton_at_the_2025_PMWC.jpg"
     },
     {
       "id": "snape",
       "nickname": "SNAPE",
       "fullName": "Muh Fathyn Zilhaq Syah S",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "player",
@@ -88,13 +92,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/8/83/RRQ_RYU_Snape_2024.png"
     },
     {
       "id": "jimmyop",
       "nickname": "JIMMYOP",
       "fullName": "Muhd Hazim Irfan Kamarudin",
-      "nationality": null,
+      "nationality": "MY",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "player",
@@ -110,13 +115,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/0/03/CelcomDigi_Alliance_Jimmy_2025.png"
     },
     {
       "id": "zuxxy",
       "nickname": "ZUXXY",
       "fullName": "Made Bagas Pramudita",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "player",
@@ -132,13 +138,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/thumb/e/e4/Zuxxy_Persija_EVOS_2023.png/900px-Zuxxy_Persija_EVOS_2023.png"
     },
     {
       "id": "aces",
       "nickname": "ACES",
       "fullName": "Muhammad Haris",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "staff",
@@ -154,13 +161,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": null
     },
     {
       "id": "hzlnuts",
       "nickname": "HZLNUTS",
       "fullName": "Noval Adrian Putra",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "staff",
@@ -176,13 +184,14 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/6/63/Alter_Ego_LIMAX_Hzlnuts_2021.png"
     },
     {
       "id": "rapshody",
       "nickname": "RAPSHODY",
       "fullName": "Muhammad Rifky",
-      "nationality": null,
+      "nationality": "ID",
       "game": "pubgm",
       "division": "Alter Ego Ares",
       "type": "staff",
@@ -198,7 +207,8 @@
       },
       "sources": [
         "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
-      ]
+      ],
+      "profileImg": null
     }
   ]
 }
