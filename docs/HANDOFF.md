@@ -38,6 +38,8 @@
   permintaan Axel; versi hanya-cahaya ada di commit 546bbc7 bila mau dicoba lagi.
 - Bila badge 2D muncul di dev padahal WebGL ada: cek konsol "Failed to fetch dynamically imported module",
   restart `npm run dev` (three.js sudah di `optimizeDeps.include`).
+- Logo partner: Good Day Coffee, myBCA, Supreme League, Interlac sekarang pakai logo dari `data/partners/`,
+  di-upscale 4× (Lanczos) ke `public/partners/*.png`. Interbat & CBN Fiber tetap. `gopay.jpg` belum dipakai.
 - Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
   kecepatan 28 px/s. Sebelumnya 2 salinan × ±1100px menyisakan gap di layar lebar saat pertama dimuat.
 
