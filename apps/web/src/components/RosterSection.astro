@@ -1,9 +1,9 @@
 ---
-import { getRoster } from '../lib/catalog';
+import { getRosterTabs } from '../lib/catalog';
 import RosterCard from './RosterCard.astro';
 import SectionLabel from './SectionLabel.astro';
 
-const rosters = getRoster();
+const rosters = getRosterTabs();
 ---
 
 <section id="roster" class="container-page flex flex-col gap-48 py-96" aria-labelledby="roster-title">
@@ -21,11 +21,11 @@ const rosters = getRoster();
         <button
           type="button"
           role="tab"
-          id={`roster-tab-${r.game}`}
-          aria-controls={`roster-${r.game}`}
+          id={`roster-tab-${r.id}`}
+          aria-controls={`roster-${r.id}`}
           aria-selected={i === 0 ? 'true' : 'false'}
           tabindex={i === 0 ? 0 : -1}
-          data-game={r.game}
+          data-game={r.id}
           class="min-h-44 rounded-pill border border-hairline px-16 font-mono text-[12px] uppercase tracking-label text-silver transition-colors duration-200 hover:text-bone aria-selected:border-signal-red aria-selected:text-bone"
         >
           {r.label}
@@ -37,9 +37,9 @@ const rosters = getRoster();
   {
     rosters.map((r) => (
       <div
-        id={`roster-${r.game}`}
+        id={`roster-${r.id}`}
         role="tabpanel"
-        aria-labelledby={`roster-tab-${r.game}`}
+        aria-labelledby={`roster-tab-${r.id}`}
         class="flex flex-col gap-64"
         data-roster-panel
       >

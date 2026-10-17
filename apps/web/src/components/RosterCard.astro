@@ -9,6 +9,8 @@ const { member } = Astro.props;
 
 const regionNames = new Intl.DisplayNames(['id'], { type: 'region' });
 const country = member.nationality ? regionNames.of(member.nationality) : null;
+// The team's own photo wins; the profile image fills in until there is one. Neither: the placeholder.
+const photo = member.photo ?? member.profileImg;
 ---
 
 <article class="group flex flex-col gap-16">
@@ -16,12 +18,14 @@ const country = member.nationality ? regionNames.of(member.nationality) : null;
     class="relative aspect-[3/4] overflow-hidden rounded-card transition-shadow duration-300 group-hover:shadow-[inset_0_0_0_1px_var(--color-signal-red)]"
   >
     {
-      member.photo ? (
+      photo ? (
         <img
-          src={member.photo}
+          src={photo}
           alt={`Foto ${member.nickname}`}
           loading="lazy"
-          class="size-full object-cover grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+          decoding="async"
+          referrerpolicy="no-referrer"
+          class="size-full bg-ink-raised object-cover object-top grayscale transition-[filter] duration-300 group-hover:grayscale-0"
         />
       ) : (
         <div class="flex size-full items-center justify-center rounded-card border border-dashed border-hairline" data-placeholder>
