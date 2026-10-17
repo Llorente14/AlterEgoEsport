@@ -1,13 +1,37 @@
 {
   "game": "mlbb",
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-17",
   "summary": {
-    "titles": 1,
-    "runnerUps": 3,
+    "titles": 6,
+    "runnerUps": 5,
     "internationalAppearances": 2,
-    "totalPrizeUSD": 436143.47
+    "totalPrizeUSD": 496514.8
   },
   "achievements": [
+    {
+      "id": "cyberhero-donatov-afk-masters-s1-2026",
+      "game": "mlbb",
+      "division": "Alter Ego",
+      "tournament": "Cyberhero x Donatov.net AFK Masters Cup Season 1",
+      "tier": "B-Tier",
+      "startDate": "2026-06-28",
+      "endDate": null,
+      "placement": "1",
+      "placementLabel": "Champion",
+      "prize": {
+        "amount": 50690.04,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
+    },
     {
       "id": "m7-world-championship",
       "game": "mlbb",
@@ -18,14 +42,19 @@
       "endDate": null,
       "placement": "2",
       "placementLabel": "Runner-up",
-      "prize": { "amount": 150000, "currency": "USD" },
+      "prize": {
+        "amount": 150000,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "mpl-id-s16",
@@ -37,14 +66,19 @@
       "endDate": null,
       "placement": "2",
       "placementLabel": "Runner-up",
-      "prize": { "amount": 52591.88, "currency": "USD" },
+      "prize": {
+        "amount": 52591.88,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "mpl-id-s15",
@@ -56,33 +90,19 @@
       "endDate": null,
       "placement": "4",
       "placementLabel": "Top 4",
-      "prize": { "amount": 27915.31, "currency": "USD" },
+      "prize": {
+        "amount": 27915.31,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": false,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
-    },
-    {
-      "id": "mpl-id-s14",
-      "game": "mlbb",
-      "division": "Alter Ego",
-      "tournament": "MPL Indonesia Season 14",
-      "tier": "A-Tier",
-      "startDate": "2024-10-23",
-      "endDate": null,
-      "placement": "5-6",
-      "placementLabel": "Top 8",
-      "prize": { "amount": 20961.96, "currency": "USD" },
-      "location": null,
-      "lan": null,
-      "rosterIds": [],
-      "awards": [],
-      "highlight": false,
-      "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "mpl-id-s11",
@@ -94,14 +114,19 @@
       "endDate": null,
       "placement": "3",
       "placementLabel": "3rd",
-      "prize": { "amount": 25816.40, "currency": "USD" },
+      "prize": {
+        "amount": 25816.4,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": false,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "mpl-id-s8",
@@ -113,14 +138,19 @@
       "endDate": null,
       "placement": "4",
       "placementLabel": "Top 4",
-      "prize": { "amount": 22304.04, "currency": "USD" },
+      "prize": {
+        "amount": 22304.04,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": false,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "m2-world-championship",
@@ -132,14 +162,19 @@
       "endDate": null,
       "placement": "4",
       "placementLabel": "Top 4",
-      "prize": { "amount": 16800, "currency": "USD" },
+      "prize": {
+        "amount": 16800,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "one-esports-mpl-invitational-2020",
@@ -151,14 +186,19 @@
       "endDate": null,
       "placement": "1",
       "placementLabel": "Champion",
-      "prize": { "amount": 35000, "currency": "USD" },
+      "prize": {
+        "amount": 35000,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "mpl-id-s6",
@@ -170,14 +210,19 @@
       "endDate": null,
       "placement": "2",
       "placementLabel": "Runner-up",
-      "prize": { "amount": 52881.81, "currency": "USD" },
+      "prize": {
+        "amount": 52881.81,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "mpl-id-s4",
@@ -189,14 +234,259 @@
       "endDate": null,
       "placement": "3",
       "placementLabel": "3rd",
-      "prize": { "amount": 31872.07, "currency": "USD" },
+      "prize": {
+        "amount": 31872.07,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": false,
       "liquipediaUrl": null,
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego/Results"]
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
+    },
+    {
+      "id": "mdl-indonesia-s12",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "MDL Indonesia Season 12",
+      "tier": "B-Tier",
+      "startDate": "2025-10-23",
+      "endDate": null,
+      "placement": "5-8",
+      "placementLabel": "Top 8",
+      "prize": {
+        "amount": 2408.54,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": false,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "mdl-indonesia-s11",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "MDL Indonesia Season 11",
+      "tier": "B-Tier",
+      "startDate": "2025-06-01",
+      "endDate": null,
+      "placement": "1",
+      "placementLabel": "Champion",
+      "prize": {
+        "amount": 6109.22,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "mdl-indonesia-s10",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "MDL Indonesia Season 10",
+      "tier": "B-Tier",
+      "startDate": "2024-10-18",
+      "endDate": null,
+      "placement": "5-8",
+      "placementLabel": "Top 8",
+      "prize": {
+        "amount": 2584.92,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": false,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "dgwib-season-15",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "DGWIB Season 15",
+      "tier": "C-Tier",
+      "startDate": "2024-06-28",
+      "endDate": null,
+      "placement": "1",
+      "placementLabel": "Champion",
+      "prize": {
+        "amount": 915.67,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "mdl-indonesia-s9",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "MDL Indonesia Season 9",
+      "tier": "B-Tier",
+      "startDate": "2024-05-31",
+      "endDate": null,
+      "placement": "5-8",
+      "placementLabel": "Top 8",
+      "prize": {
+        "amount": 2460.77,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": false,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "kohai-sea-championship-s2",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "Kohai SEA Championship Season 2",
+      "tier": "B-Tier",
+      "startDate": "2023-12-31",
+      "endDate": null,
+      "placement": "3",
+      "placementLabel": "3rd",
+      "prize": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": false,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "piala-bung-karno-esports-2023",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "Piala Bung Karno Esports 2023",
+      "tier": "B-Tier",
+      "startDate": "2023-07-04",
+      "endDate": null,
+      "placement": "2",
+      "placementLabel": "Runner-up",
+      "prize": {
+        "amount": 1332.19,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "mdl-indonesia-s5",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "MDL Indonesia Season 5",
+      "tier": "B-Tier",
+      "startDate": "2022-04-17",
+      "endDate": null,
+      "placement": "2",
+      "placementLabel": "Runner-up",
+      "prize": {
+        "amount": 2788.62,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "dgwib-championship-2022",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "DGWIB Championship 2022",
+      "tier": "B-Tier",
+      "startDate": "2022-01-30",
+      "endDate": null,
+      "placement": "1",
+      "placementLabel": "Champion",
+      "prize": {
+        "amount": 5214.34,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "mdl-indonesia-s4",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "tournament": "MDL Indonesia Season 4",
+      "tier": "B-Tier",
+      "startDate": "2021-10-17",
+      "endDate": null,
+      "placement": "1",
+      "placementLabel": "Champion",
+      "prize": {
+        "amount": 5328.98,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
     }
   ]
 }
