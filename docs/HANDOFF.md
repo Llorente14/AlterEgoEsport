@@ -41,8 +41,9 @@
 - Logo partner: Good Day Coffee, Interbat, myBCA, Supreme League, Interlac dipotong dari
   `data/partners/Banner Logo Sponsor Latar Transparan.png` (latarnya kotak-kotak palsu, bukan alpha; dipisahkan
   lewat mask kecerahan/saturasi) dan menimpa `public/partners/*.png`. Good Day hanya huruf merahnya (outline putih
-  dibuang agar tidak jadi blob saat situs meratakan logo jadi putih). CBN Fiber tetap. gopay ada di banner tapi
-  belum didaftarkan sebagai partner.
+  dibuang agar tidak jadi blob saat situs meratakan logo jadi putih). CBN Fiber tetap. gopay sudah didaftarkan
+  sebagai partner (`GoPay`). Good Day diperbesar lewat `scale: 1.5` di `data/partners.json` (opsional per partner;
+  baris marquee h-64 agar tidak terpotong).
 - Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
   kecepatan 28 px/s. Sebelumnya 2 salinan × ±1100px menyisakan gap di layar lebar saat pertama dimuat.
 
