@@ -1,16 +1,16 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Partners, Join, Footer', () => {
-  test('menampilkan 6 partner', async ({ page, isMobile }) => {
+  test('menampilkan 7 partner', async ({ page, isMobile }) => {
     await page.goto('/');
     const section = page.locator('#partners');
     if (isMobile) {
-      await expect(section.getByRole('list', { name: 'Partner' }).getByRole('listitem')).toHaveCount(6);
+      await expect(section.getByRole('list', { name: 'Partner' }).getByRole('listitem')).toHaveCount(7);
     } else {
       const marquee = section.locator('[data-partner-marquee]');
       await expect(marquee).toBeVisible();
       await expect(marquee.getByRole('img', { name: 'Interbat' })).toBeVisible();
-      await expect(marquee.getByText('Good Day Coffee').first()).toBeVisible();
+      await expect(marquee.getByRole('img', { name: 'Good Day Coffee' }).first()).toBeVisible();
       // No gap before the loop restarts: the track covers the screen plus the one set it shifts by.
       await expect
         .poll(() =>
