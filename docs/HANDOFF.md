@@ -41,6 +41,10 @@
 - Achievement baru (dari data Axel): CS2 runner-up ESL Challenger League S52 Asia-Pacific Cup 3 (2026-10-14,
   US$2.500); PUBG Mobile PUBG Master Series 2026 Phase 2 juara (2026-10-11, US$15.600) dan Phase 1 juara ke-3
   (2026-05-10, US$5.250), divisi "Alter Ego PC" (dari Axel: divisi PUBG PC). Summary di file ikut diperbarui (PUBG total 674089).
+- Berita: juara AFK Masters (MLBB, `data/mlbb_afk_masters_cup.png`), juara PMS 2026 Phase 2 (PUBG PC,
+  `data/pubg_pc_pms_winner_2026.png`), cover AOC Masters CS2 diganti ke `data/ae_cs2_aoc_masters_winner.jpg`.
+  PMS Phase 1 juara ke-3 BELUM ada berita: `data/pubg_pc_pms_3_phase1.png` ternyata poster PUBG Global Series APAC
+  Qualifiers 2025 (bukan PMS Phase 1), jadi tidak dipakai. Perlu foto yang benar dari Axel.
 - Berita baru: runner-up CS2 (cover poster `data/cs2_runnerup_esl.webp`). PUBG Master Series belum punya
   berita/cover: perlu foto dari Axel (cover wajib di skema berita).
 - Logo partner: Good Day Coffee, Interbat, myBCA, Supreme League, Interlac dipotong dari
