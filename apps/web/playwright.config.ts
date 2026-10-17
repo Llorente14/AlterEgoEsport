@@ -33,6 +33,8 @@ export default defineConfig({
   webServer: {
     command: `npm run build && npx astro preview --port ${PORT}`,
     url: `http://localhost:${PORT}`,
+    // Build the internal /dev pages too: the asset test needs them.
+    env: { INCLUDE_DEV_PAGES: '1' },
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },
