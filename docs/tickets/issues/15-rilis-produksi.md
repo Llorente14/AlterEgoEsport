@@ -4,8 +4,9 @@
 
 **Blocked by:** 14, 01
 
-**Status:** ready-for-agent
+**Status:** in-progress (menunggu deploy Vercel oleh Axel)
 
-- [ ] Cek otomatis semua link eksternal (Shopee ×6, Tokopedia, WhatsApp, sosmed ×5, Maps)
-- [ ] Domain produksi di Vercel, site URL di konfigurasi diganti
-- [ ] Seluruh tes lulus sebelum deploy
+- [x] Cek otomatis semua link eksternal (Shopee ×6, Tokopedia, WhatsApp, sosmed ×5, Maps, Linktree): `npm run check:links`
+- [x] Site URL diambil dari `VERCEL_PROJECT_PRODUCTION_URL` (domain bawaan Vercel); domain kustom nanti lewat env `SITE_URL`
+- [ ] Deploy Vercel oleh Axel (Root Directory `apps/web`), lalu URL produksi dicek
+- [x] Seluruh tes lulus sebelum deploy

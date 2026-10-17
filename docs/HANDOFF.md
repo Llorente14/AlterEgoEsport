@@ -67,6 +67,15 @@
    (~640 KB, hanya desktop).
 3. Tiket 15: cek semua link eksternal, domain produksi (ganti `site` di `astro.config.mjs`).
 
+## Rilis ke Vercel (tiket 15)
+- Project Vercel: Root Directory `apps/web`, framework Astro. Opsi "Include source files outside of the Root
+  Directory" harus **aktif** (build membaca `data/` dan `packages/shared`). Tidak perlu env wajib.
+- Domain: pakai `*.vercel.app` bawaan dulu. `site` diambil dari `VERCEL_PROJECT_PRODUCTION_URL` saat build.
+  Domain kustom nanti cukup set env `SITE_URL` di Vercel (tanpa ubah kode).
+- Sebelum deploy: `npm test`, `npm run check`, `npm run test:e2e`, lalu `npm run check:links` (laporan link;
+  `blocked` = cek manual di browser, `broken` = perbaiki).
+- `.vercelignore` tidak mengunggah `docs/`, `brand/`, `data/partners/`, `data/ceo_photo/`, dan file mentah.
+
 ## Menunggu dari Axel
 - Domain produksi (ganti `site` di `apps/web/astro.config.mjs`; placeholder `alterego.example`).
 - Deploy Vercel (Root Directory `apps/web`).
