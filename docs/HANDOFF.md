@@ -26,8 +26,12 @@
 - Roster: tab sekarang 4 — Mobile Legends MPL, Mobile Legends MDL, Counter-Strike 2, PUBG Mobile. Game yang
   divisinya main di liga berbeda (dibaca dari `gameSpecific.league`) dipecah per divisi (`buildRosterTabs`);
   hash tab jadi `#roster-mlbb-mpl`, `#roster-mlbb-mdl`, `#roster-cs2`, `#roster-pubgm`.
-- Kartu roster menampilkan `photo` (file tim) lalu `profileImg` (URL Liquipedia, hotlink) bila ada; null = placeholder.
-  Opsional: self-host + optimasi foto (seperti gambar produk), karena PNG Liquipedia ±200 KB dan hotlink bisa putus.
+- Semua gambar kini self-host (tidak ada hotlink di `dist`). Foto roster: `npm run fetch:photos` mengunduh
+  `profileImg` dari `data/<game>.json` sekali, membuat WebP 400/800 di `public/roster/<game>/` + manifest
+  `src/data/roster-photos.json` (kunci `game:id`). Jalankan ulang bila `profileImg` berubah; tes unit gagal
+  jika ada `profileImg` tanpa salinan lokal. Foto CEO: `data/ceo_photo/*.jpg` → `public/founders/*.webp`
+  (dirujuk `photo` di `data/founders.json`). Foto tampil berwarna (tanpa grayscale); tanpa foto = placeholder.
+  Atribusi: foto Liquipedia berlisensi CC BY-SA, pertimbangkan baris kredit sebelum rilis.
 - Logo 3D lebih gelap & doff (review Axel): env 0.3, key 0.75, rim 1.4, exposure 0.75; material dipaksa
   roughness ≥ 0.75 dan metalness ≤ 0.02 saat dimuat (glb asli terlalu mengkilap, merah jadi salmon).
 - Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
