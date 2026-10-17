@@ -6,12 +6,11 @@ test.describe('Berita', () => {
     const section = page.locator('#news');
     const cards = section.locator('[data-news-card]');
     await expect(cards).toHaveCount(3);
-    await expect(cards.first()).toContainText('PUBG Mobile Pro Laga');
+    await expect(cards.first()).toContainText('ESL Challenger League Season 52');
 
     await cards.first().getByRole('link').click();
-    await expect(page).toHaveURL(/\/news\/alter-ego-ares-juara-pmpl-indonesia-2026-fall$/);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Alter Ego Ares Juara');
-    await expect(page.getByText('Final MVP', { exact: false }).first()).toBeVisible();
+    await expect(page).toHaveURL(/\/news\/alter-ego-runner-up-esl-challenger-league-s52$/);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Runner-up ESL');
     await expect(page.getByRole('heading', { name: 'Berita lainnya' })).toBeVisible();
   });
 
@@ -21,11 +20,11 @@ test.describe('Berita', () => {
     await page.goto('/news');
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Berita');
-    await expect(page.locator('[data-news-card]')).toHaveCount(3);
+    await expect(page.locator('[data-news-card]')).toHaveCount(4);
 
     await page.getByRole('navigation', { name: 'Kategori berita' }).getByRole('link', { name: /^Result/ }).click();
     await expect(page).toHaveURL(/\/news\/kategori\/result$/);
-    await expect(page.locator('[data-news-card]')).toHaveCount(3);
+    await expect(page.locator('[data-news-card]')).toHaveCount(4);
     await context.close();
   });
 
