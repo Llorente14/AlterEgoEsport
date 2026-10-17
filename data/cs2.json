@@ -6,7 +6,7 @@
       "id": "bntet",
       "nickname": "BNTET",
       "fullName": "Hansel Ferdinand",
-      "nationality": null,
+      "nationality": "ID",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "player",
@@ -22,13 +22,14 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/thumb/7/77/BnTeT_at_Antwerp_Major_2022_APAC_RMR.jpg/900px-BnTeT_at_Antwerp_Major_2022_APAC_RMR.jpg"
     },
     {
       "id": "pokemon",
       "nickname": "POKEMON",
       "fullName": "Saad Ahmed",
-      "nationality": null,
+      "nationality": "PK",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "player",
@@ -44,13 +45,14 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/5/51/PokemoN.png"
     },
     {
       "id": "laxiee",
       "nickname": "LAXIEE",
       "fullName": "Maks Andryei",
-      "nationality": null,
+      "nationality": "MN",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "player",
@@ -66,13 +68,14 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": null
     },
     {
       "id": "adex",
       "nickname": "ADEX",
       "fullName": "Adelin Nica",
-      "nationality": null,
+      "nationality": "RO",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "player",
@@ -88,13 +91,14 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/thumb/2/28/AdeX_at_La_Coupe_2023.jpeg/900px-AdeX_at_La_Coupe_2023.jpeg"
     },
     {
       "id": "shadiy",
       "nickname": "SHADIY",
       "fullName": "Martins Gütmanis",
-      "nationality": null,
+      "nationality": "LV",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "player",
@@ -110,13 +114,14 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/thumb/c/cf/Shadiy_at_La_Coupe_2023.jpeg/900px-Shadiy_at_La_Coupe_2023.jpeg"
     },
     {
       "id": "bali",
       "nickname": "BALI",
       "fullName": "Andrew Joseph",
-      "nationality": null,
+      "nationality": "ID",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "staff",
@@ -132,13 +137,14 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": "https://liquipedia.net/commons/images/1/17/Bali_at_IEM_IV_Asian_Championship.jpg"
     },
     {
       "id": "whyphy",
       "nickname": "WHYPHY",
       "fullName": "Avian Luthfi",
-      "nationality": null,
+      "nationality": "ID",
       "game": "cs2",
       "division": "Alter Ego",
       "type": "staff",
@@ -154,7 +160,8 @@
       },
       "sources": [
         "https://liquipedia.net/counterstrike/Alter_Ego"
-      ]
+      ],
+      "profileImg": null
     }
   ]
 }
