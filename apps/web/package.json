@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "check:assets": "node scripts/check-assets.mjs",
+    "check:links": "node scripts/check-links.mjs",
     "build": "npm run check:assets && astro build",
     "preview": "astro preview",
     "check": "astro check",
