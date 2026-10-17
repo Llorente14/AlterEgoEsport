@@ -14,7 +14,7 @@ test.describe('Berita', () => {
     await expect(page.getByRole('heading', { name: 'Berita lainnya' })).toBeVisible();
   });
 
-  test('halaman berita dengan filter kategori tanpa JavaScript', async ({ browser }) => {
+  test('halaman berita tanpa JavaScript, filter hanya Semua selama satu kategori', async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto('/news');
@@ -22,9 +22,10 @@ test.describe('Berita', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Berita');
     await expect(page.locator('[data-news-card]')).toHaveCount(6);
 
-    await page.getByRole('navigation', { name: 'Kategori berita' }).getByRole('link', { name: /^Result/ }).click();
-    await expect(page).toHaveURL(/\/news\/kategori\/result$/);
-    await expect(page.locator('[data-news-card]')).toHaveCount(6);
+    // Only one category has articles, so the filter shows just "Semua".
+    const chips = page.getByRole('navigation', { name: 'Kategori berita' }).getByRole('link');
+    await expect(chips).toHaveCount(1);
+    await expect(chips.first()).toContainText('Semua');
     await context.close();
   });
 

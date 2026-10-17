@@ -13,14 +13,20 @@ const all = sortNews(await getCollection('news'));
 const articles = category ? all.filter((a) => a.data.category === category) : all;
 const [featured, ...rest] = articles;
 
+// A category chip only appears once there is more than one category with articles.
+const categories = NEWS_CATEGORIES.map((c) => ({ c, count: all.filter((a) => a.data.category === c).length })).filter(
+  (x) => x.count > 0,
+);
 const chips = [
   { href: '/news', label: 'Semua', count: all.length, active: !category },
-  ...NEWS_CATEGORIES.map((c) => ({
-    href: `/news/kategori/${c.toLowerCase()}`,
-    label: NEWS_CATEGORY_LABELS[c],
-    count: all.filter((a) => a.data.category === c).length,
-    active: c === category,
-  })).filter((chip) => chip.count > 0),
+  ...(categories.length > 1
+    ? categories.map(({ c, count }) => ({
+        href: `/news/kategori/${c.toLowerCase()}`,
+        label: NEWS_CATEGORY_LABELS[c],
+        count,
+        active: c === category,
+      }))
+    : []),
 ];
 ---
 
