@@ -301,15 +301,6 @@
         "800": "/products/alter-ego-x-acfc-jogo-bonito-jersey-yellow/01-800.webp",
         "1200": "/products/alter-ego-x-acfc-jogo-bonito-jersey-yellow/01-1200.webp"
       }
-    },
-    {
-      "width": 1024,
-      "height": 1024,
-      "srcset": {
-        "400": "/products/alter-ego-x-acfc-jogo-bonito-jersey-yellow/02-400.webp",
-        "800": "/products/alter-ego-x-acfc-jogo-bonito-jersey-yellow/02-800.webp",
-        "1200": "/products/alter-ego-x-acfc-jogo-bonito-jersey-yellow/02-1200.webp"
-      }
     }
   ],
   "alter-ego-x-acfc-jogo-bonito-jersey-black": [
@@ -320,15 +311,6 @@
         "400": "/products/alter-ego-x-acfc-jogo-bonito-jersey-black/01-400.webp",
         "800": "/products/alter-ego-x-acfc-jogo-bonito-jersey-black/01-800.webp",
         "1200": "/products/alter-ego-x-acfc-jogo-bonito-jersey-black/01-1200.webp"
-      }
-    },
-    {
-      "width": 1024,
-      "height": 1024,
-      "srcset": {
-        "400": "/products/alter-ego-x-acfc-jogo-bonito-jersey-black/02-400.webp",
-        "800": "/products/alter-ego-x-acfc-jogo-bonito-jersey-black/02-800.webp",
-        "1200": "/products/alter-ego-x-acfc-jogo-bonito-jersey-black/02-1200.webp"
       }
     }
   ],
@@ -591,24 +573,6 @@
         "800": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/01-800.webp",
         "1200": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/01-1200.webp"
       }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/02-400.webp",
-        "800": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/02-800.webp",
-        "1200": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/03-400.webp",
-        "800": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/03-800.webp",
-        "1200": "/products/alt390-black-ankle-pants-chino-s-2xl-polyester/03-1200.webp"
-      }
     }
   ],
   "alt390-yokai-suede-bomber-jacket-ukuran-m-3xl": [
@@ -658,24 +622,6 @@
         "800": "/products/alt390-black-utility-vest-chino-multisize/01-800.webp",
         "1200": "/products/alt390-black-utility-vest-chino-multisize/01-1200.webp"
       }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-utility-vest-chino-multisize/02-400.webp",
-        "800": "/products/alt390-black-utility-vest-chino-multisize/02-800.webp",
-        "1200": "/products/alt390-black-utility-vest-chino-multisize/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-utility-vest-chino-multisize/03-400.webp",
-        "800": "/products/alt390-black-utility-vest-chino-multisize/03-800.webp",
-        "1200": "/products/alt390-black-utility-vest-chino-multisize/03-1200.webp"
-      }
     }
   ],
   "official-alter-ego-3d-keychain-rubber-merch": [
@@ -686,15 +632,6 @@
         "400": "/products/official-alter-ego-3d-keychain-rubber-merch/01-400.webp",
         "800": "/products/official-alter-ego-3d-keychain-rubber-merch/01-800.webp",
         "1200": "/products/official-alter-ego-3d-keychain-rubber-merch/01-1200.webp"
-      }
-    },
-    {
-      "width": 1024,
-      "height": 1024,
-      "srcset": {
-        "400": "/products/official-alter-ego-3d-keychain-rubber-merch/02-400.webp",
-        "800": "/products/official-alter-ego-3d-keychain-rubber-merch/02-800.webp",
-        "1200": "/products/official-alter-ego-3d-keychain-rubber-merch/02-1200.webp"
       }
     }
   ],
@@ -906,24 +843,6 @@
         "800": "/products/alt390-black-and-red-flannel-polar-fabric/01-800.webp",
         "1200": "/products/alt390-black-and-red-flannel-polar-fabric/01-1200.webp"
       }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-and-red-flannel-polar-fabric/02-400.webp",
-        "800": "/products/alt390-black-and-red-flannel-polar-fabric/02-800.webp",
-        "1200": "/products/alt390-black-and-red-flannel-polar-fabric/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-and-red-flannel-polar-fabric/03-400.webp",
-        "800": "/products/alt390-black-and-red-flannel-polar-fabric/03-800.webp",
-        "1200": "/products/alt390-black-and-red-flannel-polar-fabric/03-1200.webp"
-      }
     }
   ],
   "alt390-exclusive-birthday-gift-card": [
@@ -1098,24 +1017,6 @@
         "800": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/01-800.webp",
         "1200": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/01-1200.webp"
       }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/02-400.webp",
-        "800": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/02-800.webp",
-        "1200": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/03-400.webp",
-        "800": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/03-800.webp",
-        "1200": "/products/alt390-mask-printed-shirt-kemeja-nostalgia-mpl/03-1200.webp"
-      }
     }
   ],
   "alter-ego-league-regalia-track-pants": [
@@ -1279,24 +1180,6 @@
         "800": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/01-800.webp",
         "1200": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/01-1200.webp"
       }
-    },
-    {
-      "width": 700,
-      "height": 700,
-      "srcset": {
-        "400": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/02-400.webp",
-        "800": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/02-800.webp",
-        "1200": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/02-1200.webp"
-      }
-    },
-    {
-      "width": 700,
-      "height": 700,
-      "srcset": {
-        "400": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/03-400.webp",
-        "800": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/03-800.webp",
-        "1200": "/products/alt390-logo-enamel-pin-v3-3-5x3-5-cm/03-1200.webp"
-      }
     }
   ],
   "one-piece-chibi-mug-official-asia-tour-merchandise": [
@@ -1459,33 +1342,6 @@
         "400": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/01-400.webp",
         "800": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/01-800.webp",
         "1200": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/01-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/02-400.webp",
-        "800": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/02-800.webp",
-        "1200": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/03-400.webp",
-        "800": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/03-800.webp",
-        "1200": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/03-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/04-400.webp",
-        "800": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/04-800.webp",
-        "1200": "/products/alter-ego-x-jujutsu-kaisen-haori-kimono-white/04-1200.webp"
       }
     }
   ],
@@ -1690,15 +1546,6 @@
         "800": "/products/alt390-panik-gak-t-shirt-cotton-combed-24s/01-800.webp",
         "1200": "/products/alt390-panik-gak-t-shirt-cotton-combed-24s/01-1200.webp"
       }
-    },
-    {
-      "width": 700,
-      "height": 700,
-      "srcset": {
-        "400": "/products/alt390-panik-gak-t-shirt-cotton-combed-24s/02-400.webp",
-        "800": "/products/alt390-panik-gak-t-shirt-cotton-combed-24s/02-800.webp",
-        "1200": "/products/alt390-panik-gak-t-shirt-cotton-combed-24s/02-1200.webp"
-      }
     }
   ],
   "alt390-black-sherpa-jacket-bordir-premium-l-3xl": [
@@ -1709,24 +1556,6 @@
         "400": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/01-400.webp",
         "800": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/01-800.webp",
         "1200": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/01-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/02-400.webp",
-        "800": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/02-800.webp",
-        "1200": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/03-400.webp",
-        "800": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/03-800.webp",
-        "1200": "/products/alt390-black-sherpa-jacket-bordir-premium-l-3xl/03-1200.webp"
       }
     }
   ],
@@ -1928,24 +1757,6 @@
         "400": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/01-400.webp",
         "800": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/01-800.webp",
         "1200": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/01-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/02-400.webp",
-        "800": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/02-800.webp",
-        "1200": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/03-400.webp",
-        "800": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/03-800.webp",
-        "1200": "/products/alt390-catastrophe-black-overlay-hoodie-fleece-330gsm/03-1200.webp"
       }
     }
   ],
@@ -2243,24 +2054,6 @@
         "400": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/01-400.webp",
         "800": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/01-800.webp",
         "1200": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/01-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/02-400.webp",
-        "800": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/02-800.webp",
-        "1200": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/02-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/03-400.webp",
-        "800": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/03-800.webp",
-        "1200": "/products/alt390-black-trainer-pants-chino-s-2xl-polyester/03-1200.webp"
       }
     }
   ],
@@ -2808,15 +2601,6 @@
         "400": "/products/one-piece-nakama-tote-bag-black-official-asia-tour-merchandise/01-400.webp",
         "800": "/products/one-piece-nakama-tote-bag-black-official-asia-tour-merchandise/01-800.webp",
         "1200": "/products/one-piece-nakama-tote-bag-black-official-asia-tour-merchandise/01-1200.webp"
-      }
-    },
-    {
-      "width": 1000,
-      "height": 1000,
-      "srcset": {
-        "400": "/products/one-piece-nakama-tote-bag-black-official-asia-tour-merchandise/02-400.webp",
-        "800": "/products/one-piece-nakama-tote-bag-black-official-asia-tour-merchandise/02-800.webp",
-        "1200": "/products/one-piece-nakama-tote-bag-black-official-asia-tour-merchandise/02-1200.webp"
       }
     }
   ],
