@@ -59,7 +59,16 @@ export async function mountLogo3D(container: HTMLElement, modelUrl: string): Pro
 
   // Model → upright (the Blender export lies flat: extruded along +Y, artwork in the XZ plane) → fit (scale)
   // → pose (position and rotation, driven by the choreography and the cursor).
-  const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(modelUrl);
+  let gltf: Awaited<ReturnType<GLTFLoader['loadAsync']>>;
+  try {
+    gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(modelUrl);
+  } catch (error) {
+    // No model: give the WebGL context back and leave no empty canvas over the 2D fallback.
+    pmrem.dispose();
+    renderer.dispose();
+    canvas.remove();
+    throw error;
+  }
   const upright = new THREE.Group();
   upright.rotation.x = Math.PI / 2;
   upright.add(gltf.scene);
