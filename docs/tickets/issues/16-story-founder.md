@@ -14,4 +14,4 @@
 - [x] Data kartu dari `data/founders.json` (placeholder 5× Delwyn Sukamto)
 - [x] Revisi: gerak logo diperhalus (peredaman scroll), logo flip horizontal dari kiri ke tengah menunjukkan sisi belakang, kartu berakhir tepat di tengah
 - [x] Revisi: scene B = sub-title, deskripsi, lalu fun fact (dihitung dari data achievement)
-- [ ] Verifikasi peran "Founder Alter Ego" untuk Delwyn Sukamto sebelum rilis (hasil pencarian menyebutnya CEO Interbat) dan ganti kartu dengan data/foto asli
+- [x] Verifikasi peran untuk Delwyn Sukamto: dikonfirmasi Axel sebagai "CEO & Founder Alter Ego" (menggantikan catatan pencarian yang menyebutnya CEO Interbat). Foto asli sudah dipasang.
