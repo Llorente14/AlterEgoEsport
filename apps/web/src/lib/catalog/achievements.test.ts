@@ -103,7 +103,8 @@ describe('getAchievements (real data)', () => {
     const { games, total, highlights } = getAchievements();
     const pubgm = games.find((g) => g.game === 'pubgm')!;
     expect(pubgm.summary.titles).toBeGreaterThan(0);
-    expect(pubgm.summary.totalPrizeUSD).toBe(653239);
+    // Curated total from the data file (includes older prizes not listed as entries).
+    expect(pubgm.summary.totalPrizeUSD).toBe(674089);
     expect(total.titles).toBe(combineSummaries(games).titles);
     expect(highlights).toHaveLength(6);
   });

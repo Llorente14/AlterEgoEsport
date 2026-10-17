@@ -1,13 +1,61 @@
 {
   "game": "pubgm",
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-17",
   "summary": {
     "titles": null,
     "runnerUps": null,
     "internationalAppearances": null,
-    "totalPrizeUSD": 653239
+    "totalPrizeUSD": 674089
   },
   "achievements": [
+    {
+      "id": "pubg-master-series-2026-phase-2",
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "tournament": "PUBG Master Series 2026 Phase 2",
+      "tier": "A-Tier",
+      "startDate": "2026-10-11",
+      "endDate": null,
+      "placement": "1",
+      "placementLabel": "Champion",
+      "totalPoints": null,
+      "totalKills": null,
+      "prize": {
+        "amount": 15600,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": true,
+      "liquipediaUrl": null,
+      "sources": []
+    },
+    {
+      "id": "pubg-master-series-2026-phase-1",
+      "game": "pubgm",
+      "division": "Alter Ego Ares",
+      "tournament": "PUBG Master Series 2026 Phase 1",
+      "tier": "A-Tier",
+      "startDate": "2026-05-10",
+      "endDate": null,
+      "placement": "3",
+      "placementLabel": "3rd",
+      "totalPoints": null,
+      "totalKills": null,
+      "prize": {
+        "amount": 5250,
+        "currency": "USD"
+      },
+      "location": null,
+      "lan": null,
+      "rosterIds": [],
+      "awards": [],
+      "highlight": false,
+      "liquipediaUrl": null,
+      "sources": []
+    },
     {
       "id": "pubg-mobile-pro-laga-id-2026-fall",
       "game": "pubgm",
@@ -20,17 +68,28 @@
       "placementLabel": "Champion",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 23000, "currency": "USD" },
+      "prize": {
+        "amount": 23000,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [
-        { "playerId": "rosemary", "award": "FMVP" },
-        { "playerId": "rosemary", "award": "Week 3 MVP" }
+        {
+          "playerId": "rosemary",
+          "award": "FMVP"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Week 3 MVP"
+        }
       ],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pubg-mobile-global-championship-2025",
@@ -44,16 +103,24 @@
       "placementLabel": "Top 8",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 94000, "currency": "USD" },
+      "prize": {
+        "amount": 94000,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [
-        { "playerId": "rosemary", "award": "Best IGL" }
+        {
+          "playerId": "rosemary",
+          "award": "Best IGL"
+        }
       ],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pubg-mobile-world-cup-2025",
@@ -67,14 +134,19 @@
       "placementLabel": "Top 8",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 150000, "currency": "USD" },
+      "prize": {
+        "amount": 150000,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pmsl-sea-summer-2025",
@@ -88,16 +160,24 @@
       "placementLabel": "Runner-up",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 27850, "currency": "USD" },
+      "prize": {
+        "amount": 27850,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [
-        { "playerId": "rosemary", "award": "Week 1 MVP" }
+        {
+          "playerId": "rosemary",
+          "award": "Week 1 MVP"
+        }
       ],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pmsl-sea-summer-2024",
@@ -111,19 +191,36 @@
       "placementLabel": "Top 8",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 13250, "currency": "USD" },
+      "prize": {
+        "amount": 13250,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [
-        { "playerId": "rosemary", "award": "Rising Star" },
-        { "playerId": "rosemary", "award": "Gunslinger" },
-        { "playerId": "rosemary", "award": "Week 1 MVP" },
-        { "playerId": "rosemary", "award": "Week 2 MVP" }
+        {
+          "playerId": "rosemary",
+          "award": "Rising Star"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Gunslinger"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Week 1 MVP"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Week 2 MVP"
+        }
       ],
       "highlight": false,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pmsl-sea-spring-2024",
@@ -137,20 +234,40 @@
       "placementLabel": "Runner-up",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 23700, "currency": "USD" },
+      "prize": {
+        "amount": 23700,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [
-        { "playerId": "rosemary", "award": "FMVP" },
-        { "playerId": "rosemary", "award": "Week 2 MVP" },
-        { "playerId": "rosemary", "award": "Week 3 MVP" },
-        { "playerId": "rosemary", "award": "Gunslinger" },
-        { "playerId": "rosemary", "award": "Rising Star" }
+        {
+          "playerId": "rosemary",
+          "award": "FMVP"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Week 2 MVP"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Week 3 MVP"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Gunslinger"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Rising Star"
+        }
       ],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pubg-mobile-global-championship-2023",
@@ -164,14 +281,19 @@
       "placementLabel": "Group Stage",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 27500, "currency": "USD" },
+      "prize": {
+        "amount": 27500,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pmsl-sea-fall-2023",
@@ -185,14 +307,19 @@
       "placementLabel": "Champion",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 49500, "currency": "USD" },
+      "prize": {
+        "amount": 49500,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pubg-mobile-world-invitational-2023",
@@ -206,14 +333,19 @@
       "placementLabel": "Top 5",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 112500, "currency": "USD" },
+      "prize": {
+        "amount": 112500,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [],
       "highlight": false,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pmsl-sea-spring-2023",
@@ -227,17 +359,28 @@
       "placementLabel": "Champion",
       "totalPoints": null,
       "totalKills": null,
-      "prize": { "amount": 50500, "currency": "USD" },
+      "prize": {
+        "amount": 50500,
+        "currency": "USD"
+      },
       "location": null,
       "lan": null,
       "rosterIds": [],
       "awards": [
-        { "playerId": "rosemary", "award": "Season MVP" },
-        { "playerId": "rosemary", "award": "Gunslinger" }
+        {
+          "playerId": "rosemary",
+          "award": "Season MVP"
+        },
+        {
+          "playerId": "rosemary",
+          "award": "Gunslinger"
+        }
       ],
       "highlight": true,
       "liquipediaUrl": "https://liquipedia.net/pubgmobile/Alter_Ego_Ares",
-      "sources": ["https://liquipedia.net/pubgmobile/Alter_Ego_Ares"]
+      "sources": [
+        "https://liquipedia.net/pubgmobile/Alter_Ego_Ares"
+      ]
     },
     {
       "id": "pmpl-indonesia-fall-2022",

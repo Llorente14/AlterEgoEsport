@@ -11,5 +11,5 @@ test('section Achievements menampilkan angka dan maksimal 6 pencapaian terbaru',
 
   const items = section.getByRole('list', { name: 'Pencapaian terbaru' }).getByRole('listitem');
   await expect(items).toHaveCount(6);
-  await expect(items.first()).toContainText('PUBG Mobile Pro Laga');
+  await expect(items.first()).toContainText('ESL Challenger League Season 52');
 });
