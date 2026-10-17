@@ -2,7 +2,9 @@
   "partners": [
     {
       "name": "Good Day Coffee",
-      "logo": null
+      "logo": "goodday.png",
+      "width": 220,
+      "height": 160
     },
     {
       "name": "Interbat",
@@ -18,15 +20,21 @@
     },
     {
       "name": "myBCA",
-      "logo": null
+      "logo": "mybca.png",
+      "width": 248,
+      "height": 76
     },
     {
       "name": "Supreme League",
-      "logo": null
+      "logo": "supreme-league.png",
+      "width": 252,
+      "height": 112
     },
     {
       "name": "Interlac",
-      "logo": null
+      "logo": "interlac.png",
+      "width": 224,
+      "height": 64
     }
   ]
 }
