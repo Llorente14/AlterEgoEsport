@@ -12,14 +12,14 @@ const FOV = 35;
 const CAMERA_Z = 6;
 /** How far toward the camera the logo is lifted at the middle of its somersault (world units; camera is 6 away). */
 const LIFT_WORLD = 1.4;
-/** Light levels at full brightness. Kept low so the black plate stays black and the red stays red. */
-const ENV_INTENSITY = 0.3;
-const KEY_INTENSITY = 0.75;
-const RIM_INTENSITY = 1.4;
-const EXPOSURE = 0.75;
-/** Matte finish: the exported materials are glossy enough to wash the red out to salmon. */
-const MIN_ROUGHNESS = 0.75;
-const MAX_METALNESS = 0.02;
+/**
+ * Light levels at full brightness. The model's own materials are left as exported; the shine is tamed with the
+ * light alone: the environment is what gets reflected, so it stays faint while the direct lights carry the colour.
+ */
+const ENV_INTENSITY = 0.12;
+const KEY_INTENSITY = 0.9;
+const RIM_INTENSITY = 1.2;
+const EXPOSURE = 0.8;
 
 const rad = THREE.MathUtils.degToRad;
 
@@ -72,14 +72,6 @@ export async function mountLogo3D(container: HTMLElement, modelUrl: string): Pro
     canvas.remove();
     throw error;
   }
-  gltf.scene.traverse((node) => {
-    if (!(node instanceof THREE.Mesh)) return;
-    for (const material of [node.material].flat()) {
-      if (!(material instanceof THREE.MeshStandardMaterial)) continue;
-      material.roughness = Math.max(material.roughness, MIN_ROUGHNESS);
-      material.metalness = Math.min(material.metalness, MAX_METALNESS);
-    }
-  });
   const upright = new THREE.Group();
   upright.rotation.x = Math.PI / 2;
   upright.add(gltf.scene);
