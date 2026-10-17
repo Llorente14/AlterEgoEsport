@@ -1,6 +1,6 @@
 {
   "game": "mlbb",
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-17",
   "players": [
     {
       "id": "nino",
@@ -16,32 +16,20 @@
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/2/2c/AE_Nino_S18.png",
       "displayOrder": 1,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
-    },
-    {
-      "id": "rinee",
-      "nickname": "RINEE",
-      "fullName": "Syahrul Ramadhan",
-      "nationality": "ID",
-      "game": "mlbb",
-      "division": "Alter Ego",
-      "type": "player",
-      "role": "Jungler",
-      "status": "active",
-      "joinDate": "2025-02-16",
-      "previousTeams": [],
-      "liquipediaUrl": null,
-      "photo": null,
-      "displayOrder": 2,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "yazukee",
       "nickname": "YAZUKEE",
-      "fullName": "Muhammad Affan Wahyudi",
+      "fullName": "Andi Muhammad Affan Wahyudi",
       "nationality": "ID",
       "game": "mlbb",
       "division": "Alter Ego",
@@ -52,9 +40,39 @@
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/a/ad/AE_Yazukee_S18.png",
+      "displayOrder": 2,
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
+    },
+    {
+      "id": "reyy",
+      "nickname": "REYY",
+      "fullName": "Reynaldo Ferdiand",
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego",
+      "type": "player",
+      "role": "Jungler",
+      "status": "active",
+      "joinDate": "2026-03-04",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/8/80/AE_Reyy_S18.png",
       "displayOrder": 3,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "hijumee",
@@ -70,14 +88,20 @@
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/e/ee/AE_Hijumee_S18.png",
       "displayOrder": 4,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "cyruz",
       "nickname": "CYRUZ",
-      "fullName": "Muhammad Halim",
+      "fullName": "Muhammad Halim Adicondro",
       "nationality": "ID",
       "game": "mlbb",
       "division": "Alter Ego",
@@ -88,9 +112,15 @@
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/5/5f/AE_Cyruz_S18.png",
       "displayOrder": 5,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "arfy",
@@ -106,14 +136,20 @@
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/f/f9/AE_Arfy_S18.png",
       "displayOrder": 6,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "alekk",
       "nickname": "ALEKK",
-      "fullName": "Alexander Owen",
+      "fullName": "Alexander Owen Marcetami Buhe",
       "nationality": "ID",
       "game": "mlbb",
       "division": "Alter Ego",
@@ -121,12 +157,18 @@
       "role": "Roamer",
       "status": "active",
       "joinDate": "2025-08-05",
-      "previousTeams": ["Alter Ego X"],
+      "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/c/c1/AE_Alekk_S18.png",
       "displayOrder": 7,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "ivann",
@@ -138,67 +180,45 @@
       "type": "player",
       "role": "Roamer",
       "status": "active",
-      "joinDate": "2025-08-19",
-      "previousTeams": [],
+      "joinDate": "2026-08-02",
+      "previousTeams": [
+        "Team Rey"
+      ],
       "liquipediaUrl": null,
       "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/1/1f/AE_Ivann_S18.png",
       "displayOrder": 8,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
-    },
-    {
-      "id": "dreams",
-      "nickname": "DREAMS",
-      "fullName": "Rachmad Wahyudi",
-      "nationality": "ID",
-      "game": "mlbb",
-      "division": "Alter Ego",
-      "type": "player",
-      "role": "Roamer",
-      "status": "active",
-      "joinDate": "2025-12-25",
-      "previousTeams": ["TODAK"],
-      "liquipediaUrl": null,
-      "photo": null,
-      "displayOrder": 9,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
-    },
-    {
-      "id": "nafari",
-      "nickname": "NAFARI",
-      "fullName": "Azam Aljabar Nafari",
-      "nationality": "ID",
-      "game": "mlbb",
-      "division": "Alter Ego",
-      "type": "staff",
-      "role": "Head Coach",
-      "status": "active",
-      "joinDate": "2025-12-25",
-      "previousTeams": ["Alter Ego", "TODAK"],
-      "liquipediaUrl": null,
-      "photo": null,
-      "displayOrder": 10,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "xepher",
       "nickname": "XEPHER",
       "fullName": "Kenny Deo",
-      "nationality": "ID",
+      "nationality": null,
       "game": "mlbb",
       "division": "Alter Ego",
       "type": "staff",
-      "role": "Coach",
+      "role": "Head Coach",
       "status": "active",
-      "joinDate": "2024-11-12",
+      "joinDate": "2026-03-04",
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
-      "displayOrder": 11,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "profileImg": "https://liquipedia.net/commons/images/6/67/AE_Xepher_S18.png",
+      "displayOrder": 9,
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
       "id": "styx",
@@ -211,16 +231,22 @@
       "role": "Coach",
       "status": "active",
       "joinDate": "2025-08-05",
-      "previousTeams": ["Alter Ego X"],
+      "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
-      "displayOrder": 12,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "profileImg": "https://liquipedia.net/commons/images/d/d6/AE_Styx_S18.png",
+      "displayOrder": 10,
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
     },
     {
-      "id": "aces",
-      "nickname": "ACES",
+      "id": "wesley",
+      "nickname": "WESLEY",
       "fullName": null,
       "nationality": "ID",
       "game": "mlbb",
@@ -228,13 +254,235 @@
       "type": "staff",
       "role": "Manager",
       "status": "active",
-      "joinDate": "2024-07-30",
+      "joinDate": "2026-03-04",
       "previousTeams": [],
       "liquipediaUrl": null,
       "photo": null,
-      "displayOrder": 13,
-      "gameSpecific": { "league": "MPL ID", "nationalTeam": null },
-      "sources": ["https://liquipedia.net/mobilelegends/Alter_Ego"]
+      "profileImg": null,
+      "displayOrder": 11,
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
+    },
+    {
+      "id": "aces",
+      "nickname": "ACES",
+      "fullName": "Muhammad Haris",
+      "nationality": null,
+      "game": "mlbb",
+      "division": "Alter Ego",
+      "type": "staff",
+      "role": "Head of Esports",
+      "status": "active",
+      "joinDate": "2026-03-04",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": null,
+      "displayOrder": 12,
+      "gameSpecific": {
+        "league": "MPL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego"
+      ]
+    },
+    {
+      "id": "fawndeer",
+      "nickname": "FAWNDEER",
+      "fullName": "Melvin Rulif",
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "player",
+      "role": "EXP Laner",
+      "status": "active",
+      "joinDate": "2025-12-25",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/0/01/AE_Fawndeer_MDL_S14.png",
+      "displayOrder": 1,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "radoo",
+      "nickname": "RADOO",
+      "fullName": null,
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "player",
+      "role": "EXP Laner",
+      "status": "active",
+      "joinDate": "2026-08-04",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": null,
+      "displayOrder": 2,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "gebe",
+      "nickname": "GEBE",
+      "fullName": "Gilbert Arihta Goa",
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "player",
+      "role": "Jungler",
+      "status": "active",
+      "joinDate": "2026-03-07",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/6/63/AE_Gebe_MDL_S14.png",
+      "displayOrder": 3,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "fadlyy",
+      "nickname": "FADLYY",
+      "fullName": null,
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "player",
+      "role": "Mid Laner",
+      "status": "active",
+      "joinDate": "2025-08-15",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": null,
+      "displayOrder": 4,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "tgarzyy",
+      "nickname": "TGARZYY",
+      "fullName": null,
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "player",
+      "role": "Gold Laner",
+      "status": "active",
+      "joinDate": "2026-04-25",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": null,
+      "displayOrder": 5,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "alvinn",
+      "nickname": "ALVINN",
+      "fullName": null,
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "player",
+      "role": "Roamer",
+      "status": "active",
+      "joinDate": "2026-08-04",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": null,
+      "displayOrder": 6,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "mylta",
+      "nickname": "MYLTA",
+      "fullName": null,
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "staff",
+      "role": "Manager",
+      "status": "active",
+      "joinDate": "2022-03-05",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": null,
+      "displayOrder": 7,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
+    },
+    {
+      "id": "devkoch",
+      "nickname": "DEVKOCH",
+      "fullName": "Devara Reynanda Putra",
+      "nationality": "ID",
+      "game": "mlbb",
+      "division": "Alter Ego X",
+      "type": "staff",
+      "role": "Analyst",
+      "status": "active",
+      "joinDate": "2025-12-25",
+      "previousTeams": [],
+      "liquipediaUrl": null,
+      "photo": null,
+      "profileImg": "https://liquipedia.net/commons/images/4/4a/AE_DevKoch_MDL_S14.png",
+      "displayOrder": 8,
+      "gameSpecific": {
+        "league": "MDL ID",
+        "nationalTeam": null
+      },
+      "sources": [
+        "https://liquipedia.net/mobilelegends/Alter_Ego_X"
+      ]
     }
   ]
 }
