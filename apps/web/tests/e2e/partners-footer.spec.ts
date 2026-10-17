@@ -46,3 +46,30 @@ test.describe('Partners, Join, Footer', () => {
     }
   });
 });
+
+test.describe('Kembali ke atas', () => {
+  test('meluncur pelan ke atas, tidak melompat', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('footer').scrollIntoViewIfNeeded();
+    await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+    const start = await page.evaluate(() => window.scrollY);
+    expect(start).toBeGreaterThan(1000);
+
+    // Sample the scroll position every frame while the glide runs.
+    await page.evaluate(() => {
+      const samples: number[] = [];
+      (window as unknown as { __samples: number[] }).__samples = samples;
+      const tick = () => {
+        samples.push(window.scrollY);
+        if (samples.length < 400) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+    await page.getByRole('link', { name: 'Kembali ke atas' }).click();
+    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 5000 }).toBe(0);
+
+    const samples = await page.evaluate(() => (window as unknown as { __samples: number[] }).__samples);
+    const between = samples.filter((y) => y > 0 && y < start);
+    expect(between.length).toBeGreaterThan(5);
+  });
+});

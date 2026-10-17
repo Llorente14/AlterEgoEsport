@@ -72,7 +72,7 @@ const linkClass = 'inline-flex min-h-44 lg:min-h-32 items-center text-[14px] tex
 
   <div class="container-page flex flex-wrap items-center justify-between gap-16 border-t border-hairline py-24">
     <p class="font-mono text-label uppercase tracking-label text-ash">© {year} Alter Ego Esports</p>
-    <a href="#main" class="font-mono text-label uppercase tracking-label text-ash hover:text-bone">Kembali ke atas ↑</a>
+    <a href="#main" data-back-to-top class="font-mono text-label uppercase tracking-label text-ash hover:text-bone">Kembali ke atas ↑</a>
   </div>
 
   <p
@@ -89,3 +89,47 @@ const linkClass = 'inline-flex min-h-44 lg:min-h-32 items-center text-[14px] tex
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='24'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='0.04'%3E%3Ccircle cx='24' cy='24' r='22'/%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='24' cy='24' r='6'/%3E%3Ccircle cx='0' cy='12' r='22'/%3E%3Ccircle cx='48' cy='12' r='22'/%3E%3C/g%3E%3C/svg%3E");
   }
 </style>
+
+<script>
+  // "Kembali ke atas" glides to the top with an ease-in-out curve. Any manual scroll stops the glide,
+  // and reduced motion jumps straight there.
+  const DURATION = { min: 600, max: 1400 }; // ms, grows with the distance
+  const link = document.querySelector<HTMLAnchorElement>('[data-back-to-top]');
+  let stop: (() => void) | null = null;
+
+  const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+  link?.addEventListener('click', (event) => {
+    event.preventDefault();
+    stop?.();
+    const start = window.scrollY;
+    if (start === 0) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    const duration = Math.min(DURATION.max, Math.max(DURATION.min, start * 0.6));
+    const t0 = performance.now();
+    let frame = 0;
+    const cancel = () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('wheel', cancel);
+      window.removeEventListener('touchstart', cancel);
+      window.removeEventListener('keydown', cancel);
+      stop = null;
+    };
+    stop = cancel;
+    window.addEventListener('wheel', cancel, { passive: true, once: true });
+    window.addEventListener('touchstart', cancel, { passive: true, once: true });
+    window.addEventListener('keydown', cancel, { once: true });
+
+    const step = (now: number) => {
+      const t = Math.min((now - t0) / duration, 1);
+      window.scrollTo(0, start * (1 - easeInOut(t)));
+      if (t < 1) frame = requestAnimationFrame(step);
+      else cancel();
+    };
+    frame = requestAnimationFrame(step);
+  });
+</script>
