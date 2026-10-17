@@ -21,7 +21,11 @@ const devPagesOnlyLocally = {
 };
 
 export default defineConfig({
-  site: 'https://alterego.example', // TODO: ganti dengan domain produksi
+  // Canonical origin for sitemap, robots and share links. Vercel sets VERCEL_PROJECT_PRODUCTION_URL on every
+  // build (the *.vercel.app domain); SITE_URL overrides it, e.g. when a custom domain is added later.
+  site:
+    process.env.SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:4321'),
   integrations: [devPagesOnlyLocally],
   vite: {
     plugins: [tailwindcss()],

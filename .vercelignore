@@ -12,3 +12,6 @@ apps/web/dist/
 apps/web/.astro/
 apps/web/test-results/
 apps/web/playwright-report/
+# Source files only (the site uses the optimized copies in public/).
+data/partners/
+data/ceo_photo/
