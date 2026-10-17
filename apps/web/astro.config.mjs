@@ -25,6 +25,16 @@ export default defineConfig({
   integrations: [devPagesOnlyLocally],
   vite: {
     plugins: [tailwindcss()],
+    // three.js is only reached through a dynamic import (the desktop 3D logo). Pre-bundle it at dev start so a
+    // stale or late dependency scan cannot 404 it and drop the page to the 2D fallback.
+    optimizeDeps: {
+      include: [
+        'three',
+        'three/addons/loaders/GLTFLoader.js',
+        'three/addons/libs/meshopt_decoder.module.js',
+        'three/addons/environments/RoomEnvironment.js',
+      ],
+    },
     resolve: {
       alias: {
         '@data': fileURLToPath(new URL('../../data', import.meta.url)),
