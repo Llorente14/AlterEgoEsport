@@ -29,6 +29,8 @@ export interface Player {
   previousTeams: string[];
   liquipediaUrl: string | null;
   photo: string | null;
+  /** Fallback photo (a remote profile image) used when `photo` is empty. */
+  profileImg: string | null;
   displayOrder: number;
   gameSpecific: Record<string, unknown>;
   sources: string[];

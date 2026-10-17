@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { getRoster } from '.';
-import { buildGameRoster } from './roster';
+import { getRoster, getRosterTabs } from '.';
+import { buildGameRoster, buildRosterTabs } from './roster';
 import { CatalogDataError } from './validate';
 
 function member(overrides: Record<string, unknown>) {
@@ -26,6 +26,7 @@ function member(overrides: Record<string, unknown>) {
 }
 
 const file = (players: unknown[]) => ({ game: 'pubgm', updatedAt: '2026-10-16', players });
+const mlbbFile = (players: unknown[]) => ({ game: 'mlbb', updatedAt: '2026-10-16', players });
 
 describe('buildGameRoster', () => {
   it('groups by division with the main team first, players and staff apart, in display order', () => {
@@ -79,5 +80,59 @@ describe('buildGameRoster', () => {
 describe('getRoster (real data)', () => {
   it('loads all three games in tab order', () => {
     expect(getRoster().map((r) => r.game)).toEqual(['mlbb', 'cs2', 'pubgm']);
+  });
+});
+
+describe('profile image', () => {
+  it('keeps profileImg and defaults to null when the data has none', () => {
+    const roster = buildGameRoster(
+      file([member({ id: 'with', profileImg: 'https://example.com/a.png' }), member({ id: 'without' })]),
+      'data/pubgm.json',
+    );
+    expect(roster.divisions[0]!.players.map((p) => p.profileImg)).toEqual(['https://example.com/a.png', null]);
+  });
+});
+
+describe('buildRosterTabs', () => {
+  const mlbb = (division: string, league: string, id: string) =>
+    member({ id, game: 'mlbb', division, gameSpecific: { league } });
+
+  it('gives each league of a game its own tab, main team first', () => {
+    const tabs = buildRosterTabs([
+      buildGameRoster(
+        mlbbFile([mlbb('Alter Ego X', 'MDL ID', 'b'), mlbb('Alter Ego', 'MPL ID', 'a')]),
+        'data/mlbb.json',
+      ),
+    ]);
+    expect(tabs.map((t) => [t.id, t.label])).toEqual([
+      ['mlbb-mpl', 'Mobile Legends MPL'],
+      ['mlbb-mdl', 'Mobile Legends MDL'],
+    ]);
+    expect(tabs.map((t) => t.divisions.map((d) => d.name))).toEqual([['Alter Ego'], ['Alter Ego X']]);
+  });
+
+  it('keeps a game as one tab when it has one division or no league data', () => {
+    const one = buildRosterTabs([buildGameRoster(file([member({ id: 'a' })]), 'data/pubgm.json')]);
+    expect(one.map((t) => [t.id, t.label])).toEqual([['pubgm', 'PUBG Mobile']]);
+
+    const noLeague = buildRosterTabs([
+      buildGameRoster(
+        file([member({ id: 'a' }), member({ id: 'b', division: 'Alter Ego Ares' })]),
+        'data/pubgm.json',
+      ),
+    ]);
+    expect(noLeague).toHaveLength(1);
+    expect(noLeague[0]!.divisions.map((d) => d.name)).toEqual(['Alter Ego', 'Alter Ego Ares']);
+  });
+});
+
+describe('getRosterTabs (real data)', () => {
+  it('lists MPL and MDL as separate options, then CS2 and PUBG Mobile', () => {
+    expect(getRosterTabs().map((t) => t.label)).toEqual([
+      'Mobile Legends MPL',
+      'Mobile Legends MDL',
+      'Counter-Strike 2',
+      'PUBG Mobile',
+    ]);
   });
 });

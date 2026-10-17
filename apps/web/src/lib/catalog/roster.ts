@@ -18,6 +18,7 @@ const playerSchema = z.object({
   previousTeams: z.array(z.string()),
   liquipediaUrl: z.string().nullable(),
   photo: z.string().nullable(),
+  profileImg: z.string().nullable().default(null),
   displayOrder: z.number(),
   gameSpecific: z.record(z.string(), z.unknown()),
   sources: z.array(z.string()),
@@ -79,4 +80,40 @@ export function buildGameRoster(raw: unknown, file: string): GameRoster {
   });
 
   return { game: data.game, label: GAME_LABELS[data.game], divisions };
+}
+
+/** One tab of the roster section: a game, or one league of a game that plays in several. */
+export interface RosterTab {
+  /** URL-safe id, used for the tab hash (`#roster-<id>`). */
+  id: string;
+  label: string;
+  game: Game;
+  divisions: RosterDivision[];
+}
+
+/** League name of a division ("MPL ID" → "MPL"), read from its members; null when the data has none. */
+function divisionLeague(division: RosterDivision): string | null {
+  for (const member of [...division.players, ...division.staff]) {
+    const league = member.gameSpecific.league;
+    if (typeof league === 'string' && league.trim()) return league.trim().split(/\s+/)[0]!;
+  }
+  return null;
+}
+
+/**
+ * Tabs for the roster section. A game whose divisions play in different leagues (Mobile Legends: MPL and MDL)
+ * gets one tab per division, e.g. "Mobile Legends MPL"; any other game is a single tab.
+ */
+export function buildRosterTabs(rosters: GameRoster[]): RosterTab[] {
+  return rosters.flatMap((roster) => {
+    const leagues = roster.divisions.map(divisionLeague);
+    const split = roster.divisions.length > 1 && leagues.every(Boolean) && new Set(leagues).size === leagues.length;
+    if (!split) return [{ id: roster.game, label: roster.label, game: roster.game, divisions: roster.divisions }];
+    return roster.divisions.map((division, i) => ({
+      id: `${roster.game}-${leagues[i]!.toLowerCase()}`,
+      label: `${roster.label} ${leagues[i]}`,
+      game: roster.game,
+      divisions: [division],
+    }));
+  });
 }

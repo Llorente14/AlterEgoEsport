@@ -16,14 +16,14 @@ import { buildFounders, type Founder } from './founders';
 import { buildLinks, type SiteLinks } from './links';
 import { buildPartners, type Partner } from './partners';
 import { buildProducts, CATEGORY_LABELS, type StoreProduct } from './products';
-import { buildGameRoster, type GameRoster } from './roster';
+import { buildGameRoster, buildRosterTabs, type GameRoster, type RosterTab } from './roster';
 
 export type { GameAchievements } from './achievements';
 export type { SiteLinks } from './links';
 export type { Founder } from './founders';
 export type { Partner } from './partners';
 export type { ProductImage, StoreProduct } from './products';
-export type { GameRoster, RosterDivision, RosterMember } from './roster';
+export type { GameRoster, RosterDivision, RosterMember, RosterTab } from './roster';
 export { CATEGORY_LABELS } from './products';
 export { CatalogDataError } from './validate';
 
@@ -37,6 +37,11 @@ export function getRoster(): GameRoster[] {
     buildGameRoster(pubgmRoster, 'data/pubgm.json'),
   ];
   return roster;
+}
+
+/** Roster tabs in display order: Mobile Legends MPL · MDL, Counter-Strike 2, PUBG Mobile. */
+export function getRosterTabs(): RosterTab[] {
+  return buildRosterTabs(getRoster());
 }
 
 export interface AchievementsOverview {
