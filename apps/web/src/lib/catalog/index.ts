@@ -11,6 +11,7 @@ import rawFounders from '@data/founders.json';
 import rawPartners from '@data/partners.json';
 import rawProducts from '@data/alterego_produk_aktif_gambar.json';
 import productImages from '../../data/product-images.json';
+import rosterPhotos from '../../data/roster-photos.json';
 import { buildGameAchievements, combineSummaries, latestHighlights, type GameAchievements } from './achievements';
 import { buildFounders, type Founder } from './founders';
 import { buildLinks, type SiteLinks } from './links';
@@ -23,7 +24,7 @@ export type { SiteLinks } from './links';
 export type { Founder } from './founders';
 export type { Partner } from './partners';
 export type { ProductImage, StoreProduct } from './products';
-export type { GameRoster, RosterDivision, RosterMember, RosterTab } from './roster';
+export type { GameRoster, PhotoSet, RosterDivision, RosterMember, RosterTab } from './roster';
 export { CATEGORY_LABELS } from './products';
 export { CatalogDataError } from './validate';
 
@@ -32,9 +33,9 @@ let roster: GameRoster[] | undefined;
 /** Active roster per game, in tab order (MLBB · CS2 · PUBG Mobile). */
 export function getRoster(): GameRoster[] {
   roster ??= [
-    buildGameRoster(mlbbRoster, 'data/mlbb.json'),
-    buildGameRoster(cs2Roster, 'data/cs2.json'),
-    buildGameRoster(pubgmRoster, 'data/pubgm.json'),
+    buildGameRoster(mlbbRoster, 'data/mlbb.json', rosterPhotos),
+    buildGameRoster(cs2Roster, 'data/cs2.json', rosterPhotos),
+    buildGameRoster(pubgmRoster, 'data/pubgm.json', rosterPhotos),
   ];
   return roster;
 }

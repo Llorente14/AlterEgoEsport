@@ -1,5 +1,6 @@
 ---
 import type { RosterMember } from '../lib/catalog';
+import ProductImage from './ProductImage.astro';
 
 interface Props {
   member: RosterMember;
@@ -9,8 +10,9 @@ const { member } = Astro.props;
 
 const regionNames = new Intl.DisplayNames(['id'], { type: 'region' });
 const country = member.nationality ? regionNames.of(member.nationality) : null;
-// The team's own photo wins; the profile image fills in until there is one. Neither: the placeholder.
-const photo = member.photo ?? member.profileImg;
+// Every photo is served from this site: the optimized copy of the profile image, else the team's own file.
+// Neither: the placeholder.
+const sizes = '(min-width: 1024px) 240px, (min-width: 768px) 30vw, 45vw';
 ---
 
 <article class="group flex flex-col gap-16">
@@ -18,14 +20,20 @@ const photo = member.photo ?? member.profileImg;
     class="relative aspect-[3/4] overflow-hidden rounded-card transition-shadow duration-300 group-hover:shadow-[inset_0_0_0_1px_var(--color-signal-red)]"
   >
     {
-      photo ? (
+      member.photoSet ? (
+        <ProductImage
+          image={member.photoSet}
+          alt={`Foto ${member.nickname}`}
+          sizes={sizes}
+          class="size-full bg-ink-raised object-cover object-top"
+        />
+      ) : member.photo ? (
         <img
-          src={photo}
+          src={member.photo}
           alt={`Foto ${member.nickname}`}
           loading="lazy"
           decoding="async"
-          referrerpolicy="no-referrer"
-          class="size-full bg-ink-raised object-cover object-top grayscale transition-[filter] duration-300 group-hover:grayscale-0"
+          class="size-full bg-ink-raised object-cover object-top"
         />
       ) : (
         <div class="flex size-full items-center justify-center rounded-card border border-dashed border-hairline" data-placeholder>

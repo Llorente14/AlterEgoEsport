@@ -28,14 +28,29 @@ test.describe('section Roster', () => {
     await expect(roster.getByRole('tabpanel', { name: 'PUBG Mobile' })).toContainText('Alter Ego Ares');
   });
 
-  test('foto pemain tampil bila ada, placeholder bila kosong', async ({ page }) => {
+  test('foto pemain disajikan dari situs sendiri, placeholder bila kosong', async ({ page }) => {
+    const external: string[] = [];
+    page.on('request', (request) => {
+      if (/^image$/.test(request.resourceType()) && !request.url().startsWith('http://localhost')) {
+        external.push(request.url());
+      }
+    });
     await page.goto('/#roster-mlbb-mdl');
     const panel = page.locator('#roster-mlbb-mdl');
     const gebe = panel.locator('article').filter({ hasText: 'GEBE' });
-    await expect(gebe.getByRole('img', { name: 'Foto GEBE' })).toHaveAttribute('src', /^https:\/\/.+\.png$/);
+    const photo = gebe.getByRole('img', { name: 'Foto GEBE' });
+    await expect(photo).toHaveAttribute('src', '/roster/mlbb/gebe-800.webp');
+    await expect(photo).toHaveAttribute('srcset', /gebe-400\.webp 400w, .*gebe-800\.webp \d+w/);
+    await expect
+      .poll(() => photo.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+      .toBe(true);
+    // Photos keep their colours: no grayscale filter, not even at rest.
+    await expect(photo).toHaveCSS('filter', 'none');
+
     const radoo = panel.locator('article').filter({ hasText: 'RADOO' });
     await expect(radoo.locator('img[alt^="Foto"]')).toHaveCount(0);
     await expect(radoo.locator('[data-placeholder]')).toBeVisible();
+    expect(external).toEqual([]);
   });
 
   test('membuka tab dari hash URL', async ({ page }) => {

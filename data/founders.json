@@ -1,9 +1,9 @@
 {
   "founders": [
-    { "id": "delwyn-1", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": null },
-    { "id": "delwyn-2", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": null },
-    { "id": "delwyn-3", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": null },
-    { "id": "delwyn-4", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": null },
-    { "id": "delwyn-5", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": null }
+    { "id": "delwyn-1", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": "/founders/delwyn-sukamto.webp" },
+    { "id": "delwyn-2", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": "/founders/delwyn-sukamto-2.webp" },
+    { "id": "delwyn-3", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": "/founders/delwyn-sukamto-3.webp" },
+    { "id": "delwyn-4", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": "/founders/delwyn-sukamto-4.webp" },
+    { "id": "delwyn-5", "name": "Delwyn Sukamto", "role": "Founder Alter Ego", "photo": "/founders/delwyn-sukamto-5.webp" }
   ]
 }

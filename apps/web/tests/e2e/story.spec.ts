@@ -134,6 +134,25 @@ test.describe('story (desktop, pinned)', () => {
     }
   });
 
+  test('foto founder mengisi kartu tanpa mendorong nama keluar dari kartu', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await scrollTo(page, 1);
+    const cards = page.locator('[data-founder-card]');
+    await expect(cards).toHaveCount(5);
+    for (const [i, card] of (await cards.all()).entries()) {
+      const photo = card.getByRole('img', { name: 'Foto Delwyn Sukamto' });
+      await expect(photo, `kartu ${i + 1}`).toHaveAttribute('src', /^\/founders\/.+\.webp$/);
+      await expect
+        .poll(() => photo.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0))
+        .toBe(true);
+      const box = (await card.boundingBox())!;
+      const name = (await card.locator('p.font-display').boundingBox())!;
+      expect(name.y, `nama kartu ${i + 1}`).toBeGreaterThanOrEqual(box.y);
+      expect(name.y + name.height, `nama kartu ${i + 1}`).toBeLessThanOrEqual(box.y + box.height + 1);
+    }
+  });
+
   test('logo berputar horizontal dari kiri ke tengah: sisi belakang terlihat lalu kembali ke depan', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto('/');

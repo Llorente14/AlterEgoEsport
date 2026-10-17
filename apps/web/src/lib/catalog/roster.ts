@@ -30,9 +30,21 @@ const rosterFileSchema = z.object({
   players: z.array(playerSchema),
 });
 
-/** A player as shown on the site: raw data plus the label to print under the photo. */
+/** Local, optimized copies of a photo (same shape as a product image); see scripts/fetch-roster-photos.mjs. */
+export interface PhotoSet {
+  width: number;
+  height: number;
+  /** Width (400/800) → local WebP path. */
+  srcset: Record<string, string>;
+}
+
+/** Photo sets keyed "<game>:<player id>". */
+export type PhotoManifest = Record<string, PhotoSet>;
+
+/** A player as shown on the site: raw data, the label to print under the photo, and the local photo if any. */
 export interface RosterMember extends Player {
   roleLabel: string;
+  photoSet: PhotoSet | null;
 }
 
 export interface RosterDivision {
@@ -62,7 +74,7 @@ function compareDivisions(a: string, b: string): number {
 }
 
 /** Validate one raw roster file (as read from `data/<game>.json`) and group it for display. */
-export function buildGameRoster(raw: unknown, file: string): GameRoster {
+export function buildGameRoster(raw: unknown, file: string, photos: PhotoManifest = {}): GameRoster {
   const data = parseDataFile(rosterFileSchema, raw, file);
   const visible = data.players.filter((p) => p.status !== 'inactive');
 
@@ -71,7 +83,7 @@ export function buildGameRoster(raw: unknown, file: string): GameRoster {
     const members = visible
       .filter((p) => p.division === name)
       .sort((a, b) => a.displayOrder - b.displayOrder)
-      .map((p) => ({ ...p, roleLabel: roleLabel(p) }));
+      .map((p) => ({ ...p, roleLabel: roleLabel(p), photoSet: photos[`${p.game}:${p.id}`] ?? null }));
     return {
       name,
       players: members.filter((p) => p.type === 'player'),

@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { getFounders } from '.';
 import { buildFounders } from './founders';
@@ -30,11 +32,14 @@ describe('buildFounders', () => {
 });
 
 describe('getFounders (real data)', () => {
-  it('has five placeholder cards for Delwyn Sukamto, founder of Alter Ego', () => {
+  it('has five cards for Delwyn Sukamto, founder of Alter Ego, each with a local photo', () => {
     const founders = getFounders();
     expect(founders).toHaveLength(5);
+    const publicDir = fileURLToPath(new URL('../../../public', import.meta.url));
     for (const f of founders) {
-      expect(f).toMatchObject({ name: 'Delwyn Sukamto', role: 'Founder Alter Ego', photo: null });
+      expect(f).toMatchObject({ name: 'Delwyn Sukamto', role: 'Founder Alter Ego' });
+      expect(f.photo, f.id).toMatch(/^\/founders\/.+\.webp$/);
+      expect(existsSync(`${publicDir}${f.photo}`), f.photo!).toBe(true);
     }
   });
 });

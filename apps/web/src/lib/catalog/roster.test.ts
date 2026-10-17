@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { getRoster, getRosterTabs } from '.';
 import { buildGameRoster, buildRosterTabs } from './roster';
@@ -134,5 +136,35 @@ describe('getRosterTabs (real data)', () => {
       'Counter-Strike 2',
       'PUBG Mobile',
     ]);
+  });
+});
+
+describe('player photos (real data)', () => {
+  const publicDir = fileURLToPath(new URL('../../../public', import.meta.url));
+  const members = getRoster().flatMap((r) => r.divisions.flatMap((d) => [...d.players, ...d.staff]));
+
+  it('every profile image has a local copy; run `npm run fetch:photos` when this fails', () => {
+    const missing = members.filter((m) => m.profileImg && !m.photoSet).map((m) => `${m.game}:${m.id}`);
+    expect(missing).toEqual([]);
+  });
+
+  it('local copies exist on disk', () => {
+    for (const member of members) {
+      for (const path of Object.values(member.photoSet?.srcset ?? {})) {
+        expect(existsSync(`${publicDir}${path}`), path).toBe(true);
+      }
+    }
+  });
+
+  it('players without any photo keep a null photo set', () => {
+    for (const member of members.filter((m) => !m.profileImg)) expect(member.photoSet).toBeNull();
+  });
+});
+
+describe('buildGameRoster with a photo manifest', () => {
+  it('attaches the set by game and id', () => {
+    const set = { width: 10, height: 20, srcset: { '400': '/roster/pubgm/a-400.webp', '800': '/roster/pubgm/a-800.webp' } };
+    const roster = buildGameRoster(file([member({ id: 'a' }), member({ id: 'b' })]), 'data/pubgm.json', { 'pubgm:a': set });
+    expect(roster.divisions[0]!.players.map((p) => p.photoSet)).toEqual([set, null]);
   });
 });

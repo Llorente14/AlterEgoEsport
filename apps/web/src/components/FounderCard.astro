@@ -20,7 +20,13 @@ const { founder, position, total } = Astro.props;
   <div class="founder-photo">
     {
       founder.photo ? (
-        <img src={founder.photo} alt={`Foto ${founder.name}`} loading="lazy" class="size-full object-cover" />
+        <img
+          src={founder.photo}
+          alt={`Foto ${founder.name}`}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 size-full object-cover object-top"
+        />
       ) : (
         <img src="/logo/alterego-logo-256.webp" alt="" width="256" height="251" class="w-1/2 opacity-15 grayscale" />
       )
@@ -44,7 +50,11 @@ const { founder, position, total } = Astro.props;
     backdrop-filter: blur(6px);
     user-select: none;
   }
+  /* The photo fills whatever height the card has; its own size never pushes the name out of the card. */
   .founder-photo {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
     display: flex;
     flex: 1;
     align-items: center;
