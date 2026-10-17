@@ -3,14 +3,14 @@
     {
       "name": "Good Day Coffee",
       "logo": "goodday.png",
-      "width": 220,
-      "height": 160
+      "width": 256,
+      "height": 190
     },
     {
       "name": "Interbat",
       "logo": "interbat.png",
-      "width": 178,
-      "height": 61
+      "width": 440,
+      "height": 107
     },
     {
       "name": "CBN Fiber",
@@ -21,20 +21,20 @@
     {
       "name": "myBCA",
       "logo": "mybca.png",
-      "width": 248,
-      "height": 76
+      "width": 267,
+      "height": 81
     },
     {
       "name": "Supreme League",
       "logo": "supreme-league.png",
-      "width": 252,
-      "height": 112
+      "width": 235,
+      "height": 118
     },
     {
       "name": "Interlac",
       "logo": "interlac.png",
       "width": 224,
-      "height": 64
+      "height": 65
     }
   ]
 }
