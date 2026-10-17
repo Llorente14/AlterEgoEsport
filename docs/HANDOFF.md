@@ -32,8 +32,12 @@
   jika ada `profileImg` tanpa salinan lokal. Foto CEO: `data/ceo_photo/*.jpg` → `public/founders/*.webp`
   (dirujuk `photo` di `data/founders.json`). Foto tampil berwarna (tanpa grayscale); tanpa foto = placeholder.
   Atribusi: foto Liquipedia berlisensi CC BY-SA, pertimbangkan baris kredit sebelum rilis.
-- Logo 3D lebih gelap lewat cahaya saja (env 0.12, key 0.9, rim 1.2, exposure 0.8). Material GLB TIDAK diubah
-  (permintaan Axel: jangan ganti logo GLB); sebelumnya sempat ada override roughness/metalness, sudah dicabut.
+- Logo 3D lebih gelap & doff (review Axel): env 0.3, key 0.75, rim 1.4, exposure 0.75; saat dimuat material
+  dipaksa roughness ≥ 0.75 dan metalness ≤ 0.02 (file glb TIDAK diubah; glb asli terlalu mengkilap, merah jadi
+  salmon). Sempat dicoba hanya-cahaya (env 0.12, key 0.9, rim 1.2, exposure 0.8) lalu dikembalikan atas
+  permintaan Axel; versi hanya-cahaya ada di commit 546bbc7 bila mau dicoba lagi.
+- Bila badge 2D muncul di dev padahal WebGL ada: cek konsol "Failed to fetch dynamically imported module",
+  restart `npm run dev` (three.js sudah di `optimizeDeps.include`).
 - Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
   kecepatan 28 px/s. Sebelumnya 2 salinan × ±1100px menyisakan gap di layar lebar saat pertama dimuat.
 
