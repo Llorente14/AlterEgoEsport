@@ -20,11 +20,11 @@ test.describe('Berita', () => {
     await page.goto('/news');
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Berita');
-    await expect(page.locator('[data-news-card]')).toHaveCount(4);
+    await expect(page.locator('[data-news-card]')).toHaveCount(6);
 
     await page.getByRole('navigation', { name: 'Kategori berita' }).getByRole('link', { name: /^Result/ }).click();
     await expect(page).toHaveURL(/\/news\/kategori\/result$/);
-    await expect(page.locator('[data-news-card]')).toHaveCount(4);
+    await expect(page.locator('[data-news-card]')).toHaveCount(6);
     await context.close();
   });
 
