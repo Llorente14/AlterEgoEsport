@@ -10,7 +10,12 @@
 - Urutan landing: Hero (video latar 30%) → Story (3 scene + Founder) → Roster → Alter Merch → Achievements →
   News → Partners → Join → Footer.
 - Store mode: `marketplace` (tombol Beli Sekarang → Shopee, fallback ke toko). Checkout native = Fase 6.
-- Tes terakhir: unit 91/91 lolos, `astro check` 0 error. **E2E belum dijalankan ulang** setelah logo 3D (lihat bawah).
+- Tes terakhir (2026-10-17): unit lolos, `astro check` 0 error, **E2E 80 lolos / 17 skip** (termasuk
+  `tests/e2e/logo3d.spec.ts` di proyek `desktop-3d`: kanvas + `data-logo3d="ready"`, kursor → `data-yaw`,
+  ikut-kursor memudar di tengah flip, fallback 2D saat glb diblokir, mobile tidak mengunduh glb/chunk `logo3d`).
+- Tes 3D sengaja berjalan berurutan (`describe.configure({ mode: 'default' })`): tiga render WebGL software
+  paralel saling memperlambat sampai timeout.
+- `mountLogo3D` kini melepas konteks WebGL + menghapus kanvas bila model gagal dimuat.
 
 ## Keputusan terbaru (revisi dari review Axel)
 - Hero: partikel WebGL & logo 3D dihapus → **video highlight sebagai latar, opacity 30%** + gradien.
@@ -27,14 +32,10 @@
 - Nav: Store · Roster · News · Achievements · Join.
 
 ## Berikutnya (urut prioritas)
-1. Jalankan `npm run test:e2e`; perbaiki yang gagal setelah perubahan logo 3D.
-2. Tulis `apps/web/tests/e2e/logo3d.spec.ts` (proyek `desktop-3d`): kanvas tampil + `data-logo3d="ready"`,
-   kursor mengubah `canvas[data-yaw]`, ikut-kursor memudar saat flip, mobile tidak mengunduh glb/three,
-   fallback 2D saat model diblokir (`page.route` abort).
-3. Perbarui `docs/DESIGN.md` (Story Scroll: logo 3D, dua flip, kursor) dan tiket 16.
-4. Tiket 14: meta/OG/sitemap/robots, 404, keluarkan `/dev/assets`, Lighthouse mobile > 80. Pertimbangkan
+1. Perbarui `docs/DESIGN.md` (Story Scroll: logo 3D, dua flip, kursor) dan tiket 16.
+2. Tiket 14: meta/OG/sitemap/robots, 404, keluarkan `/dev/assets`, Lighthouse mobile > 80. Pertimbangkan
    merampingkan chunk three.js (~640 KB, hanya desktop).
-5. Tiket 15: cek semua link eksternal, domain produksi (ganti `site` di `astro.config.mjs`).
+3. Tiket 15: cek semua link eksternal, domain produksi (ganti `site` di `astro.config.mjs`).
 
 ## Menunggu dari Axel
 - Deploy Vercel (Root Directory `apps/web`).
