@@ -27,7 +27,7 @@ export default defineConfig({
       testIgnore: /logo3d/,
       use: { ...devices['Pixel 7'], launchOptions: { args: ['--disable-3d-apis'] } },
     },
-    // The 3D logo (tests/e2e/logo3d.spec.ts, not written yet) runs with WebGL on.
+    // The 3D logo (tests/e2e/logo3d.spec.ts) runs with WebGL on.
     { name: 'desktop-3d', testMatch: /logo3d/, use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {
