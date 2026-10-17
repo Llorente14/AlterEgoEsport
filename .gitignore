@@ -19,3 +19,6 @@ data/*.mp4
 !.env.example
 .DS_Store
 Thumbs.db
+
+# sponsor banner source (2 MB, only the cut logos are used)
+data/partners/Banner*.png
