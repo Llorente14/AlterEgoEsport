@@ -23,7 +23,11 @@ const summary = product.descriptionBlocks[1] ?? product.descriptionBlocks[0] ?? 
 const { primary } = productActions(product, STORE_MODE);
 ---
 
-<BaseLayout title={`${product.name} — Alter Merch`} description={summary.slice(0, 155)}>
+<BaseLayout
+  title={`${product.name} — Alter Merch`}
+  description={summary.slice(0, 155)}
+  image={product.images[0]?.srcset['800']}
+>
   <div class="container-page pb-128 pt-32 lg:pb-96">
     <nav aria-label="Breadcrumb" class="mb-32">
       <ol class="flex flex-wrap items-center gap-8 font-mono text-label uppercase tracking-label text-ash">

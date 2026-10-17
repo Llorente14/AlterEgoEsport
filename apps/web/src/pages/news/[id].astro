@@ -18,7 +18,7 @@ const { title, date, category, game, excerpt, cover, coverAlt } = article.data;
 const related = relatedNews(await getCollection('news'), article);
 ---
 
-<BaseLayout title={`${title} — Alter Ego Esports`} description={excerpt}>
+<BaseLayout title={`${title} — Alter Ego Esports`} description={excerpt} image={cover.src} type="article">
   <article class="container-page flex flex-col gap-48 pb-96 pt-64">
     <header class="mx-auto flex w-full max-w-[720px] flex-col gap-24">
       <p class="font-mono text-label uppercase tracking-label text-ash">

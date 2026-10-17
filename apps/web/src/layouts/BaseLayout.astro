@@ -7,12 +7,26 @@ import AmbientField from '../components/AmbientField.astro';
 interface Props {
   title?: string;
   description?: string;
+  /** Share image: a site path (e.g. a product photo) or an absolute URL. Defaults to the logo. */
+  image?: string;
+  /** "article" for news pages, "website" otherwise. */
+  type?: 'website' | 'article';
+  /** Keep the page out of search results (internal pages). */
+  noindex?: boolean;
 }
 
 const {
   title = 'Alter Ego Esports',
   description = 'Situs resmi Alter Ego Esports dan Alter Merch.',
+  image = '/logo/alterego-logo-1200.webp',
+  type = 'website',
+  noindex = false,
 } = Astro.props;
+
+const origin = Astro.site ?? Astro.url;
+// One form per page, no trailing slash (the sitemap lists them the same way).
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', origin).href;
+const shareImage = new URL(image, origin).href;
 ---
 
 <!doctype html>
@@ -22,8 +36,21 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#000000" />
+    {noindex && <meta name="robots" content="noindex" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/png" href="/logo/alterego-logo-64.png" />
     <title>{title}</title>
+    <meta property="og:site_name" content="Alter Ego Esports" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>

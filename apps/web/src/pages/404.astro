@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Halaman tidak ditemukan — Alter Ego" description="Halaman yang Anda cari tidak ada." noindex>
+  <section class="container-page flex min-h-[70dvh] flex-col items-center justify-center gap-24 py-96 text-center">
+    <p class="font-mono text-label uppercase tracking-label text-signal-red">Error 404</p>
+    <h1 class="font-display text-display-xl uppercase leading-heading">Tersesat<br /><span class="text-signal-red">di arena?</span></h1>
+    <p class="max-w-[480px] text-body text-ash">Halaman ini tidak ada, atau sudah dipindahkan. Kembali ke beranda atau cari merch dan berita terbaru.</p>
+    <div class="flex flex-wrap justify-center gap-16">
+      <a href="/" class="inline-flex min-h-48 items-center rounded-control bg-ego-red px-24 text-[14px] font-semibold uppercase tracking-ui text-bone transition-colors duration-200 hover:bg-ego-red-hover">Ke beranda</a>
+      <a href="/store" class="inline-flex min-h-48 items-center rounded-control border-[1.5px] border-bone/40 px-24 text-[14px] font-medium uppercase tracking-ui text-bone transition-colors duration-200 hover:border-bone">Store</a>
+    </div>
+  </section>
+</BaseLayout>
