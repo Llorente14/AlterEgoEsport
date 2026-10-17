@@ -50,7 +50,8 @@
 ## Keputusan terbaru (revisi dari review Axel)
 - Hero: partikel WebGL & logo 3D dihapus → **video highlight sebagai latar, opacity 30%** + gradien.
 - Story (`src/components/StorySection.astro`, mekanik di `src/lib/story-scroll.ts`):
-  - Scene A: "BANYAK WAJAH / SATU NAMA" + deskripsi singkat (placeholder), logo kanan.
+  - Scene A: "BANYAK WAJAH / SATU NAMA" + deskripsi sejarah singkat (berdiri 2018 di Jakarta, mulai di Mobile
+    Legends, kini juga CS2 & PUBG Mobile), logo kanan. Sumber: id.wikipedia Alter Ego Esports, igames.id.
   - Scene B: logo kiri, deskripsi + **fun fact** (dihitung dari data achievement).
   - Scene C: judul FOUNDER, 5 kartu berundak (5× Delwyn Sukamto, placeholder), logo di belakang kartu, deretan
     berakhir tepat di tengah. Mobile: tumpukan kartu yang bisa di-swipe.
@@ -77,6 +78,9 @@
 - `.vercelignore` tidak mengunggah `docs/`, `brand/`, `data/partners/`, `data/ceo_photo/`, dan file mentah.
 
 ## Menunggu dari Axel
+- Konfirmasi sejarah: tahun masuk CS2 dan PUBG Mobile (belum ada sumber; teks sengaja tanpa tahun). Liquipedia
+  menolak akses otomatis (403), sumbernya belum dicek langsung. Ejaan pendiri (Delwyn/Eldwyn) dan perannya masih
+  beda antar sumber; wikipedia & igames menyebut Delwyn Sukamto sebagai pendiri (dan CEO di igames).
 - Domain produksi (ganti `site` di `apps/web/astro.config.mjs`; placeholder `alterego.example`).
 - Deploy Vercel (Root Directory `apps/web`).
 - Data asli kartu Founder + verifikasi peran Delwyn Sukamto.
