@@ -7,7 +7,7 @@ import { buildFounders } from './founders';
 const founder = (overrides: Record<string, unknown> = {}) => ({
   id: 'a',
   name: 'Delwyn Sukamto',
-  role: 'Founder Alter Ego',
+  role: 'CEO & Founder Alter Ego',
   photo: null,
   ...overrides,
 });
@@ -37,7 +37,7 @@ describe('getFounders (real data)', () => {
     expect(founders).toHaveLength(5);
     const publicDir = fileURLToPath(new URL('../../../public', import.meta.url));
     for (const f of founders) {
-      expect(f).toMatchObject({ name: 'Delwyn Sukamto', role: 'Founder Alter Ego' });
+      expect(f).toMatchObject({ name: 'Delwyn Sukamto', role: 'CEO & Founder Alter Ego' });
       expect(f.photo, f.id).toMatch(/^\/founders\/.+\.webp$/);
       expect(existsSync(`${publicDir}${f.photo}`), f.photo!).toBe(true);
     }
