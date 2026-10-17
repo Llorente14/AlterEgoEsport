@@ -16,6 +16,10 @@
 - Tes 3D sengaja berjalan berurutan (`describe.configure({ mode: 'default' })`): tiga render WebGL software
   paralel saling memperlambat sampai timeout.
 - `mountLogo3D` kini melepas konteks WebGL + menghapus kanvas bila model gagal dimuat.
+- Logo 3D lebih gelap & doff (review Axel): env 0.3, key 0.75, rim 1.4, exposure 0.75; material dipaksa
+  roughness ≥ 0.75 dan metalness ≤ 0.02 saat dimuat (glb asli terlalu mengkilap, merah jadi salmon).
+- Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
+  kecepatan 28 px/s. Sebelumnya 2 salinan × ±1100px menyisakan gap di layar lebar saat pertama dimuat.
 
 ## Keputusan terbaru (revisi dari review Axel)
 - Hero: partikel WebGL & logo 3D dihapus → **video highlight sebagai latar, opacity 30%** + gradien.
