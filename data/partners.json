@@ -4,7 +4,14 @@
       "name": "Good Day Coffee",
       "logo": "goodday.png",
       "width": 256,
-      "height": 190
+      "height": 190,
+      "scale": 1.5
+    },
+    {
+      "name": "GoPay",
+      "logo": "gopay.png",
+      "width": 437,
+      "height": 101
     },
     {
       "name": "Interbat",

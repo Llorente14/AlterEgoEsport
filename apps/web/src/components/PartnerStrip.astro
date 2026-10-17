@@ -19,9 +19,9 @@ const partners = getPartners();
         [0, 1].map((copy) => (
           <ul class="flex shrink-0 items-center gap-64 pr-64" data-partner-set aria-hidden={copy === 1 ? 'true' : undefined}>
             {partners.map((p: Partner) => (
-              <li class="flex h-48 items-center">
+              <li class="flex h-64 items-center">
                 {p.logoSrc ? (
-                  <img src={p.logoSrc} alt={copy === 0 ? p.name : ''} width={p.width} height={p.height} class="partner-logo h-40 w-auto" loading="lazy" />
+                  <img src={p.logoSrc} alt={copy === 0 ? p.name : ''} width={p.width} height={p.height} class="partner-logo h-40 w-auto" style={p.scale === 1 ? undefined : `height:${40 * p.scale}px`} loading="lazy" />
                 ) : (
                   <span class="partner-wordmark font-display text-[28px] leading-none">{p.name}</span>
                 )}
@@ -39,7 +39,7 @@ const partners = getPartners();
       partners.map((p) => (
         <li class="flex h-48 items-center justify-center">
           {p.logoSrc ? (
-            <img src={p.logoSrc} alt={p.name} width={p.width} height={p.height} class="partner-logo h-32 w-auto max-w-full" loading="lazy" />
+            <img src={p.logoSrc} alt={p.name} width={p.width} height={p.height} class="partner-logo h-32 w-auto max-w-full" style={p.scale === 1 ? undefined : `height:${32 * p.scale}px`} loading="lazy" />
           ) : (
             <span class="partner-wordmark text-center font-display text-[22px] leading-none">{p.name}</span>
           )}

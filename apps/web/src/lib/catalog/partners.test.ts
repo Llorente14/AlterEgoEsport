@@ -14,9 +14,20 @@ describe('buildPartners', () => {
         'data/partners.json',
       ),
     ).toEqual([
-      { name: 'A', logoSrc: '/partners/a.png', width: 100, height: 40 },
-      { name: 'B', logoSrc: null },
+      { name: 'A', logoSrc: '/partners/a.png', width: 100, height: 40, scale: 1 },
+      { name: 'B', logoSrc: null, scale: 1 },
     ]);
+  });
+
+  it('reads an optional display scale and rejects out-of-range values', () => {
+    const [p] = buildPartners(
+      { partners: [{ name: 'A', logo: 'a.png', width: 10, height: 10, scale: 1.5 }] },
+      'data/partners.json',
+    );
+    expect(p!.scale).toBe(1.5);
+    expect(() =>
+      buildPartners({ partners: [{ name: 'A', logo: null, scale: 3 }] }, 'data/partners.json'),
+    ).toThrow(/partners\[0\]\.scale/);
   });
 
   it('requires a size for logos', () => {
@@ -33,10 +44,11 @@ describe('buildPartners', () => {
 });
 
 describe('catalog partners and links (real data)', () => {
-  it('lists the six partners and every logo file exists', () => {
+  it('lists the seven partners and every logo file exists', () => {
     const partners = getPartners();
     expect(partners.map((p) => p.name)).toEqual([
       'Good Day Coffee',
+      'GoPay',
       'Interbat',
       'CBN Fiber',
       'myBCA',
