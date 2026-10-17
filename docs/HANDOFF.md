@@ -38,6 +38,11 @@
   permintaan Axel; versi hanya-cahaya ada di commit 546bbc7 bila mau dicoba lagi.
 - Bila badge 2D muncul di dev padahal WebGL ada: cek konsol "Failed to fetch dynamically imported module",
   restart `npm run dev` (three.js sudah di `optimizeDeps.include`).
+- Achievement baru (dari data Axel): CS2 runner-up ESL Challenger League S52 Asia-Pacific Cup 3 (2026-10-14,
+  US$2.500); PUBG Mobile PUBG Master Series 2026 Phase 2 juara (2026-10-11, US$15.600) dan Phase 1 juara ke-3
+  (2026-05-10, US$5.250), divisi "Alter Ego Ares" (asumsi). Summary di file ikut diperbarui (PUBG total 674089).
+- Berita baru: runner-up CS2 (cover poster `data/cs2_runnerup_esl.webp`). PUBG Master Series belum punya
+  berita/cover: perlu foto dari Axel (cover wajib di skema berita).
 - Logo partner: Good Day Coffee, Interbat, myBCA, Supreme League, Interlac dipotong dari
   `data/partners/Banner Logo Sponsor Latar Transparan.png` (latarnya kotak-kotak palsu, bukan alpha; dipisahkan
   lewat mask kecerahan/saturasi) dan menimpa `public/partners/*.png`. Good Day hanya huruf merahnya (outline putih
