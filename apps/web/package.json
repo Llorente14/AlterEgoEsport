@@ -11,7 +11,8 @@
     "check": "astro check",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "fetch:images": "node scripts/fetch-product-images.mjs"
+    "fetch:images": "node scripts/fetch-product-images.mjs",
+    "fetch:photos": "node scripts/fetch-roster-photos.mjs && node scripts/optimize-founder-photos.mjs"
   },
   "dependencies": {
     "@alterego/shared": "*",

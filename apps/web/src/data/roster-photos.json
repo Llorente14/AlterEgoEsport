@@ -1,0 +1,202 @@
+{
+  "mlbb:nino": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/nino-400.webp",
+      "800": "/roster/mlbb/nino-800.webp"
+    }
+  },
+  "mlbb:yazukee": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/yazukee-400.webp",
+      "800": "/roster/mlbb/yazukee-800.webp"
+    }
+  },
+  "mlbb:reyy": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/reyy-400.webp",
+      "800": "/roster/mlbb/reyy-800.webp"
+    }
+  },
+  "mlbb:hijumee": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/hijumee-400.webp",
+      "800": "/roster/mlbb/hijumee-800.webp"
+    }
+  },
+  "mlbb:cyruz": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/cyruz-400.webp",
+      "800": "/roster/mlbb/cyruz-800.webp"
+    }
+  },
+  "mlbb:arfy": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/arfy-400.webp",
+      "800": "/roster/mlbb/arfy-800.webp"
+    }
+  },
+  "mlbb:alekk": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/alekk-400.webp",
+      "800": "/roster/mlbb/alekk-800.webp"
+    }
+  },
+  "mlbb:ivann": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/ivann-400.webp",
+      "800": "/roster/mlbb/ivann-800.webp"
+    }
+  },
+  "mlbb:xepher": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/xepher-400.webp",
+      "800": "/roster/mlbb/xepher-800.webp"
+    }
+  },
+  "mlbb:styx": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/styx-400.webp",
+      "800": "/roster/mlbb/styx-800.webp"
+    }
+  },
+  "mlbb:fawndeer": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/fawndeer-400.webp",
+      "800": "/roster/mlbb/fawndeer-800.webp"
+    }
+  },
+  "mlbb:gebe": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/gebe-400.webp",
+      "800": "/roster/mlbb/gebe-800.webp"
+    }
+  },
+  "mlbb:devkoch": {
+    "width": 500,
+    "height": 500,
+    "srcset": {
+      "400": "/roster/mlbb/devkoch-400.webp",
+      "800": "/roster/mlbb/devkoch-800.webp"
+    }
+  },
+  "cs2:bntet": {
+    "width": 900,
+    "height": 601,
+    "srcset": {
+      "400": "/roster/cs2/bntet-400.webp",
+      "800": "/roster/cs2/bntet-800.webp"
+    }
+  },
+  "cs2:pokemon": {
+    "width": 600,
+    "height": 950,
+    "srcset": {
+      "400": "/roster/cs2/pokemon-400.webp",
+      "800": "/roster/cs2/pokemon-800.webp"
+    }
+  },
+  "cs2:adex": {
+    "width": 900,
+    "height": 600,
+    "srcset": {
+      "400": "/roster/cs2/adex-400.webp",
+      "800": "/roster/cs2/adex-800.webp"
+    }
+  },
+  "cs2:shadiy": {
+    "width": 900,
+    "height": 600,
+    "srcset": {
+      "400": "/roster/cs2/shadiy-400.webp",
+      "800": "/roster/cs2/shadiy-800.webp"
+    }
+  },
+  "cs2:bali": {
+    "width": 683,
+    "height": 1024,
+    "srcset": {
+      "400": "/roster/cs2/bali-400.webp",
+      "800": "/roster/cs2/bali-800.webp"
+    }
+  },
+  "pubgm:badru": {
+    "width": 288,
+    "height": 866,
+    "srcset": {
+      "400": "/roster/pubgm/badru-400.webp",
+      "800": "/roster/pubgm/badru-800.webp"
+    }
+  },
+  "pubgm:rosemary": {
+    "width": 600,
+    "height": 600,
+    "srcset": {
+      "400": "/roster/pubgm/rosemary-400.webp",
+      "800": "/roster/pubgm/rosemary-800.webp"
+    }
+  },
+  "pubgm:krypton": {
+    "width": 900,
+    "height": 600,
+    "srcset": {
+      "400": "/roster/pubgm/krypton-400.webp",
+      "800": "/roster/pubgm/krypton-800.webp"
+    }
+  },
+  "pubgm:snape": {
+    "width": 622,
+    "height": 1115,
+    "srcset": {
+      "400": "/roster/pubgm/snape-400.webp",
+      "800": "/roster/pubgm/snape-800.webp"
+    }
+  },
+  "pubgm:jimmyop": {
+    "width": 612,
+    "height": 800,
+    "srcset": {
+      "400": "/roster/pubgm/jimmyop-400.webp",
+      "800": "/roster/pubgm/jimmyop-800.webp"
+    }
+  },
+  "pubgm:zuxxy": {
+    "width": 900,
+    "height": 1538,
+    "srcset": {
+      "400": "/roster/pubgm/zuxxy-400.webp",
+      "800": "/roster/pubgm/zuxxy-800.webp"
+    }
+  },
+  "pubgm:hzlnuts": {
+    "width": 576,
+    "height": 864,
+    "srcset": {
+      "400": "/roster/pubgm/hzlnuts-400.webp",
+      "800": "/roster/pubgm/hzlnuts-800.webp"
+    }
+  }
+}
