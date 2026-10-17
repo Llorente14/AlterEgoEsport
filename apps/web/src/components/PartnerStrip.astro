@@ -12,12 +12,12 @@ const partners = getPartners();
     <h2 id="partners-title" class="font-display text-heading uppercase leading-heading">Didukung oleh</h2>
   </div>
 
-  <!-- Desktop: slow right-to-left marquee (list duplicated for a seamless loop). -->
+  <!-- Desktop: slow right-to-left marquee. Two copies in the HTML; the script adds more until the screen is full. -->
   <div class="partner-marquee hidden overflow-hidden lg:block" data-partner-marquee>
     <div class="partner-track flex w-max">
       {
         [0, 1].map((copy) => (
-          <ul class="flex shrink-0 items-center gap-64 pr-64" aria-hidden={copy === 1 ? 'true' : undefined}>
+          <ul class="flex shrink-0 items-center gap-64 pr-64" data-partner-set aria-hidden={copy === 1 ? 'true' : undefined}>
             {partners.map((p: Partner) => (
               <li class="flex h-48 items-center">
                 {p.logoSrc ? (
@@ -68,7 +68,7 @@ const partners = getPartners();
   }
 
   .partner-track {
-    animation: partner-scroll 40s linear infinite;
+    animation: partner-scroll var(--marquee-duration, 40s) linear infinite;
   }
   .partner-marquee:hover .partner-track {
     animation-play-state: paused;
@@ -78,7 +78,7 @@ const partners = getPartners();
       transform: translateX(0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translateX(var(--marquee-shift, -50%));
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -87,3 +87,35 @@ const partners = getPartners();
     }
   }
 </style>
+
+<script>
+  // One set of partners is narrower than a wide screen, so two copies leave a gap before the loop restarts.
+  // Clone sets until the track covers the screen plus one set, then shift by exactly one set (in px).
+  const SPEED = 28; // px per second (the old 40s loop over one set)
+  const marquee = document.querySelector<HTMLElement>('[data-partner-marquee]');
+  const track = marquee?.querySelector<HTMLElement>('.partner-track');
+  const first = track?.querySelector<HTMLElement>('[data-partner-set]');
+
+  if (marquee && track && first) {
+    const fill = () => {
+      const setWidth = first.getBoundingClientRect().width;
+      if (setWidth === 0) return; // hidden (below lg)
+      const needed = Math.ceil(marquee.clientWidth / setWidth) + 1;
+      let sets = track.querySelectorAll('[data-partner-set]').length;
+      for (; sets < needed; sets++) {
+        const copy = first.cloneNode(true) as HTMLElement;
+        copy.setAttribute('aria-hidden', 'true');
+        for (const img of copy.querySelectorAll('img')) {
+          img.alt = '';
+          img.loading = 'eager';
+        }
+        track.append(copy);
+      }
+      track.style.setProperty('--marquee-shift', `${-setWidth}px`);
+      track.style.setProperty('--marquee-duration', `${(setWidth / SPEED).toFixed(1)}s`);
+    };
+    new ResizeObserver(fill).observe(first);
+    new ResizeObserver(fill).observe(marquee);
+    fill();
+  }
+</script>

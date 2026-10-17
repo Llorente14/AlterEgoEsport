@@ -11,6 +11,16 @@ test.describe('Partners, Join, Footer', () => {
       await expect(marquee).toBeVisible();
       await expect(marquee.getByRole('img', { name: 'Interbat' })).toBeVisible();
       await expect(marquee.getByText('Good Day Coffee').first()).toBeVisible();
+      // No gap before the loop restarts: the track covers the screen plus the one set it shifts by.
+      await expect
+        .poll(() =>
+          marquee.evaluate((m) => {
+            const track = m.querySelector<HTMLElement>('.partner-track')!;
+            const shift = -parseFloat(track.style.getPropertyValue('--marquee-shift'));
+            return shift > 0 && track.scrollWidth >= m.clientWidth + shift;
+          }),
+        )
+        .toBe(true);
     }
   });
 
