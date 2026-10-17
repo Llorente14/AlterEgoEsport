@@ -3,7 +3,7 @@ import { expect, test, type Page } from '@playwright/test';
 // Runs in the `desktop-3d` project (WebGL on). Headless Chromium renders in software, so frames are slow:
 // assertions poll instead of reading once, and the tests run one after another (three software renderers in
 // parallel starve each other past the timeouts).
-test.describe.configure({ mode: 'default' });
+test.describe.configure({ mode: 'default', timeout: 60_000 });
 
 const story = '[data-story]';
 const canvas = '[data-story-canvas] canvas';
