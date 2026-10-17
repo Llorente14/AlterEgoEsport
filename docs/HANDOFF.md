@@ -20,6 +20,9 @@
   (prop `image`, `type`, `noindex`), halaman produk/artikel mengirim gambar sendiri, `src/pages/404.astro`
   bergaya brand, `/dev/*` tidak masuk `dist` (integrasi di `astro.config.mjs`; e2e pakai `INCLUDE_DEV_PAGES=1`).
   Tes: unit 95/95, e2e 92 lolos / 17 skip, `astro check` 0.
+- 14 produk (ACFC Jogo Bonito ×2, Alt390 pants/vest/flannel/pin/panik/sherpa/hoodie, keychain 3D, haori white,
+  tote bag) hanya punya 1 foto: foto 164 px kecil dihapus dari `data/alterego_produk_aktif_gambar.json`
+  (manifest + file WebP ikut dibersihkan). Kartu dengan satu foto: hover = zoom, bukan ganti foto.
 - Logo 3D lebih gelap & doff (review Axel): env 0.3, key 0.75, rim 1.4, exposure 0.75; material dipaksa
   roughness ≥ 0.75 dan metalness ≤ 0.02 saat dimuat (glb asli terlalu mengkilap, merah jadi salmon).
 - Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
