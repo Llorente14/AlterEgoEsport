@@ -23,6 +23,11 @@
 - 14 produk (ACFC Jogo Bonito ×2, Alt390 pants/vest/flannel/pin/panik/sherpa/hoodie, keychain 3D, haori white,
   tote bag) hanya punya 1 foto: foto 164 px kecil dihapus dari `data/alterego_produk_aktif_gambar.json`
   (manifest + file WebP ikut dibersihkan). Kartu dengan satu foto: hover = zoom, bukan ganti foto.
+- Roster: tab sekarang 4 — Mobile Legends MPL, Mobile Legends MDL, Counter-Strike 2, PUBG Mobile. Game yang
+  divisinya main di liga berbeda (dibaca dari `gameSpecific.league`) dipecah per divisi (`buildRosterTabs`);
+  hash tab jadi `#roster-mlbb-mpl`, `#roster-mlbb-mdl`, `#roster-cs2`, `#roster-pubgm`.
+- Kartu roster menampilkan `photo` (file tim) lalu `profileImg` (URL Liquipedia, hotlink) bila ada; null = placeholder.
+  Opsional: self-host + optimasi foto (seperti gambar produk), karena PNG Liquipedia ±200 KB dan hotlink bisa putus.
 - Logo 3D lebih gelap & doff (review Axel): env 0.3, key 0.75, rim 1.4, exposure 0.75; material dipaksa
   roughness ≥ 0.75 dan metalness ≤ 0.02 saat dimuat (glb asli terlalu mengkilap, merah jadi salmon).
 - Marquee partner: skrip mengkloning set sampai layar + satu set tertutup, geser tepat satu set (px),
