@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
 
 const { article } = Astro.props as { article: CollectionEntry<'news'> };
 const { Content } = await render(article);
-const { title, date, category, game, excerpt, cover, coverAlt } = article.data;
+const { title, date, category, game, excerpt, cover, coverAlt, coverPosition } = article.data;
 const related = relatedNews(await getCollection('news'), article);
 ---
 
@@ -39,6 +39,7 @@ const related = relatedNews(await getCollection('news'), article);
       sizes="(min-width: 1280px) 1232px, 100vw"
       loading="eager"
       class="aspect-video w-full rounded-card object-cover"
+      style={coverPosition ? `object-position: ${coverPosition}` : undefined}
     />
 
     <div class="article-body mx-auto w-full max-w-[720px]">

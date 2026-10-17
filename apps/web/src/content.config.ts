@@ -18,6 +18,8 @@ const news = defineCollection({
       excerpt: z.string().min(1).max(200),
       cover: image(),
       coverAlt: z.string().min(1),
+      /** Crop focus for the cover, CSS object-position (e.g. "50% 12%"). Default: centre. */
+      coverPosition: z.string().regex(/^\d{1,3}% \d{1,3}%$/).optional(),
       achievementId: z.string().optional(),
     }),
 });

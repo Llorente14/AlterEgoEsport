@@ -5,6 +5,7 @@ category: RESULT
 game: mlbb
 excerpt: Divisi Mobile Legends Alter Ego menembus grand final M7 World Championship dan pulang sebagai runner-up dunia.
 cover: ../../../../../data/mlbb_runnerup_m7.jpg
+coverPosition: "50% 12%"
 coverAlt: Tim Mobile Legends Alter Ego di panggung M7 World Championship
 achievementId: m7-world-championship
 ---
