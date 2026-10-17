@@ -101,6 +101,18 @@
     outline: 2px solid var(--color-bone);
     outline-offset: 2px;
   }
+
+  /* Text selection in brand red instead of the browser's blue. */
+  ::selection {
+    background: var(--color-ego-red);
+    color: var(--color-bone);
+  }
+
+  /* Scrollbar: transparent track, thin ash thumb at low opacity (visible, but quiet). */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-ash) 35%, transparent) transparent;
+  }
 }
 
 /* Sections fade up once as they enter the viewport (JavaScript only; never with reduced motion). */
