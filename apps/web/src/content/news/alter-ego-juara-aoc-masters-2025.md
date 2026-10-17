@@ -4,8 +4,8 @@ date: 2025-12-07
 category: RESULT
 game: cs2
 excerpt: Alter Ego meraih gelar AOC Masters 2025 di Counter-Strike 2, gelar pertama dari dua yang diraih divisi ini pada Desember 2025.
-cover: ../../../../../data/poster.jpg
-coverAlt: Cuplikan pertandingan Alter Ego
+cover: ../../../../../data/ae_cs2_aoc_masters_winner.jpg
+coverAlt: Tim Counter-Strike 2 Alter Ego merayakan gelar juara AOC Masters Tournament 2025
 achievementId: aoc-masters-2025
 ---
 
