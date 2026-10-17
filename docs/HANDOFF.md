@@ -43,9 +43,7 @@
   (2026-05-10, US$5.250), divisi "Alter Ego PC" (dari Axel: divisi PUBG PC). Summary di file ikut diperbarui (PUBG total 674089).
 - Berita: juara AFK Masters (MLBB, `data/mlbb_afk_masters_cup.png`), juara PMS 2026 Phase 2 (PUBG PC,
   `data/pubg_pc_pms_winner_2026.png`), cover AOC Masters CS2 diganti ke `data/ae_cs2_aoc_masters_winner.jpg`.
-  PMS Phase 1 juara ke-3 sudah ada beritanya, tetapi covernya `data/pubg_pc_pms_3_phase1.png` ternyata poster PUBG
-  Global Series APAC Qualifiers 2025 (bukan PMS Phase 1). Caption cover sudah jujur; ganti dengan foto PMS Phase 1
-  yang benar bila ada.
+  Berita PMS Phase 1 juara ke-3 memakai `data/pubg_pc_pms_3_phase1.png` sebagai cover (sesuai keputusan Axel).
 - Berita baru: runner-up CS2 (cover poster `data/cs2_runnerup_esl.webp`). PUBG Master Series belum punya
   berita/cover: perlu foto dari Axel (cover wajib di skema berita).
 - Logo partner: Good Day Coffee, Interbat, myBCA, Supreme League, Interlac dipotong dari
