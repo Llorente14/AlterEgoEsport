@@ -27,6 +27,7 @@ test.describe('Store', () => {
     await expect(page).toHaveURL(/\/store\/kategori\/jersey$/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Jersey');
     await expect(nav.getByRole('link', { name: /^Jersey/ })).toHaveAttribute('aria-current', 'page');
+    await page.waitForLoadState('load');
 
     const count = await page.locator('[data-product-card]').count();
     expect(count).toBeGreaterThan(0);
@@ -47,5 +48,24 @@ test.describe('Store', () => {
       'https://shopee.com.my/alteregomerch7q.my',
     );
     await expect(details.getByRole('link', { name: /WhatsApp/ })).toHaveAttribute('href', 'https://wa.me/6289652442519');
+  });
+});
+
+test.describe('kartu produk dengan satu foto', () => {
+  test.skip(({ isMobile }) => isMobile, 'hover hanya di desktop');
+
+  test('tanpa foto kedua, hover memperbesar foto (tidak ganti foto)', async ({ page }) => {
+    await page.goto('/store');
+    const card = page.locator('[data-product-card]').filter({ hasText: 'Official Alter Ego 3D Keychain' }).first();
+    await expect(card).toBeVisible();
+    const photo = card.locator('img').first();
+    // Only one photo: no second image sits under the first one.
+    await expect(card.locator('img')).toHaveCount(1);
+
+    // Tailwind's scale-105 uses the individual `scale` property, so read that.
+    const scale = () => photo.evaluate((el) => getComputedStyle(el).scale);
+    expect(await scale()).toBe('none');
+    await card.hover();
+    await expect.poll(scale).toBe('1.05');
   });
 });
